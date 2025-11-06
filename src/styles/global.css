@@ -1,0 +1,59 @@
+@import "tailwindcss";
+
+@theme {
+  --color-surface-invert: #31001a;
+  --color-text-invert: #fff3e4;
+  --color-text-primary: #52002b;
+  --color-text-brand-red: #f00037;
+  --color-buttons-primary-bg-default: #f00037;
+  --color-buttons-primary-txt-default: #fff3e4;
+
+  --color-surface-background-burgundy: #52002b;
+  --color-surface-background-minimal: #fff3e4;
+  --color-surface-background-red: #f00037;
+
+  --font-large-heading: "Spark", sans-serif;
+  --font-heading: "Bluescreens", sans-serif;
+  --font-copy: "Poppins", sans-serif;
+}
+
+@font-face {
+  font-family: Spark;
+  src: url("/fonts/SparkCL-Regular.woff") format("woff");
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: Bluescreens;
+  src: url("/fonts/tt_bluescreens/TT Bluescreens Trial Regular.ttf")
+    format("truetype");
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: Bluescreens;
+  src: url("/fonts/tt_bluescreens/TT Bluescreens Trial ExtraBold.ttf")
+    format("truetype");
+  font-weight: 800;
+  font-style: normal;
+  font-display: swap;
+}
+
+html,
+body {
+  background: var(--color-surface-background-minimal);
+  height: 300vh;
+  overflow-x: hidden;
+  overscroll-behavior: none;
+  color: white;
+  margin: 0;
+  width: 100%;
+}
+
+.p1 {
+  @apply font-copy text-[18px]/[26px];
+}

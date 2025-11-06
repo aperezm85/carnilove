@@ -1,0 +1,101 @@
+---
+import ArrowDownIcon from "@/assets/icons/arrow-down.svg";
+import SearchIcon from "@/assets/icons/search.svg";
+import LogoIcon from "@/assets/Logo.svg";
+
+import videoSrc from "@/assets/hero/hero.mp4";
+---
+
+<section id="hero" class="relative flex flex-col items-center h-screen w-full">
+  <video
+    autoplay
+    muted
+    loop
+    playsinline
+    class="absolute top-0 left-0 w-full h-full object-cover z-0"
+  >
+    <source src={videoSrc} type="video/mp4" />
+    Your browser does not support the video tag.
+  </video>
+
+  <header
+    class="relative w-full grid template-cols-[1fr_1fr_1fr] grid-cols-3 items-start justify-between mt-9 px-8"
+  >
+    <nav class="">
+      <ul class="m-0 p-0 list-none flex flex-row gap-5">
+        <li
+          class="font-large-heading text-[26px]/[30px] text-text-invert uppercase"
+        >
+          DOGS
+        </li>
+        <li
+          class="font-large-heading text-[26px]/[30px] text-text-invert uppercase"
+        >
+          CATS
+        </li>
+        <li
+          class="font-large-heading text-[26px]/[30px] text-text-invert uppercase"
+        >
+          |
+        </li>
+        <li><SearchIcon class="text-text-invert w-4 h-4" /></li>
+      </ul>
+    </nav>
+    <LogoIcon class="max-w-[110px] h-auto mx-auto" />
+    <nav class="">
+      <ul class="m-0 p-0 list-none flex flex-row gap-5">
+        <li
+          class="font-large-heading text-[26px]/[30px] text-text-invert uppercase"
+        >
+          FIND YOUR FOOD
+        </li>
+        <li
+          class="font-large-heading text-[26px]/[30px] text-text-invert uppercase"
+        >
+          SUBSCRIBE
+        </li><li
+          class="font-large-heading text-[26px]/[30px] text-text-invert uppercase"
+        >
+          ABOUT
+        </li>
+        <li
+          class="font-large-heading text-[26px]/[30px] text-text-invert uppercase"
+        >
+          |
+        </li>
+        <li
+          class="font-large-heading text-[26px]/[30px] text-text-invert uppercase flex gap-2.5 items-center"
+        >
+          EN <ArrowDownIcon class="text-text-invert" />
+        </li>
+      </ul>
+    </nav>
+  </header>
+
+  <section
+    class="absolute flex flex-col gap-4 items-center justify-center text-center grow h-full"
+  >
+    <h1
+      class="font-large-heading text-[150px]/[80%] text-text-invert uppercase"
+    >
+      Trust their instinct
+    </h1>
+    <p class="p1 text-text-invert max-w-[600px]">
+      Wild origin meats & forest fruits as nature intended for dogs & cats.
+    </p>
+    <div class="flex flex-row gap-4">
+      <button
+        type="button"
+        class="bg-buttons-primary-bg-default text-buttons-primary-txt-default font-heading text-[22px]/[24px] py-3 px-8 rounded-sm uppercase font-extrabold cursor-pointer"
+      >
+        Shop dogs
+      </button>
+      <button
+        type="button"
+        class="bg-buttons-primary-bg-default text-buttons-primary-txt-default font-heading text-[22px]/[24px] py-3 px-8 rounded-sm uppercase font-extrabold cursor-pointer"
+      >
+        Shop cats
+      </button>
+    </div>
+  </section>
+</section>

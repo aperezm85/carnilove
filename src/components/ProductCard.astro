@@ -1,0 +1,32 @@
+---
+import CardBg from "@/assets/shop_product/card-bg.svg";
+
+const { title, image } = Astro.props;
+---
+
+<article
+  class:list={[
+    "relative w-[315px] h-[315px] flex flex-col items-start justify-end gap-1.5 px-5 py-3 shadow-[0px_0px_11.31px_0px_#00000014] bg-surface-background-minimal overflow-hidden",
+    "group cursor-pointer",
+    "transition-all duration-300 ease-in-out",
+  ]}
+>
+  <img
+    src={CardBg.src}
+    class="absolute left-0 h-full w-full -top-20 object-cover group-hover:scale-250 transition-all duration-300 ease-in-out"
+  />
+
+  <div class="z-1 flex flex-col items-start justify-end gap-1.5 w-full h-full">
+    <img
+      src={image}
+      alt={title}
+      class="relative top-0 grow flex items-center justify-end justify-self-end mx-auto group-hover:-top-2 transition-all duration-300 ease-in-out"
+    />
+
+    <h2
+      class="font-heading text-[#4A002A] font-extrabold text-2xl/[28px] uppercase shrink-0"
+    >
+      {title}
+    </h2>
+  </div>
+</article>
