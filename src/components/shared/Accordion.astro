@@ -1,0 +1,92 @@
+---
+import ExpandLessIcon from "@/assets/icons/expand-less.svg";
+import ExpandMoreIcon from "@/assets/icons/expand-more.svg";
+
+interface Props {
+  title: string;
+  content: string;
+}
+
+const { title, content } = Astro.props;
+---
+
+<div class="accordion rounded-sm overflow-hidden">
+  <button
+    class="accordion-toggle w-full text-left px-5 py-3 font-copy font-bold bg-surface-contrast text-text-invert cursor-pointer flex justify-between items-center"
+    aria-expanded="false"
+  >
+    {title}
+    <span class="ml-2">
+      <ExpandMoreIcon class="accordion-icon inline-block" />
+    </span>
+  </button>
+  <div
+    class="accordion-content px-5 py-3 font-copy text-text-invert hidden"
+    aria-hidden="true"
+  >
+    {content}
+  </div>
+</div>
+
+<script>
+  import { gsap } from "gsap";
+
+  document.addEventListener("DOMContentLoaded", () => {
+    const toggles = document.querySelectorAll(".accordion-toggle");
+
+    toggles.forEach((toggle) => {
+      // scope to the closest accordion container so multiple instances work
+      const container = toggle.closest(".accordion");
+      const content = container?.querySelector(".accordion-content");
+      const icon = container?.querySelector(".accordion-icon");
+
+      toggle?.addEventListener("click", () => {
+        const expanded = toggle.getAttribute("aria-expanded") === "true";
+        toggle.setAttribute("aria-expanded", String(!expanded));
+        if (content) content.setAttribute("aria-hidden", String(expanded));
+
+        if (!expanded) {
+          // show then animate from 0 to auto
+          if (!content || !icon) return;
+          content.classList.remove("hidden");
+          gsap.fromTo(
+            content,
+            { height: 0, opacity: 0 },
+            {
+              height: "auto",
+              opacity: 1,
+              duration: 0.4,
+              ease: "power2.out",
+            }
+          );
+          gsap.fromTo(
+            icon,
+            { rotate: 0 },
+            {
+              rotate: 180,
+              duration: 0.4,
+              ease: "power2.out",
+            }
+          );
+        } else if (content && icon) {
+          gsap.to(content, {
+            height: 0,
+            opacity: 0,
+            duration: 0.3,
+            ease: "power2.in",
+            onComplete: () => content.classList.add("hidden"),
+          });
+          gsap.fromTo(
+            icon,
+            { rotate: 180 },
+            {
+              rotate: 0,
+              duration: 0.4,
+              ease: "power2.out",
+            }
+          );
+        }
+      });
+    });
+  });
+</script>

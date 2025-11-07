@@ -1,0 +1,41 @@
+---
+import Accordion from "@/components/shared/Accordion.astro";
+---
+
+<section id="FAQ" class="w-full bg-text-secondary text-text-invert">
+  <div
+    class="flex flex-col gap-5 items-center max-w-[800px] mx-auto pt-[86px] pb-[50px]"
+  >
+    <h1 class="font-large-heading text-[60px]/[80%] uppercase">
+      Frequently Asked Questions
+    </h1>
+    <p class="font-copy text-base/[24px] text-center">
+      Curious about Carnilove? You’re not alone. Here are some of the most
+      common questions from fellow dog and cat lovers — all answered by our team
+      of nutrition and pet care experts.
+    </p>
+  </div>
+
+  <div class="flex flex-col gap-2 w-[715px] max-w-[90%] ml-40 pb-[100px]">
+    <Accordion
+      title="What makes Carnilove different from other pet foods?"
+      content="Carnilove is crafted to mirror the natural diet of wild dogs and cats. Every recipe is rich in meat, balanced with forest fruits, vegetables, and herbs — no grains, no artificial additives, just real nutrition inspired by nature."
+    />
+    <Accordion
+      title="Is Carnilove suitable for all breeds and sizes?"
+      content="Yes — our recipes are designed for all breeds and activity levels. Each formula is nutritionally balanced, and we offer specific options for puppies, adults, seniors, and active pets to ensure the perfect fit for every member of your pack."
+    />
+    <Accordion
+      title="Do you use artificial colours or preservatives?"
+      content="Never. We believe in pure, honest nutrition. Our food is preserved naturally and coloured only by the real ingredients inside — because nature doesn’t need enhancements."
+    />
+    <Accordion
+      title="Can I mix Carnilove dry and wet food?"
+      content="Absolutely. Many pet owners mix the two for added variety and hydration. Our dry and wet formulas are designed to complement each other, giving your pet a complete and satisfying meal."
+    />
+    <Accordion
+      title="Where is Carnilove made?"
+      content="All Carnilove recipes are made in the heart of Europe, using responsibly sourced ingredients from trusted farms and fisheries. Each batch is carefully crafted to meet the highest standards of quality and safety."
+    />
+  </div>
+</section>
