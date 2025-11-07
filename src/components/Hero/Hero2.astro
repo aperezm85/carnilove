@@ -1,13 +1,12 @@
 ---
-import HeroHeader from "../HeroHeader.astro";
-
-import EastIcon from "@/assets/icons/east.svg";
-
 import BagsFoodImage from "@/assets/hero/bags-food.png";
 import HeroDog from "@/assets/hero/hero-dog.png";
+import EastIcon from "@/assets/icons/east.svg";
+import HeroHeader from "@/components/HeroHeader.astro";
+import ButtonRed from "@/components/shared/ButtonRed.astro";
 ---
 
-<section id="hero-2" class="w-full h-full overflow-hidden absolute top-0 mt-20">
+<section id="hero-2" class="w-full h-full overflow-hidden absolute top-0 pt-20">
   <HeroHeader textColor="text-text-primary" />
   <section class="mt-[100px] ml-[100px]">
     <h1
@@ -21,12 +20,9 @@ import HeroDog from "@/assets/hero/hero-dog.png";
       SUBSCRIBERS GET FREE DELIVERY AND TRIPLE POINTS
     </h2>
 
-    <button
-      type="button"
-      class="red-button mt-[30px] flex flex-row items-center gap-1.5"
-    >
+    <ButtonRed className="mt-[30px] flex flex-row items-center gap-1.5">
       Subscribe today <EastIcon class="w-6 h-6" />
-    </button>
+    </ButtonRed>
   </section>
 
   <section
@@ -39,7 +35,7 @@ import HeroDog from "@/assets/hero/hero-dog.png";
   </section>
 
   <section
-    class="absolute bottom-[10%] left-[90px] aspect-656/536 overflow-hidden scale-120 z-1"
+    class="absolute bottom-0 left-[90px] aspect-656/536 overflow-hidden scale-120 z-1"
   >
     <img
       src={BagsFoodImage.src}
@@ -47,9 +43,7 @@ import HeroDog from "@/assets/hero/hero-dog.png";
       class="w-full h-full object-cover"
     />
   </section>
-  <section
-    class="absolute bottom-[10%] right-0 aspect-767/ 610 overflow-hidden"
-  >
+  <section class="absolute bottom-0 right-0 aspect-767/ 610 overflow-hidden">
     <img src={HeroDog.src} alt="hero dog" class="w-full h-full object-cover" />
   </section>
 </section>

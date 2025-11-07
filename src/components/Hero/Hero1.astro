@@ -1,11 +1,12 @@
 ---
 import videoSrc from "@/assets/hero/hero.mp4";
-import HeroHeader from "../HeroHeader.astro";
+import HeroHeader from "@/components/HeroHeader.astro";
+import ButtonRed from "@/components/shared/ButtonRed.astro";
 ---
 
 <section
   id="hero-1"
-  class="w-full h-full overflow-hidden absolute top-0 left-0 mt-20"
+  class="w-full h-full overflow-hidden absolute top-0 left-0 pt-20"
 >
   <section class="absolute top-0 left-0 w-full h-full">
     <section
@@ -38,8 +39,8 @@ import HeroHeader from "../HeroHeader.astro";
       Wild origin meats & forest fruits as nature intended for dogs & cats.
     </p>
     <div class="flex flex-row gap-4">
-      <button type="button" class="red-button"> Shop dogs </button>
-      <button type="button" class="red-button"> Shop cats </button>
+      <ButtonRed>Shop dogs</ButtonRed>
+      <ButtonRed>Shop cats</ButtonRed>
     </div>
   </section>
 </section>

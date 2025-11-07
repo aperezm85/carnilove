@@ -5,16 +5,20 @@ import All from "@/assets/shop_product/all-food.png";
 import DryFood from "@/assets/shop_product/dry-food.png";
 import Snacks from "@/assets/shop_product/snack-food.png";
 import WetFood from "@/assets/shop_product/wet-food.png";
+import Label from "@/components/shared/Label.astro";
 ---
 
 <section
   id="shop_by_product"
-  class="relative flex flex-col items-center h-screen w-full pt-[78px] bg-[url(/savannah.jpg)] bg-cover bg-center bg-no-repeat"
+  class="relative flex flex-col items-center h-screen w-full mt-[78px]"
 >
-  <span
-    class="px-2 py-1.5 border border-surface-background-burgundy rounded-sm font-heading uppercase font-extrabold text-base/[24px] text-text-primary"
-    >honour the bond</span
+  <section
+    id="savannah"
+    class="bg-[url(/savannah.jpg)] bg-cover bg-center bg-no-repeat w-full h-[569px] absolute -bottom-[200px]"
   >
+  </section>
+
+  <Label>honour the bond</Label>
 
   <h1
     class="font-large-heading text-[90px]/[80%] text-center text-text-primary mt-6"
