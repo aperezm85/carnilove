@@ -4,10 +4,16 @@
   --color-surface-invert: #31001a;
   --color-text-invert: #fff3e4;
   --color-text-primary: #52002b;
+  --color-text-minimal: #a2547d;
+
   --color-text-brand-red: #f00037;
   --color-buttons-primary-bg-default: #f00037;
   --color-buttons-primary-txt-default: #fff3e4;
+  --color-buttons-primary-bg-hover: #aa0027;
+  --color-buttons-primary-txt-hover: #fff3e4;
+  --color-buttons-tertiary-txt-default: #74003d;
 
+  --color-surface-background-secondary: #f6e1ce;
   --color-surface-background-burgundy: #52002b;
   --color-surface-background-minimal: #fff3e4;
   --color-surface-background-red: #f00037;
@@ -56,4 +62,12 @@ body {
 
 .p1 {
   @apply font-copy text-[18px]/[26px];
+}
+
+.red-button {
+  @apply bg-buttons-primary-bg-default text-buttons-primary-txt-default font-heading text-[22px]/[24px] py-3 px-8 rounded-sm uppercase font-extrabold cursor-pointer hover:bg-buttons-primary-bg-hover hover:text-buttons-primary-txt-hover transition-all duration-300;
+}
+
+.carousel-button {
+  @apply rounded-full size-12 p-3 bg-surface-background-secondary border-[1.5px]  border-transparent text-buttons-tertiary-txt-default cursor-pointer hover:border-buttons-tertiary-txt-default transition-all duration-300;
 }

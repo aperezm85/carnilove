@@ -1,0 +1,55 @@
+---
+import HeroHeader from "../HeroHeader.astro";
+
+import EastIcon from "@/assets/icons/east.svg";
+
+import BagsFoodImage from "@/assets/hero/bags-food.png";
+import HeroDog from "@/assets/hero/hero-dog.png";
+---
+
+<section id="hero-2" class="w-full h-full overflow-hidden absolute top-20">
+  <HeroHeader textColor="text-text-primary" />
+  <section class="mt-[100px] ml-[100px]">
+    <h1
+      class="font-large-heading text-[150px]/[80%] uppercase text-text-primary"
+    >
+      Subscribe <span class="text-text-minimal">& save</span>
+    </h1>
+    <h2
+      class="font-heading font-extrabold text-[34px]/[38px] uppercase text-text-primary mt-[30px]"
+    >
+      SUBSCRIBERS GET FREE DELIVERY AND TRIPLE POINTS
+    </h2>
+
+    <button
+      type="button"
+      class="red-button mt-[30px] flex flex-row items-center gap-1.5"
+    >
+      Subscribe today <EastIcon class="w-6 h-6" />
+    </button>
+  </section>
+
+  <section
+    class="absolute right-40 top-[220px] size-[300px] rounded-full bg-surface-background-red text-text-invert flex flex-col items-center justify-center p-14 z-0"
+  >
+    <span class="font-large-heading text-[190px]/[80%] uppercase"> 3X </span>
+    <span class="font-large-heading text-10/[80%] uppercase">
+      CARNI POINTS
+    </span>
+  </section>
+
+  <section
+    class="absolute bottom-[10%] left-[90px] aspect-656/536 overflow-hidden scale-120 z-1"
+  >
+    <img
+      src={BagsFoodImage.src}
+      alt="bags food"
+      class="w-full h-full object-cover"
+    />
+  </section>
+  <section
+    class="absolute bottom-[10%] right-0 aspect-767/ 610 overflow-hidden"
+  >
+    <img src={HeroDog.src} alt="hero dog" class="w-full h-full object-cover" />
+  </section>
+</section>

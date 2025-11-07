@@ -1,0 +1,45 @@
+---
+import videoSrc from "@/assets/hero/hero.mp4";
+import HeroHeader from "../HeroHeader.astro";
+---
+
+<section
+  id="hero-1"
+  class="w-full h-full overflow-hidden absolute top-20 left-0"
+>
+  <section class="absolute top-0 left-0 w-full h-full">
+    <section
+      class="bg-linear-[360deg,rgba(0,0,0,0)_18.93%,rgba(0,0,0,0.8)_100%] absolute top-0 left-0 w-full h-[300px]"
+    >
+    </section>
+    <video
+      autoplay
+      muted
+      loop
+      playsinline
+      class="w-full h-full object-cover z-0"
+    >
+      <source src={videoSrc} type="video/mp4" />
+      Your browser does not support the video tag.
+    </video>
+  </section>
+
+  <HeroHeader textColor="text-text-invert" />
+
+  <section
+    class="absolute flex flex-col gap-4 items-center justify-center text-center grow h-full w-full top-0"
+  >
+    <h1
+      class="font-large-heading text-[150px]/[80%] text-text-invert uppercase"
+    >
+      Trust their instinct
+    </h1>
+    <p class="p1 text-text-invert max-w-[600px]">
+      Wild origin meats & forest fruits as nature intended for dogs & cats.
+    </p>
+    <div class="flex flex-row gap-4">
+      <button type="button" class="red-button"> Shop dogs </button>
+      <button type="button" class="red-button"> Shop cats </button>
+    </div>
+  </section>
+</section>

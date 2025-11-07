@@ -1,0 +1,85 @@
+---
+import Header from "@/components/Header.astro";
+
+import ChevronRightIcon from "@/assets/icons/chevron-right.svg";
+import ChevronLeftIcon from "@/assets/icons/chevron-left.svg";
+import Hero1 from "./Hero1.astro";
+import Hero2 from "./Hero2.astro";
+---
+
+<section id="hero" class="relative h-screen w-full">
+  <Header />
+  <Hero1 />
+  <Hero2 />
+
+  <section
+    id="buttons"
+    class="absolute top-1/2 w-full flex flex-row justify-between"
+  >
+    <button id="left-button" type="button" class="carousel-button ml-4">
+      <ChevronLeftIcon class="w-6 h-6" />
+    </button>
+    <button id="right-button" type="button" class="carousel-button mr-4">
+      <ChevronRightIcon class="w-6 h-6" />
+    </button>
+  </section>
+</section>
+
+<script>
+  import { gsap } from "gsap";
+
+  const hero1 = document.getElementById("hero-1");
+  const hero2 = document.getElementById("hero-2");
+  const leftButton = document.getElementById("left-button");
+  const rightButton = document.getElementById("right-button");
+
+  gsap.set(hero2, { x: "100%" });
+
+  const tl = gsap.timeline({
+    defaults: {
+      ease: "none",
+      duration: 1,
+    },
+  });
+
+  let currentSlide = 0;
+  const numSlides = 2;
+  leftButton?.addEventListener("click", () => {
+    changeSlide((currentSlide - 1 + numSlides) % numSlides);
+  });
+
+  rightButton?.addEventListener("click", () => {
+    changeSlide((currentSlide + 1) % numSlides);
+  });
+
+  function changeSlide(nextSlide: number) {
+    if (nextSlide === 0) {
+      tl.to(hero1, {
+        x: "0%",
+      }).fromTo(
+        hero2,
+        {
+          x: "0%",
+        },
+        {
+          x: "100%",
+        },
+        "<"
+      );
+    } else if (nextSlide === 1) {
+      tl.to(hero1, {
+        x: "-100%",
+      }).fromTo(
+        hero2,
+        {
+          x: "100%",
+        },
+        {
+          x: "0%",
+        },
+        "<"
+      );
+    }
+    currentSlide = nextSlide;
+  }
+</script>
