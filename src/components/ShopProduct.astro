@@ -6,6 +6,8 @@ import DryFood from "@/assets/shop_product/dry-food.png";
 import Snacks from "@/assets/shop_product/snack-food.png";
 import WetFood from "@/assets/shop_product/wet-food.png";
 import Label from "@/components/shared/Label.astro";
+import Subtitle from "@/components/shared/Subtitle.astro";
+import Title from "@/components/shared/Title.astro";
 ---
 
 <section
@@ -19,16 +21,11 @@ import Label from "@/components/shared/Label.astro";
   </section>
 
   <Label>honour the bond</Label>
-
-  <h1
-    class="font-large-heading text-[90px]/[80%] text-center text-text-primary mt-6"
-  >
-    Shop by Products
-  </h1>
-  <p class="p1 max-w-[570px] text-center text-text-primary mt-[30px]">
+  <Title className="mt-6"> Shop by Products </Title>
+  <Subtitle className="max-w-[570px] mt-[30px]">
     Lorem ipsum dolor sit amet, consectetur adipiscing elit etiam sit amet
     finibus nunc. Aenean ut est egestas.
-  </p>
+  </Subtitle>
 
   <div class="mt-[35px] flex flex-row gap-2.5 items-center justify-center">
     <button

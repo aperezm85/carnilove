@@ -1,0 +1,15 @@
+---
+const { id, title, text } = Astro.props;
+---
+
+<article
+  id={id}
+  class="flex flex-col gap-2 rounded-lg bg-text-beige p-5 max-w-[430px]"
+>
+  <h2
+    class="font-heading font-extrabold text-[34px]/[38px] uppercase text-text-primary"
+  >
+    {title}
+  </h2>
+  <p class="font-copy text-lg/[26px] text-text-primary">{text}</p>
+</article>

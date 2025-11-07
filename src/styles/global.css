@@ -5,8 +5,11 @@
   --color-text-invert: #fff3e4;
   --color-text-primary: #52002b;
   --color-text-minimal: #a2547d;
-
   --color-text-brand-red: #f00037;
+  --color-text-beige: #f6e1ce;
+
+  --color-red-500: #f00037;
+
   --color-buttons-primary-bg-default: #f00037;
   --color-buttons-primary-txt-default: #fff3e4;
   --color-buttons-primary-bg-hover: #aa0027;
@@ -52,7 +55,7 @@
 html,
 body {
   background: var(--color-surface-background-minimal);
-  height: 300vh;
+  height: 1000vh;
   overflow-x: hidden;
   overscroll-behavior: none;
   color: white;

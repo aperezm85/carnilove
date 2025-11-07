@@ -1,0 +1,41 @@
+---
+interface Props {
+  id: string;
+  title: string;
+  text: string;
+  iconName: "meat" | "plant" | "grain";
+}
+
+const { id, title, text, iconName } = Astro.props;
+
+import GrainIcon from "@/assets/ingredients/grain-icon.png";
+import MeatIcon from "@/assets/ingredients/meat-icon.png";
+import PlantIcon from "@/assets/ingredients/plant-icon.png";
+
+let icon;
+
+switch (iconName) {
+  case "meat":
+    icon = MeatIcon;
+    break;
+  case "plant":
+    icon = PlantIcon;
+    break;
+  case "grain":
+    icon = GrainIcon;
+    break;
+}
+---
+
+<article
+  id={id}
+  class="flex flex-col gap-2 rounded-lg bg-text-beige p-5 max-w-[235px] items-start"
+>
+  <img src={icon.src} alt={`${iconName} icon`} class="size-[60px]" />
+  <h3
+    class="font-heading font-extrabold text-[26px]/[30px] uppercase text-text-primary"
+  >
+    {title}
+  </h3>
+  <p class="font-copy text-base/[24px] text-text-primary">{text}</p>
+</article>

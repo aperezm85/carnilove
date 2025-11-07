@@ -1,0 +1,51 @@
+---
+import EastIcon from "@/assets/icons/east.svg";
+import Label from "@/components/shared/Label.astro";
+import Subtitle from "@/components/shared/Subtitle.astro";
+import Title from "@/components/shared/Title.astro";
+
+import BenefitCardWithIcon from "@/components/shared/BenefitCardWithIcon.astro";
+import ButtonRed from "./shared/ButtonRed.astro";
+---
+
+<section
+  id="ingredients"
+  class="relative flex flex-col items-center h-screen w-full mt-[78px]"
+>
+  <section
+    id="savannah"
+    class="bg-[url(/savannah.jpg)] bg-cover bg-center bg-no-repeat w-full h-[569px] absolute bottom-0"
+  >
+  </section>
+  <Label>From Wild Origins to Real Nutrition</Label>
+  <Title className="mt-3"> Ingredients from the Wild </Title>
+  <Subtitle className="max-w-[650px] mt-5">
+    Every Carnilove recipe begins in nature — balanced with forest fruits, roots
+    and herbs for real performance nutrition.
+  </Subtitle>
+
+  <BenefitCardWithIcon
+    id="benefit-meat"
+    title="Made Only with Fresh Meat"
+    text="Pure protein power — fuelled by wild ingredients like salmon, duck & boar."
+    iconName="meat"
+  />
+
+  <BenefitCardWithIcon
+    id="benefit-plant"
+    title="True Natural Ingredients"
+    text="Nothing artificial. Just the real taste of nature — herbs, berries & roots."
+    iconName="plant"
+  />
+
+  <BenefitCardWithIcon
+    id="benefit-grain"
+    title="Grain-Free Recipes for Your Pet"
+    text="Nature’s way to feed — balanced, primal nutrition for every dog’s instinctive needs."
+    iconName="grain"
+  />
+
+  <ButtonRed className="mt-[30px] flex flex-row items-center gap-1.5">
+    About our food <EastIcon class="w-6 h-6" />
+  </ButtonRed>
+</section>

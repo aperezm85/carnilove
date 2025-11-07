@@ -1,0 +1,65 @@
+---
+import Card from "@/components/shared/Card.astro";
+
+import Arrow1 from "@/assets/find-path/arrow-1.png";
+import Arrow2 from "@/assets/find-path/arrow-2.png";
+import Arrow3 from "@/assets/find-path/arrow-3.png";
+---
+
+<section
+  id="find-your-path"
+  class="relative flex flex-col items-center h-screen w-full mt-[78px]"
+>
+  <section
+    id="savannah"
+    class="bg-[url(/savannah.jpg)] bg-cover bg-center bg-no-repeat w-full h-[569px] absolute bottom-0"
+  >
+  </section>
+
+  <section
+    id="grass"
+    class="bg-[url(/rock-and-grass.png)] bg-bottom bg-auto bg-no-repeat w-[1761px] h-auto aspect-1761/1101 absolute bottom-[78px] z-1"
+  >
+  </section>
+
+  <h1
+    id="find-your-path-header"
+    class="font-large-heading text-[120px]/[80%] uppercase text-text-primary max-w-[170px] z-2"
+  >
+    Find your <span class="text-text-minimal">Path</span>
+  </h1>
+
+  <div id="find-your-path-subheader" class="flex flex-col gap-6 max-w-[170px]">
+    <p class="font-copy text-base/[24px] text-text-primary z-2">
+      Every animal’s journey is different, from finding the food they love to
+      knowing how much they need, and never running out again.
+    </p>
+    <p class="font-copy text-base/[24px] text-text-primary z-2">
+      Explore three simple ways to feed instinctively and make every meal
+      effortless, natural, and true to their nature.
+    </p>
+  </div>
+  <div class="flex flex-row gap-2 z-2">
+    <img
+      id="arrow-1"
+      src={Arrow1.src}
+      alt="Arrow pointing right"
+      class="w-[100px] h-[110px]"
+    />
+    <Card id="card-subscribe" type="subscribe" />
+    <img
+      id="arrow-2"
+      src={Arrow2.src}
+      alt="Arrow pointing right"
+      class="w-[100px] h-[110px]"
+    />
+    <Card id="card-trial" type="trial" />
+    <img
+      id="arrow-3"
+      src={Arrow3.src}
+      alt="Arrow pointing right"
+      class="w-[100px] h-[110px]"
+    />
+    <Card id="card-pet" type="pet" />
+  </div>
+</section>

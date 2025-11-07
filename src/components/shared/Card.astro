@@ -1,0 +1,99 @@
+---
+interface Props {
+  id: string;
+  type: "pet" | "subscribe" | "trial";
+}
+
+const { id, type } = Astro.props;
+
+import boxFood from "@/assets/find-path/box-food.jpg";
+import howMuchFood from "@/assets/find-path/how-much-food.png";
+import PetProfileIcon from "@/assets/find-path/pet-profile-icon.png";
+import SubscribeIcon from "@/assets/find-path/subscribe-icon.png";
+import TrialIcon from "@/assets/find-path/trial-icon.png";
+import whichFood from "@/assets/find-path/which-food.png";
+
+import CheckIcon from "@/assets/icons/check.svg";
+
+import ButtonRed from "@/components/shared/ButtonRed.astro";
+
+let icon;
+let image;
+let title;
+let point1;
+let point2;
+let buttonText;
+switch (type) {
+  case "pet":
+    title = "Not sure how much?";
+    point1 = "60-second quiz calculates the perfect portion";
+    point2 = "Based on breed, age, weight & activity level";
+    buttonText = "Take the quiz";
+    icon = PetProfileIcon;
+    image = howMuchFood;
+    break;
+  case "subscribe":
+    title = "Subscribe & save 25%";
+    point1 = "Never run out. Free delivery over £10";
+    point2 = "Cancel anytime. Pause or skip deliveries.";
+    buttonText = "Subscribe now";
+    icon = SubscribeIcon;
+    image = boxFood;
+    break;
+  case "trial":
+    title = "Not sure which one?";
+    point1 = "Try a Trial Box with 3 flavors for £9.99";
+    point2 = "Find your dog's favorite before committing";
+    buttonText = "Get a trial box";
+    icon = TrialIcon;
+    image = whichFood;
+    break;
+}
+---
+
+<article
+  id={id}
+  class="flex flex-col gap-0 rounded-lg overflow-hidden bg-[#ECD7C5] w-[340px] h-[510px]"
+>
+  <img
+    src={image?.src}
+    alt={`${title} image`}
+    class="w-full h-[215px] object-cover"
+  />
+
+  <div
+    class="flex flex-col gap-5 pt-[45px] px-5 pb-5 items-start relative grow"
+  >
+    <h2
+      class="font-heading font-extrabold text-[34px]/[38px] uppercase text-text-primary"
+    >
+      {title}
+    </h2>
+
+    <img
+      src={icon?.src}
+      alt={`${type} icon`}
+      class="size-[65px] absolute -top-[32.5px] left-[17px]"
+    />
+
+    <div class="flex flex-col gap-2.5 grow">
+      <p
+        class="font-copy text-base/[24px] text-text-primary flex flex-row gap-2 items-start"
+      >
+        <span
+          class="size-[25px] rounded-full bg-surface-background-minimal text-text-minimal flex items-center justify-center shrink-0"
+          ><CheckIcon class="size-4 text-text-minimal" />
+        </span>{point1}
+      </p>
+      <p
+        class="font-copy text-base/[24px] text-text-primary flex flex-row gap-2 items-start"
+      >
+        <span
+          class="size-[25px] rounded-full bg-surface-background-minimal text-text-minimal flex items-center justify-center shrink-0"
+          ><CheckIcon class="size-4 text-text-minimal" />
+        </span>{point2}
+      </p>
+    </div>
+    <ButtonRed className="w-full self-end">{buttonText}</ButtonRed>
+  </div>
+</article>
