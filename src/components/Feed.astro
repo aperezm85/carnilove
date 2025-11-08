@@ -7,30 +7,37 @@ import Placeholder from "@/assets/feed-nature/video-placeholder.jpg";
 ---
 
 <section
-  id="find-your-path"
-  class="pin-section relative flex flex-col items-center h-screen w-full pt-[78px] bg-surface-background-minimal"
+  id="feed-their-nature"
+  class="pin-section relative flex flex-row items-center justify-center h-screen w-full pt-[78px] gap-6 bg-surface-background-minimal"
 >
-  <DoubleHeading
-    id="find-your-path-title"
-    className="max-w-[530px] z-2"
-    first="Feed their"
-    second="true nature."
+  <section class="flex flex-col max-w-[550px]">
+    <DoubleHeading
+      id="feed-their-nature-title"
+      className="max-w-[550px] z-2"
+      first="Feed their"
+      second="true nature."
+    />
+
+    <h2
+      class="font-heading font-extrabold text-[34px]/[38px] uppercase text-text-primary max-w-[530px]"
+    >
+      Instinct-driven nutrition for the natural carnivore in every pet
+    </h2>
+
+    <p class="text-sm/[22px] text-text-primary max-w-[530px]">
+      High-meat recipes with no grains or fillers. Pure, powerful nutrition that
+      ignites their spirit.
+    </p>
+
+    <ButtonRed
+      className="mt-[30px] flex flex-row items-center gap-1.5 self-start"
+    >
+      Discover Their Wild Side <EastIcon class="w-6 h-6" />
+    </ButtonRed>
+  </section>
+  <img
+    id="video-feed-placeholder"
+    src={Placeholder.src}
+    class="aspect-433/532 w-[433px] h-[532px]"
   />
-
-  <h2
-    class="font-heading font-extrabold text-[34px]/[38px] uppercase text-text-primary max-w-[530px]"
-  >
-    Instinct-driven nutrition for the natural carnivore in every pet
-  </h2>
-
-  <p class="text-sm/[22px] text-text-primary max-w-[530px]">
-    High-meat recipes with no grains or fillers. Pure, powerful nutrition that
-    ignites their spirit.
-  </p>
-
-  <ButtonRed className="mt-[30px] flex flex-row items-center gap-1.5">
-    Discover Their Wild Side <EastIcon class="w-6 h-6" />
-  </ButtonRed>
-
-  <img src={Placeholder.src} class="aspect-433/532 w-[433px] h-[532px]" />
 </section>

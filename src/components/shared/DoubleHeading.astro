@@ -6,10 +6,10 @@ const { id, className, first, second } = Astro.props;
   id={id}
   class:list={[
     "font-large-heading text-[140px]/[80%] text-center text-text-primary uppercase",
-    "flex flex-col items-start",
+    "flex flex-col items-start overflow-hidden pt-6",
     className,
   ]}
 >
-  <span>{first}</span>
-  <span class="text-text-minimal">{second}</span>
+  <span class="chars">{first}</span>
+  <span class="text-text-minimal chars">{second}</span>
 </h1>
