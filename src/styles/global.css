@@ -76,3 +76,7 @@ body {
 @utility carousel-button {
   @apply rounded-full size-12 p-3 bg-surface-background-secondary border-[1.5px]  border-transparent text-buttons-tertiary-txt-default cursor-pointer hover:border-buttons-tertiary-txt-default transition-all duration-300;
 }
+
+@utility carousel-red-button {
+  @apply rounded-full size-12 p-3 bg-red-500 border-[1.5px] border-transparent text-buttons-primary-txt-default cursor-pointer hover:border-buttons-tertiary-txt-default transition-all duration-300;
+}

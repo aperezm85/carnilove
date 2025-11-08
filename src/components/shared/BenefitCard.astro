@@ -1,10 +1,13 @@
 ---
-const { id, title, text } = Astro.props;
+const { id, title, text, className } = Astro.props;
 ---
 
 <article
   id={id}
-  class="flex flex-col gap-2 rounded-lg bg-text-beige p-5 max-w-[430px]"
+  class:list={[
+    "flex flex-col gap-2 rounded-lg bg-text-beige p-5 max-w-[430px]",
+    className,
+  ]}
 >
   <h2
     class="font-heading font-extrabold text-[34px]/[38px] uppercase text-text-primary"

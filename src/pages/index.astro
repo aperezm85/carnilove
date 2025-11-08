@@ -5,6 +5,7 @@ import FindYourPath from "@/components/FindYourPath.astro";
 
 import Hero from "@/components/Hero/Hero.astro";
 import Ingredients from "@/components/Ingredients.astro";
+import Instincts from "@/components/Instincts.astro";
 import ShopProduct from "@/components/ShopProduct.astro";
 import Layout from "@/layouts/Layout.astro";
 ---
@@ -13,6 +14,7 @@ import Layout from "@/layouts/Layout.astro";
   <Hero />
   <ShopProduct />
   <Feed />
+  <Instincts />
   <Ingredients />
   <FindYourPath />
   <FAQ />
@@ -77,6 +79,7 @@ import Layout from "@/layouts/Layout.astro";
         start: "top bottom",
         end: "bottom top", // short range to trigger once
         scrub: true,
+        pin: true,
       },
     });
 
@@ -90,6 +93,7 @@ import Layout from "@/layouts/Layout.astro";
         start: "top top",
         end: "bottom top",
         scrub: false,
+        pin: true,
       },
     });
 
@@ -102,6 +106,7 @@ import Layout from "@/layouts/Layout.astro";
         start: "top top",
         end: "bottom top",
         scrub: false,
+        pin: true,
       },
     });
   }
