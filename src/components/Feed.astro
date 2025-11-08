@@ -41,3 +41,66 @@ import Placeholder from "@/assets/feed-nature/video-placeholder.jpg";
     class="aspect-433/532 w-[433px] h-[532px]"
   />
 </section>
+
+<script>
+  import { gsap } from "gsap";
+  import { ScrollTrigger } from "gsap/ScrollTrigger";
+  import { SplitText } from "gsap/SplitText";
+
+  gsap.registerPlugin(ScrollTrigger, SplitText);
+
+  const feedTitle = document.getElementById("feed-their-nature-title");
+  const videoFeedPlaceholder = document.getElementById(
+    "video-feed-placeholder"
+  );
+
+  if (feedTitle) {
+    // Run SplitText only after fonts are loaded to ensure correct measurements.
+    const initSplitText = () => {
+      // If SplitText was already applied, kill previous instance (defensive)
+      try {
+        // Create SplitText on the actual element node rather than a string selector
+        const mySplitText = new SplitText(feedTitle, { type: "chars" });
+        const chars = mySplitText.chars;
+
+        gsap.from(chars, {
+          yPercent: 130,
+          stagger: 0.02,
+          ease: "back.out",
+          duration: 1,
+          scrollTrigger: {
+            trigger: feedTitle,
+            start: "top 50%",
+            toggleActions: "play reverse restart restart",
+          },
+        });
+      } catch (err) {
+        // If SplitText fails for any reason, log and bail gracefully
+        console.warn("SplitText init failed:", err);
+      }
+    };
+
+    if (document.fonts && document.fonts.ready) {
+      // Wait for all fonts declared in CSS to be loaded
+      document.fonts.ready.then(initSplitText).catch(initSplitText);
+    } else {
+      // Fallback: wait for window load
+      window.addEventListener("load", initSplitText, { once: true });
+    }
+  }
+
+  if (videoFeedPlaceholder) {
+    gsap.from(videoFeedPlaceholder, {
+      yPercent: 130,
+      stagger: 0.02,
+      ease: "back.out",
+      duration: 1,
+      scrollTrigger: {
+        trigger: feedTitle,
+        start: "top 50%",
+        end: "bottom 40%",
+        toggleActions: "play reset restart reset",
+      },
+    });
+  }
+</script>

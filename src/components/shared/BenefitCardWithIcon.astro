@@ -4,9 +4,10 @@ interface Props {
   title: string;
   text: string;
   iconName: "meat" | "plant" | "grain";
+  className?: string;
 }
 
-const { id, title, text, iconName } = Astro.props;
+const { id, title, text, iconName, className } = Astro.props;
 
 import GrainIcon from "@/assets/ingredients/grain-icon.png";
 import MeatIcon from "@/assets/ingredients/meat-icon.png";
@@ -29,7 +30,10 @@ switch (iconName) {
 
 <article
   id={id}
-  class="flex flex-col gap-2 rounded-lg bg-text-beige p-5 max-w-[235px] items-start"
+  class:list={[
+    "flex flex-col gap-2 rounded-lg bg-text-beige p-5 max-w-[235px] items-start h-[275px]",
+    className,
+  ]}
 >
   <img src={icon.src} alt={`${iconName} icon`} class="size-[60px]" />
   <h3

@@ -6,6 +6,9 @@ import Title from "@/components/shared/Title.astro";
 
 import BenefitCardWithIcon from "@/components/shared/BenefitCardWithIcon.astro";
 import ButtonRed from "./shared/ButtonRed.astro";
+
+import BowlImage from "@/assets/ingredients/bowl.png";
+import HalfBowlImage from "@/assets/ingredients/half-bowl.png";
 ---
 
 <section
@@ -24,6 +27,7 @@ import ButtonRed from "./shared/ButtonRed.astro";
     title="Made Only with Fresh Meat"
     text="Pure protein power — fuelled by wild ingredients like salmon, duck & boar."
     iconName="meat"
+    className="absolute top-[30%] left-[35%]"
   />
 
   <BenefitCardWithIcon
@@ -31,6 +35,7 @@ import ButtonRed from "./shared/ButtonRed.astro";
     title="True Natural Ingredients"
     text="Nothing artificial. Just the real taste of nature — herbs, berries & roots."
     iconName="plant"
+    className="absolute top-[30%] left-[55%]"
   />
 
   <BenefitCardWithIcon
@@ -38,9 +43,75 @@ import ButtonRed from "./shared/ButtonRed.astro";
     title="Grain-Free Recipes for Your Pet"
     text="Nature’s way to feed — balanced, primal nutrition for every dog’s instinctive needs."
     iconName="grain"
+    className="absolute top-[30%] left-[75%]"
   />
 
   <ButtonRed className="mt-[30px] flex flex-row items-center gap-1.5">
     About our food <EastIcon class="w-6 h-6" />
   </ButtonRed>
+
+  <section
+    id="bowl"
+    class="absolute bottom-[15%] -left-[5%] w-full max-w-[50%] h-[590px] grid grid-cols-1 grid-rows-1"
+  >
+    <img
+      src={BowlImage.src}
+      alt="Carnilove ingredients bowl"
+      class="w-full h-auto inline-block relative top-0 left-0 z-1"
+    />
+    <section
+      class="half-bowl-container w-1/2 h-auto relative -top-6 left-[280px] scale-80 z-2 inline-block"
+    >
+      <img
+        src={HalfBowlImage.src}
+        alt="Carnilove ingredients bowl"
+        class="w-full h-auto"
+      />
+    </section>
+  </section>
+
+  <script>
+    import { gsap } from "gsap";
+    import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+    gsap.registerPlugin(ScrollTrigger);
+
+    const ingredients = document.getElementById("ingredients");
+    const bowl = document.getElementById("bowl");
+
+    const entryTimeline = gsap.timeline({
+      scrollTrigger: {
+        trigger: ingredients,
+        start: "top center +=100",
+        end: "bottom bottom",
+        toggleActions: "play reverse none restart",
+        scrub: true,
+      },
+    });
+
+    entryTimeline
+      .from("#benefit-meat", {
+        top: 0,
+        left: "35%",
+        opacity: 0,
+      })
+      .from("#benefit-plant", { top: 0, left: "55%", opacity: 0 })
+      .from("#benefit-grain", { top: 0, left: "75%", opacity: 0 })
+      .from(bowl, { y: 100, x: -100, rotate: 360, opacity: 0 }, "<0.2");
+
+    const exitTimeline = gsap.timeline({
+      scrollTrigger: {
+        trigger: ingredients,
+        start: "bottom 95%",
+        end: "bottom 75%",
+        scrub: 1,
+      },
+    });
+
+    exitTimeline
+      .to(bowl, { y: 100, x: -100, rotate: -360, opacity: 0 })
+      .to("#benefit-meat", { top: 0, xPercent: 35, opacity: 0 }, "<0.2")
+      .to("#benefit-plant", { top: 0, xPercent: 55, opacity: 0 }, "<0.2")
+      .to("#benefit-grain", { top: 0, xPercent: 75, opacity: 0 }, "<0.2");
+  </script>
 </section>
