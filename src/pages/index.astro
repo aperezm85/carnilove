@@ -59,6 +59,8 @@ import Layout from "@/layouts/Layout.astro";
     "video-feed-placeholder"
   );
 
+  const FAQ = document.getElementById("FAQ");
+
   if (savannah && shopSection && feed) {
     // Timeline for bottom transitions
     const tl = gsap.timeline();
@@ -87,14 +89,24 @@ import Layout from "@/layouts/Layout.astro";
         trigger: feed,
         start: "top top",
         end: "bottom top",
-        scrub: true,
+        scrub: false,
+      },
+    });
+
+    tl.to(savannah, {
+      top: "-=200px",
+      duration: 1,
+      ease: "power2.out",
+      scrollTrigger: {
+        trigger: "#ingredients",
+        start: "top top",
+        end: "bottom top",
+        scrub: false,
       },
     });
   }
 
   if (productCards.length > 0) {
-    console.log("Animating product cards ", productCards.length);
-
     gsap.to(productCards, {
       y: -200,
       opacity: 0,
@@ -127,7 +139,6 @@ import Layout from "@/layouts/Layout.astro";
           scrollTrigger: {
             trigger: feedTitle,
             start: "top 50%",
-            markers: true,
             toggleActions: "play reverse restart reset",
           },
         });
@@ -155,7 +166,7 @@ import Layout from "@/layouts/Layout.astro";
       scrollTrigger: {
         trigger: feedTitle,
         start: "top 50%",
-        markers: true,
+        end: "bottom 40%",
         toggleActions: "play reset restart reset",
       },
     });
