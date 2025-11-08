@@ -65,14 +65,14 @@ body {
   width: 100%;
 }
 
-.p1 {
+@utility p1 {
   @apply font-copy text-[18px]/[26px];
 }
 
-.red-button {
+@utility red-button {
   @apply bg-buttons-primary-bg-default text-buttons-primary-txt-default font-heading text-[22px]/[24px] py-3 px-8 rounded-sm uppercase font-extrabold cursor-pointer hover:bg-buttons-primary-bg-hover hover:text-buttons-primary-txt-hover transition-all duration-300;
 }
 
-.carousel-button {
+@utility carousel-button {
   @apply rounded-full size-12 p-3 bg-surface-background-secondary border-[1.5px]  border-transparent text-buttons-tertiary-txt-default cursor-pointer hover:border-buttons-tertiary-txt-default transition-all duration-300;
 }
