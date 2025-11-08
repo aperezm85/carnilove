@@ -57,7 +57,7 @@
 html,
 body {
   background: var(--color-surface-background-minimal);
-  height: 1000vh;
+  height: auto;
   overflow-x: hidden;
   overscroll-behavior: none;
   color: white;

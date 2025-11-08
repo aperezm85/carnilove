@@ -24,15 +24,16 @@ import Layout from "@/layouts/Layout.astro";
 
   gsap.registerPlugin(ScrollTrigger);
 
+  const sections = document.querySelectorAll(".pin-section");
   // Pin sections
-  document.querySelectorAll(".pin-section").forEach((section) => {
+  sections.forEach((section) => {
     ScrollTrigger.create({
       trigger: section,
       start: "top top",
       end: "bottom top",
       pin: true,
       pinSpacing: false,
-      scrub: 50,
+      scrub: 1,
       markers: true,
       snap: 1,
     });
