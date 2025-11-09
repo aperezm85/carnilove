@@ -1,0 +1,154 @@
+---
+import UGC01Image from "@/assets/trusted/01-ugc-image.jpg";
+import UGC01Video from "@/assets/trusted/01-ugc-video.mp4";
+import UGC02Image from "@/assets/trusted/02-ugc-card.jpg";
+import UGC02Video from "@/assets/trusted/02-ugc-video.mp4";
+import UGC03Image from "@/assets/trusted/03-ugc-image.jpg";
+import UGC03Video from "@/assets/trusted/03-ugc-video.mp4";
+import UGC04Image from "@/assets/trusted/04-ugc-image.jpg";
+import UGC04Video from "@/assets/trusted/04-ugc-video.mp4";
+import UGC05Image from "@/assets/trusted/05-ugc-image.jpg";
+import UGC06Image from "@/assets/trusted/06-ugc-image.jpg";
+
+import ChevronLeftIcon from "@/assets/icons/chevron-left.svg";
+import ChevronRightIcon from "@/assets/icons/chevron-right.svg";
+import VideoIcon from "@/assets/icons/video.svg";
+
+const items = [
+  {
+    type: "image",
+    src: UGC01Image,
+    alt: "User generated content image 1",
+  },
+  {
+    type: "video",
+    src: UGC01Video,
+    alt: "User generated content video 1",
+  },
+  {
+    type: "image",
+    src: UGC02Image,
+    alt: "User generated content image 2",
+  },
+  {
+    type: "video",
+    src: UGC02Video,
+    alt: "User generated content video 2",
+  },
+  {
+    type: "image-combined",
+    src: [UGC03Image, UGC04Image],
+    alt: "User generated content image 5",
+  },
+  {
+    type: "video",
+    src: UGC03Video,
+    alt: "User generated content video 3",
+  },
+  {
+    type: "video",
+    src: UGC04Video,
+    alt: "User generated content video 4",
+  },
+  {
+    type: "image",
+    src: UGC05Image,
+    alt: "User generated content image 5",
+  },
+  {
+    type: "image",
+    src: UGC06Image,
+    alt: "User generated content image 6",
+  },
+];
+---
+
+<section>
+  <section
+    id="buttons"
+    class="absolute top-1/2 w-full flex flex-row justify-between z-2"
+  >
+    <button
+      id="left-carousel-button"
+      type="button"
+      class="carousel-red-button ml-8"
+    >
+      <ChevronLeftIcon class="w-6 h-6" />
+    </button>
+    <button
+      id="right-carousel-button"
+      type="button"
+      class="carousel-red-button mr-8"
+    >
+      <ChevronRightIcon class="w-6 h-6" />
+    </button>
+  </section>
+  <section
+    class="relative w-full h-full overflow-hidden flex flex-row flex-nowrap gap-3"
+    id="carousel"
+  >
+    {
+      items.map((item) => {
+        if (item.type === "image") {
+          return (
+            <img
+              src={(item.src as any).src}
+              alt={item.alt}
+              class="h-full object-cover rounded-lg shrink-0"
+            />
+          );
+        } else if (item.type === "video") {
+          return (
+            <div class="relative max-h-[500px] w-[300px] shrink-0 rounded-lg overflow-hidden">
+              <video
+                class="video"
+                autoplay
+                muted
+                loop
+                playsinline
+                class="w-full h-full object-fill z-0 aspect-9/16 "
+                preload="auto"
+              >
+                <source src={item.src as any} type="video/mp4" />
+                Your browser does not support the video tag.
+              </video>
+              <VideoIcon class="absolute bottom-4 left-4 w-6 h-6 z-2" />
+            </div>
+          );
+        } else if (item.type === "image-combined") {
+          return (
+            <div class="h-full flex flex-col gap-3 shrink-0">
+              {(item.src as any)?.map((src: any, index: number) => (
+                <img
+                  src={src.src}
+                  alt={`${item.alt} - part ${index + 1}`}
+                  class="h-1/2 object-cover rounded-lg"
+                />
+              ))}
+            </div>
+          );
+        }
+      })
+    }
+  </section>
+</section>
+
+<script>
+  const leftButton = document.getElementById("left-carousel-button");
+  const rightButton = document.getElementById("right-carousel-button");
+  const carousel = document.getElementById("carousel");
+
+  leftButton?.addEventListener("click", () => {
+    carousel?.scrollBy({
+      left: -carousel.clientWidth,
+      behavior: "smooth",
+    });
+  });
+
+  rightButton?.addEventListener("click", () => {
+    carousel?.scrollBy({
+      left: carousel.clientWidth,
+      behavior: "smooth",
+    });
+  });
+</script>

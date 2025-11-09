@@ -1,0 +1,58 @@
+---
+import Subtitle from "@/components/shared/Subtitle.astro";
+
+import ButtonRed from "@/components/shared/ButtonRed.astro";
+import BentoGridCarousel from "@/components/BentoGridCarousel/BentoGridCarousel.astro";
+---
+
+<section
+  id="trusted"
+  class="pin-section relative flex flex-col items-center h-screen w-full pt-[78px] bg-surface-background-minimal"
+>
+  <h1
+    id="trusted-title"
+    class:list={[
+      "font-large-heading text-[60px]/[80%] text-center text-text-primary overflow-hidden uppercase",
+      "max-w-[640px] mt-6",
+    ]}
+  >
+    Trusted by thousands of wild hearts across Europe
+  </h1>
+
+  <Subtitle id="trusted-description" className="max-w-[640px] mt-5">
+    Don’t just take our word for it — hear how real owners feed instinctively
+    and see the difference.
+  </Subtitle>
+
+  <ButtonRed className="mt-[30px] flex flex-row items-center gap-1.5">
+    Hear more from the tribe
+  </ButtonRed>
+
+  <section class="w-full h-[500px] mt-16 overflow-hidden">
+    <BentoGridCarousel />
+  </section>
+</section>
+<script>
+  import { animateTitle } from "@/utils";
+  import { gsap } from "gsap";
+  import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+  gsap.registerPlugin(ScrollTrigger);
+
+  const trusted = document.getElementById("trusted");
+  const bowl = document.getElementById("bowl");
+
+  const trustedTitle = document.getElementById("trusted-title");
+  const trustedDescription = document.getElementById("trusted-description");
+
+  animateTitle({
+    title: trustedTitle,
+    trigger: trusted,
+    end: "bottom 95%",
+  });
+  animateTitle({
+    title: trustedDescription,
+    trigger: trusted,
+    end: "bottom 95%",
+  });
+</script>
