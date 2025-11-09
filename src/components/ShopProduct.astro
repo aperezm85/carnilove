@@ -58,7 +58,7 @@ import Title from "@/components/shared/Title.astro";
   const productTitle = document.getElementById("product-title");
   const productSubtitle = document.getElementById("product-subtitle");
 
-  const trigger = "#shop-by-product";
+  const trigger = document.getElementById("shop-by-product");
 
   animateTitle({ title: productTitle, trigger, end: "bottom 95%" });
 
@@ -78,26 +78,9 @@ import Title from "@/components/shared/Title.astro";
       scrollTrigger: {
         trigger: "#shop-by-product",
         start: "top center",
-        end: "bottom bottom",
+        end: "bottom 95%",
         toggleActions: "play reverse play reverse",
       },
     }
   );
-
-  // const exitTimeline = gsap.timeline({
-  //   scrollTrigger: {
-  //     trigger: "#shop-by-product",
-  //     start: "bottom 80%",
-  //     end: "bottom 50%",
-  //     scrub: true,
-  //   },
-  // });
-
-  // exitTimeline.to(productCards, {
-  //   y: -200,
-  //   opacity: 0,
-  //   duration: 0.6,
-  //   ease: "power2.out",
-  //   stagger: 0.06,
-  // });
 </script>
