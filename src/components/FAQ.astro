@@ -8,6 +8,7 @@ import Accordion from "@/components/shared/Accordion.astro";
   class="pin-section w-full bg-text-secondary text-text-invert h-dvh flex flex-col justify-between z-20"
 >
   <div
+    id="faq_title"
     class="flex flex-col gap-5 items-center max-w-[800px] mx-auto pt-[86px] pb-[50px]"
   >
     <h1 class="font-large-heading text-[60px]/[80%] uppercase">
@@ -20,7 +21,10 @@ import Accordion from "@/components/shared/Accordion.astro";
     </p>
   </div>
 
-  <div class="flex flex-col gap-2 w-[715px] max-w-[90%] ml-40 pb-[100px]">
+  <div
+    id="faq_questions"
+    class="flex flex-col gap-2 w-[715px] max-w-[90%] ml-40 pb-[100px]"
+  >
     <Accordion
       title="What makes Carnilove different from other pet foods?"
       content="Carnilove is crafted to mirror the natural diet of wild dogs and cats. Every recipe is rich in meat, balanced with forest fruits, vegetables, and herbs — no grains, no artificial additives, just real nutrition inspired by nature."
@@ -44,3 +48,49 @@ import Accordion from "@/components/shared/Accordion.astro";
   </div>
   <Footer />
 </section>
+
+<script>
+  import { gsap } from "gsap";
+
+  const trigger = document.getElementById("FAQ");
+  const faqQuestions = document.getElementById("faq_questions");
+  const faqTitle = document.getElementById("faq_title");
+
+  gsap.from("#FAQ", {
+    backgroundColor: "#fff3e4",
+    duration: 1.5,
+    ease: "power2.inOut",
+    scrollTrigger: {
+      trigger: trigger,
+      start: "top bottom",
+      end: "bottom top",
+      scrub: false,
+    },
+  });
+
+  gsap
+    .timeline({
+      scrollTrigger: {
+        trigger: trigger,
+        start: "top 80%",
+        end: "bottom top",
+        scrub: false,
+      },
+    })
+    .from(faqQuestions, {
+      xPercent: -100,
+      opacity: 0,
+      duration: 1,
+      ease: "power2.out",
+    })
+    .from(
+      faqTitle,
+      {
+        yPercent: 50,
+        opacity: 0,
+        duration: 1,
+        ease: "power2.out",
+      },
+      "-=0.5"
+    );
+</script>
