@@ -37,22 +37,22 @@ import Layout from "@/layouts/Layout.astro";
 
   gsap.registerPlugin(ScrollTrigger, SplitText);
 
-  // const sections = document.querySelectorAll(".pin-section");
+  const sections = document.querySelectorAll(".pin-section");
 
-  // sections.forEach((section, index) => {
-  //   gsap.timeline({
-  //     scrollTrigger: {
-  //       trigger: section,
-  //       start: "top top",
-  //       end: "bottom top",
-  //       pin: true,
-  //       pinSpacing: false,
-  //       scrub: 0.06,
-  //       // markers: true,
-  //       snap: 1,
-  //     },
-  //   });
-  // });
+  sections.forEach((section, index) => {
+    gsap.timeline({
+      scrollTrigger: {
+        trigger: section,
+        start: "top top",
+        end: "bottom top",
+        pin: true,
+        pinSpacing: false,
+        scrub: 0.06,
+        // markers: true,
+        snap: 1,
+      },
+    });
+  });
 
   // prefer transform-based motion for smoother GPU-accelerated animation
   const savannah = document.getElementById("savannah");
