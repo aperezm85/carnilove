@@ -1,10 +1,11 @@
 ---
-const { className } = Astro.props;
+const { id, className } = Astro.props;
 ---
 
 <p
+  id={id}
   class:list={[
-    "font-copy text-lg/[26px] text-center text-text-primary",
+    "font-copy text-lg/[26px] text-center  overflow-hidden text-text-primary",
     className,
   ]}
 >

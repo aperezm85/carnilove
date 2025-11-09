@@ -23,7 +23,10 @@ import EastIcon from "@/assets/icons/east.svg";
       <span class="text-text-minimal chars max-w-full">instincts matters</span>
     </h1>
 
-    <p class="text-sm/[22px] text-text-primary max-w-[530px]">
+    <p
+      id="instincts-description"
+      class="text-sm/[22px] text-text-primary max-w-[530px] overflow-hidden"
+    >
       The principles behind every recipe
     </p>
   </section>
@@ -83,7 +86,14 @@ import EastIcon from "@/assets/icons/east.svg";
   import { gsap } from "gsap";
   import { ScrollTrigger } from "gsap/ScrollTrigger";
 
+  import { animateTitle } from "@/utils.js";
+
   gsap.registerPlugin(ScrollTrigger);
+
+  const trigger = document.getElementById("instincts");
+
+  const title = document.getElementById("instincts-title");
+  const description = document.getElementById("instincts-description");
 
   const buttons = document.getElementById("buttons");
   const benefit1 = document.getElementById("benefit1");
@@ -93,6 +103,9 @@ import EastIcon from "@/assets/icons/east.svg";
   const rightButton = document.getElementById("right-button-instincts");
 
   const foodPackages = document.getElementById("food-packages");
+
+  animateTitle({ title, trigger, end: "bottom 95%" });
+  animateTitle({ title: description, trigger, end: "bottom 95%" });
 
   const tlEntry = gsap.timeline({
     scrollTrigger: {

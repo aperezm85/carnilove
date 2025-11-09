@@ -16,8 +16,10 @@ import HalfBowlImage from "@/assets/ingredients/half-bowl.png";
   class="pin-section relative flex flex-col items-center h-screen w-full pt-[78px] bg-surface-background-minimal"
 >
   <Label>From Wild Origins to Real Nutrition</Label>
-  <Title className="mt-3"> Ingredients from the Wild </Title>
-  <Subtitle className="max-w-[650px] mt-5">
+  <Title id="ingredients-title" className="mt-3">
+    Ingredients from the Wild
+  </Title>
+  <Subtitle id="ingredients-description" className="max-w-[650px] mt-5">
     Every Carnilove recipe begins in nature — balanced with forest fruits, roots
     and herbs for real performance nutrition.
   </Subtitle>
@@ -71,6 +73,7 @@ import HalfBowlImage from "@/assets/ingredients/half-bowl.png";
   </section>
 
   <script>
+    import { animateTitle } from "@/utils";
     import { gsap } from "gsap";
     import { ScrollTrigger } from "gsap/ScrollTrigger";
 
@@ -78,6 +81,22 @@ import HalfBowlImage from "@/assets/ingredients/half-bowl.png";
 
     const ingredients = document.getElementById("ingredients");
     const bowl = document.getElementById("bowl");
+
+    const ingredientsTitle = document.getElementById("ingredients-title");
+    const ingredientsDescription = document.getElementById(
+      "ingredients-description"
+    );
+
+    animateTitle({
+      title: ingredientsTitle,
+      trigger: ingredients,
+      end: "bottom 95%",
+    });
+    animateTitle({
+      title: ingredientsDescription,
+      trigger: ingredients,
+      end: "bottom 95%",
+    });
 
     const entryTimeline = gsap.timeline({
       scrollTrigger: {

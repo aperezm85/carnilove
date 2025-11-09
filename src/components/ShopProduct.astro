@@ -15,8 +15,8 @@ import Title from "@/components/shared/Title.astro";
   class="pin-section relative flex flex-col items-center h-screen w-full pt-[78px] bg-surface-background-minimal"
 >
   <Label>honour the bond</Label>
-  <Title className="mt-6"> Shop by Products </Title>
-  <Subtitle className="max-w-[570px] mt-[30px]">
+  <Title id="product-title" className="mt-6"> Shop by Products </Title>
+  <Subtitle id="product-subtitle" className="max-w-[570px] mt-[30px]">
     Lorem ipsum dolor sit amet, consectetur adipiscing elit etiam sit amet
     finibus nunc. Aenean ut est egestas.
   </Subtitle>
@@ -51,8 +51,18 @@ import Title from "@/components/shared/Title.astro";
 </section>
 
 <script>
+  import { animateTitle } from "@/utils";
   import { gsap } from "gsap";
   import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+  const productTitle = document.getElementById("product-title");
+  const productSubtitle = document.getElementById("product-subtitle");
+
+  const trigger = "#shop-by-product";
+
+  animateTitle({ title: productTitle, trigger, end: "bottom 95%" });
+
+  animateTitle({ title: productSubtitle, trigger, end: "bottom 95%" });
 
   gsap.registerPlugin(ScrollTrigger);
 

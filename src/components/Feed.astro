@@ -19,12 +19,16 @@ import Placeholder from "@/assets/feed-nature/video-placeholder.jpg";
     />
 
     <h2
-      class="font-heading font-extrabold text-[34px]/[38px] uppercase text-text-primary max-w-[530px]"
+      id="feed-their-nature-subtitle"
+      class="font-heading font-extrabold text-[34px]/[38px] uppercase text-text-primary max-w-[530px] overflow-hidden"
     >
       Instinct-driven nutrition for the natural carnivore in every pet
     </h2>
 
-    <p class="text-sm/[22px] text-text-primary max-w-[530px]">
+    <p
+      id="feed-their-nature-description"
+      class="text-sm/[22px] text-text-primary max-w-[530px] overflow-hidden"
+    >
       High-meat recipes with no grains or fillers. Pure, powerful nutrition that
       ignites their spirit.
     </p>
@@ -43,55 +47,29 @@ import Placeholder from "@/assets/feed-nature/video-placeholder.jpg";
 </section>
 
 <script>
+  import { animateTitle } from "@/utils";
   import { gsap } from "gsap";
   import { ScrollTrigger } from "gsap/ScrollTrigger";
-  import { SplitText } from "gsap/SplitText";
 
-  gsap.registerPlugin(ScrollTrigger, SplitText);
+  gsap.registerPlugin(ScrollTrigger);
 
   const feedTitle = document.getElementById("feed-their-nature-title");
+  const feedSubtitle = document.getElementById("feed-their-nature-subtitle");
+  const feedDescription = document.getElementById(
+    "feed-their-nature-description"
+  );
+
   const videoFeedPlaceholder = document.getElementById(
     "video-feed-placeholder"
   );
 
-  if (feedTitle) {
-    // Run SplitText only after fonts are loaded to ensure correct measurements.
-    const initSplitText = () => {
-      // If SplitText was already applied, kill previous instance (defensive)
-      try {
-        // Create SplitText on the actual element node rather than a string selector
-        const mySplitText = new SplitText(feedTitle, { type: "chars" });
-        const chars = mySplitText.chars;
-
-        gsap.from(chars, {
-          yPercent: 130,
-          stagger: 0.02,
-          ease: "back.out",
-          duration: 1,
-          scrollTrigger: {
-            trigger: feedTitle,
-            start: "top 50%",
-            toggleActions: "play reverse restart restart",
-          },
-        });
-      } catch (err) {
-        // If SplitText fails for any reason, log and bail gracefully
-        console.warn("SplitText init failed:", err);
-      }
-    };
-
-    if (document.fonts && document.fonts.ready) {
-      // Wait for all fonts declared in CSS to be loaded
-      document.fonts.ready.then(initSplitText).catch(initSplitText);
-    } else {
-      // Fallback: wait for window load
-      window.addEventListener("load", initSplitText, { once: true });
-    }
-  }
+  animateTitle({ title: feedTitle });
+  animateTitle({ title: feedSubtitle });
+  animateTitle({ title: feedDescription });
 
   if (videoFeedPlaceholder) {
     gsap.from(videoFeedPlaceholder, {
-      yPercent: 130,
+      yPercent: 200,
       stagger: 0.02,
       ease: "back.out",
       duration: 1,
@@ -99,7 +77,7 @@ import Placeholder from "@/assets/feed-nature/video-placeholder.jpg";
         trigger: feedTitle,
         start: "top 50%",
         end: "bottom 40%",
-        toggleActions: "play reset restart reset",
+        toggleActions: "play reverse restart reset",
       },
     });
   }
