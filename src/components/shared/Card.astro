@@ -2,9 +2,10 @@
 interface Props {
   id: string;
   type: "pet" | "subscribe" | "trial";
+  className?: string;
 }
 
-const { id, type } = Astro.props;
+const { id, type, className } = Astro.props;
 
 import boxFood from "@/assets/find-path/box-food.jpg";
 import howMuchFood from "@/assets/find-path/how-much-food.png";
@@ -53,7 +54,7 @@ switch (type) {
 
 <article
   id={id}
-  class="flex flex-col gap-0 rounded-lg overflow-hidden bg-[#ECD7C5] w-[340px] h-[510px]"
+  class={`card flex flex-col gap-0 rounded-lg overflow-hidden bg-[#ECD7C5] w-[340px] h-[510px] ${className}`}
 >
   <img
     src={image?.src}

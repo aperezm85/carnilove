@@ -8,52 +8,112 @@ import Arrow3 from "@/assets/find-path/arrow-3.png";
 
 <section
   id="find-your-path"
-  class="pin-section relative flex flex-col items-center h-screen w-full pt-[78px] bg-surface-background-minimal"
+  class="pin-section relative block h-screen w-full bg-surface-background-minimal"
 >
   <section
-    id="grass"
-    class="bg-[url(/rock-and-grass.png)] bg-bottom bg-auto bg-no-repeat w-[1761px] h-auto aspect-1761/1101 absolute bottom-[78px] z-1"
+    id="title"
+    class="absolute top-[10%] left-[10%] flex flex-col gap-4 z-2"
   >
+    <h1
+      id="find-your-path-header"
+      class="font-large-heading text-[120px]/[80%] uppercase text-text-primary max-w-[180px] z-2 overflow-hidden"
+    >
+      Find your <span class="text-text-minimal">Path</span>
+    </h1>
+
+    <div
+      id="find-your-path-subheader"
+      class="flex flex-col gap-6 max-w-[170px] overflow-hidden"
+    >
+      <p class="font-copy text-base/[24px] text-text-primary z-2">
+        Every animal’s journey is different, from finding the food they love to
+        knowing how much they need, and never running out again.
+      </p>
+      <p class="font-copy text-base/[24px] text-text-primary z-2">
+        Explore three simple ways to feed instinctively and make every meal
+        effortless, natural, and true to their nature.
+      </p>
+    </div>
   </section>
 
-  <h1
-    id="find-your-path-header"
-    class="font-large-heading text-[120px]/[80%] uppercase text-text-primary max-w-[170px] z-2"
-  >
-    Find your <span class="text-text-minimal">Path</span>
-  </h1>
-
-  <div id="find-your-path-subheader" class="flex flex-col gap-6 max-w-[170px]">
-    <p class="font-copy text-base/[24px] text-text-primary z-2">
-      Every animal’s journey is different, from finding the food they love to
-      knowing how much they need, and never running out again.
-    </p>
-    <p class="font-copy text-base/[24px] text-text-primary z-2">
-      Explore three simple ways to feed instinctively and make every meal
-      effortless, natural, and true to their nature.
-    </p>
-  </div>
-  <div class="flex flex-row gap-2 z-2">
-    <img
-      id="arrow-1"
-      src={Arrow1.src}
-      alt="Arrow pointing right"
-      class="w-[100px] h-[110px]"
-    />
-    <Card id="card-subscribe" type="subscribe" />
-    <img
-      id="arrow-2"
-      src={Arrow2.src}
-      alt="Arrow pointing right"
-      class="w-[100px] h-[110px]"
-    />
-    <Card id="card-trial" type="trial" />
-    <img
-      id="arrow-3"
-      src={Arrow3.src}
-      alt="Arrow pointing right"
-      class="w-[100px] h-[110px]"
-    />
-    <Card id="card-pet" type="pet" />
-  </div>
+  <img
+    id="arrow-1"
+    src={Arrow1.src}
+    alt="Arrow pointing right"
+    class="arrow w-[100px] h-[110px] absolute top-[12%] left-[21%]"
+  />
+  <Card
+    id="card-subscribe"
+    type="subscribe"
+    className="absolute top-[17%] left-[27%]"
+  />
+  <img
+    id="arrow-2"
+    src={Arrow2.src}
+    alt="Arrow pointing right"
+    class="arrow w-[100px] h-[110px] absolute top-[26%] left-[45%]"
+  />
+  <Card
+    id="card-trial"
+    type="trial"
+    className="absolute top-[27%] left-[51%]"
+  />
+  <img
+    id="arrow-3"
+    src={Arrow3.src}
+    alt="Arrow pointing right"
+    class="arrow w-[100px] h-[110px] absolute top-[32%] left-[70%]"
+  />
+  <Card id="card-pet" type="pet" className="absolute top-[37%] left-[77%]" />
 </section>
+
+<script>
+  import { animateTitle } from "@/utils";
+  import { gsap } from "gsap";
+  import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+  gsap.registerPlugin(ScrollTrigger);
+  const trigger = document.getElementById("find-your-path");
+  const title = document.getElementById("find-your-path-header");
+  const description = document.getElementById("find-your-path-subheader");
+
+  animateTitle({
+    title: title,
+    trigger: trigger,
+    end: "bottom 95%",
+  });
+  animateTitle({
+    title: description,
+    trigger: trigger,
+    end: "bottom 95%",
+  });
+
+  const timeline = gsap.timeline({
+    scrollTrigger: {
+      trigger: trigger,
+      start: "top 50%",
+      end: "bottom 40%",
+      toggleActions: "play reverse restart restart",
+    },
+  });
+
+  timeline
+    .from(".card", {
+      yPercent: -200,
+      opacity: 0,
+      stagger: 0.4,
+      duration: 1,
+      ease: "power2.out",
+    })
+    .from(
+      ".arrow",
+      {
+        yPercent: -200,
+        opacity: 0,
+        stagger: 0.4,
+        duration: 1,
+        ease: "power2.out",
+      },
+      "-=2"
+    );
+</script>
