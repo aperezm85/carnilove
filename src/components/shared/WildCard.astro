@@ -1,0 +1,63 @@
+---
+import AddIcon from "@/assets/icons/add.svg";
+
+const { id, label, image, title, description } = Astro.props;
+---
+
+<div
+  class="wild-card group relative w-[400px] h-[530px] transition-all duration-300 ease-in-out overflow-hidden cursor-pointer rounded-lg py-5 pb-9 px-5
+  flex flex-col items-start justify-between"
+  data-id={id}
+>
+  <img
+    src={image}
+    alt={title}
+    class="w-full h-full object-cover absolute inset-0"
+  />
+  <div
+    class:list={[
+      "bg-radial from-transparent to-black/75 to-85%",
+      "absolute w-full h-full inset-0",
+    ]}
+  >
+  </div>
+
+  <button
+    type="button"
+    id="open-button"
+    class="absolute top-5 right-5 w-12 h-12
+     bg-surface-background-red rounded-full flex justify-center items-center transition-all duration-300 z-1 text-text-invert"
+  >
+    <AddIcon class="w-6 h-6" />
+  </button>
+
+  <div
+    class="border border-border-invert rounded-sm flex flex-col gap-1 py-1.5 px-2 font-heading font-extrabold font-base/[24px] uppercase text-text-invert z-1"
+  >
+    {label}
+  </div>
+  <div class="flex flex-col align-start justify-end grow gap-4 z-1">
+    <h2
+      class="font-heading font-extrabold text-[34px]/[38px] uppercase text-text-invert overflow-hidden"
+    >
+      {title}
+    </h2>
+    <p
+      class="card-description font-body text-base/[24px] text-text-invert opacity-0 h-0 transition-all duration-300 overflow-hidden"
+    >
+      {description}
+    </p>
+
+    <button
+      type="button"
+      class:list={[
+        "card-read-more-button uppercase h-0 p-0  w-max rounded-sm  bg-surface-background-minimal text-buttons-tertiary-txt-default font-heading font-extrabold text-base/[24px] cursor-pointer",
+        "text-center shrink-0 flex justify-start align-center items-center",
+        "hover:bg-surface-background-burgundy hover:text-text-invert transition-colors duration-300",
+        "opacity-0 overflow-hidden shrink",
+      ]}
+    >
+      <span> Read Article </span>
+    </button>
+  </div>
+</div>

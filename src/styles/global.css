@@ -23,6 +23,8 @@
   --color-surface-background-red: #f00037;
   --color-surface-contrast: #31001a33;
 
+  --color-border-invert: #fff3e4;
+
   --font-large-heading: "Spark", sans-serif;
   --font-heading: "Bluescreens", sans-serif;
   --font-copy: "Poppins", sans-serif;

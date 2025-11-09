@@ -1,0 +1,139 @@
+---
+import WildCard from "@/components/shared/WildCard.astro";
+
+import KitchenImage from "@/assets/from-wild/kitchen-image.jpg";
+import MeatImage from "@/assets/from-wild/meat-image.jpg";
+import WolfImage from "@/assets/from-wild/wolf-image.jpg";
+
+const cards = [
+  {
+    id: "card1",
+    label: "Nutrition & Wellness",
+    image: MeatImage.src,
+    title: "The Power of a Wild Diet: Why Natural Ingredients Matter",
+    description:
+      "Modern pets may live in our homes, but their bodies still thrive on the same nutrients found in the wild. Learn how high-quality meats, herbs, and superfoods fuel vitality, muscle tone, and long-term health — and why “natural” isn’t just a marketing word for us.",
+  },
+  {
+    id: "card2",
+    label: "Performance & Activity",
+    image: WolfImage.src,
+    title: "Adventure Ready: Nutrition for Active Dogs",
+    description:
+      "Whether it’s a mountain hike or a park run, active dogs need more than calories — they need performance fuel. We break down how to support energy, recovery, and endurance with nutrient-dense, species-appropriate meals designed for dogs on the move.",
+  },
+  {
+    id: "card3",
+    label: "Behind the Brand",
+    image: KitchenImage.src,
+    title: "From Forest to Bowl: The Story Behind Carnilove Recipes",
+    description:
+      "Every recipe starts with respect for nature. Take a behind-the-scenes look at how Carnilove’s formulations draw inspiration from wild animal diets — balancing proteins, herbs, and antioxidants to nourish your pet like nature intended.",
+  },
+];
+---
+
+<section class="flex justify-center items-center gap-4">
+  {cards.map((card) => <WildCard {...card} />)}
+</section>
+
+<script>
+  import { gsap } from "gsap";
+
+  const cards = document.querySelectorAll(".wild-card");
+  let openCard: any = null;
+
+  cards.forEach((card) => {
+    card.addEventListener("click", () => {
+      if (openCard && openCard !== card) {
+        collapseCard(openCard);
+      }
+
+      if (openCard === card) {
+        collapseCard(card);
+        openCard = null;
+      } else {
+        expandCard(card);
+        openCard = card;
+      }
+    });
+  });
+
+  function expandCard(card: any) {
+    const tl = gsap.timeline();
+    const desc = card.querySelector(".card-description");
+    const button = card.querySelector(".card-read-more-button");
+    const openButton = card.querySelector("#open-button");
+
+    tl.to(card, { width: "840px", duration: 0.5, ease: "none" })
+      .to(
+        desc,
+        {
+          opacity: 1,
+          height: "auto",
+          duration: 0.4,
+          ease: "none",
+        },
+        "<"
+      )
+      .to(
+        openButton,
+        {
+          rotate: 45,
+          duration: 0.4,
+          ease: "none",
+        },
+        "<"
+      )
+      .to(
+        button,
+        {
+          opacity: 1,
+          height: "48px",
+          duration: 0.3,
+          ease: "none",
+          padding: "12px 32px",
+        },
+        "-=0.2"
+      );
+  }
+
+  function collapseCard(card: any) {
+    const tl = gsap.timeline();
+    const desc = card.querySelector(".card-description");
+    const button = card.querySelector(".card-read-more-button");
+    const openButton = card.querySelector("#open-button");
+
+    tl.to(card, { width: "400px", duration: 0.5, ease: "none" })
+      .to(
+        desc,
+        {
+          opacity: 0,
+          height: 0,
+          duration: 0.3,
+          ease: "none",
+        },
+        "<"
+      )
+      .to(
+        openButton,
+        {
+          rotate: 0,
+          duration: 0.4,
+          ease: "none",
+        },
+        "<"
+      )
+      .to(
+        button,
+        {
+          opacity: 0,
+          height: 0,
+          duration: 0.2,
+          ease: "none",
+          padding: 0,
+        },
+        "-=0.2"
+      );
+  }
+</script>

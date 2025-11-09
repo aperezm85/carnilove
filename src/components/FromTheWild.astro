@@ -1,0 +1,62 @@
+---
+import Subtitle from "@/components/shared/Subtitle.astro";
+import ButtonRed from "@/components/shared/ButtonRed.astro";
+import WildCards from "@/components/WildCards/WildCards.astro";
+
+import EastIcon from "@/assets/icons/east.svg";
+---
+
+<section
+  id="from-the-wild"
+  class="pin-section relative flex flex-col items-center h-screen w-full pt-[78px] bg-surface-background-minimal"
+>
+  <h1
+    id="from-the-wild-title"
+    class:list={[
+      "font-large-heading text-[60px]/[80%] text-center text-text-primary overflow-hidden uppercase",
+      "w-full mt-6",
+    ]}
+  >
+    From the Wild: Insights for Healthier, Happier Pets
+  </h1>
+
+  <Subtitle id="from-the-wild-description" className="max-w-[690px] mt-5">
+    Discover stories, science, and practical tips inspired by nature — helping
+    you feed, train, and care for your four-legged explorer the natural way.
+  </Subtitle>
+
+  <section class="w-full h-[500px] mt-16 overflow-hidden">
+    <WildCards />
+  </section>
+
+  <ButtonRed className="mt-[45px] flex flex-row items-center gap-1.5">
+    Read more from the wild <EastIcon class="w-6 h-6" />
+  </ButtonRed>
+
+  <script>
+    import { animateTitle } from "@/utils";
+    import { gsap } from "gsap";
+    import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+    gsap.registerPlugin(ScrollTrigger);
+
+    const fromTheWild = document.getElementById("from-the-wild");
+    const bowl = document.getElementById("bowl");
+
+    const fromTheWildTitle = document.getElementById("from-the-wild-title");
+    const fromTheWildDescription = document.getElementById(
+      "from-the-wild-description"
+    );
+
+    animateTitle({
+      title: fromTheWildTitle,
+      trigger: fromTheWild,
+      end: "bottom 95%",
+    });
+    animateTitle({
+      title: fromTheWildDescription,
+      trigger: fromTheWild,
+      end: "bottom 95%",
+    });
+  </script>
+</section>
