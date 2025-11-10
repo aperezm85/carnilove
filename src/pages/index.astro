@@ -19,6 +19,18 @@ import Layout from "@/layouts/Layout.astro";
     style="background-image: url('/savannah-large.png'); background-size: cover; background-position: center bottom;"
   >
   </section>
+  <section
+    id="rocks"
+    class="fixed inset-0 pointer-events-none z-2 opacity-0 top-[50%]"
+    style="background-image: url('/rock-and-grass.png'); background-size: cover; background-position: center bottom;"
+  >
+  </section>
+  <section
+    id="forest"
+    class="fixed inset-0 pointer-events-none z-2 opacity-0 top-[0%]"
+    style="background-image: url('/forest.png'); background-size: cover; background-position: center bottom;"
+  >
+  </section>
 
   <Hero />
   <ShopProduct />
@@ -59,12 +71,13 @@ import Layout from "@/layouts/Layout.astro";
     });
   });
 
-  // prefer transform-based motion for smoother GPU-accelerated animation
   const savannah = document.getElementById("savannah");
+  const rocks = document.getElementById("rocks");
+  const forest = document.getElementById("forest");
   const shopSection = document.getElementById("shop-by-product");
   const feed = document.getElementById("feed-their-nature");
 
-  if (savannah && shopSection && feed) {
+  if (savannah && rocks && forest && shopSection && feed) {
     // Timeline for bottom transitions
 
     const bgTimeline = gsap.timeline({
@@ -72,7 +85,7 @@ import Layout from "@/layouts/Layout.astro";
         trigger: "#shop-by-product",
         start: "top center",
         end: "bottom top",
-        endTrigger: "#from-the-wild",
+        endTrigger: "#find-your-path",
         scrub: 1,
       },
     });
@@ -88,27 +101,92 @@ import Layout from "@/layouts/Layout.astro";
         {
           opacity: 1,
           backgroundPositionY: "85%",
-          duration: 1,
           ease: "none",
         }
       )
       // Move higher during section 3
       .to(savannah, {
         backgroundPositionY: "30%",
-        duration: 1,
         ease: "none",
       })
       // Move down during section 4
       .to(savannah, {
         backgroundPositionY: "60%",
-        duration: 1,
         ease: "none",
       })
       // Fade out at section 5
       .to(savannah, {
         opacity: 0,
-        duration: 1,
         ease: "none",
       });
   }
+
+  const rocksTimeline = gsap.timeline({
+    scrollTrigger: {
+      trigger: "#instincts",
+      start: "top center",
+      end: "top top",
+      endTrigger: "#trusted",
+      scrub: 1,
+    },
+  });
+
+  rocksTimeline
+    .fromTo(
+      rocks,
+      {
+        opacity: 0,
+        backgroundPositionY: "0%",
+      },
+      {
+        opacity: 1,
+        backgroundPositionY: "100%",
+        ease: "none",
+      }
+    )
+    .to(rocks, {
+      backgroundPositionY: "80%",
+      ease: "none",
+    })
+    .to(rocks, {
+      backgroundPositionY: "100%",
+      ease: "none",
+    })
+    .to(rocks, {
+      opacity: 0,
+      ease: "none",
+    });
+
+  const forestTimeline = gsap.timeline({
+    scrollTrigger: {
+      trigger: "#trusted",
+      start: "top bottom",
+      end: "bottom bottom",
+      endTrigger: "#FAQ",
+      scrub: 1,
+    },
+  });
+
+  forestTimeline
+
+    .fromTo(
+      forest,
+      {
+        opacity: 0,
+        backgroundPositionY: "0%",
+      },
+      {
+        opacity: 1,
+        backgroundPositionY: "85%",
+        ease: "none",
+      }
+    )
+    .to(forest, {
+      backgroundPositionY: "30%",
+      ease: "none",
+    })
+    .to(forest, {
+      opacity: 0,
+      ease: "none",
+    });
 </script>
