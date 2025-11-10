@@ -62,6 +62,7 @@ body {
   height: auto;
   overflow-x: hidden;
   overscroll-behavior: none;
+  overflow-y: auto;
   color: white;
   margin: 0;
   width: 100%;
@@ -82,3 +83,20 @@ body {
 @utility carousel-red-button {
   @apply rounded-full size-12 p-3 bg-red-500 border-[1.5px] border-transparent text-buttons-primary-txt-default cursor-pointer hover:border-buttons-tertiary-txt-default transition-all duration-300;
 }
+
+/* @layer base {
+  html {
+    scroll-snap-type: both mandatory;
+    scroll-behavior: smooth;
+    overflow-x: hidden;
+  }
+
+  body {
+    background: var(--color-surface-background-minimal);
+  }
+
+  section.pin-section {
+    scroll-snap-align: start;
+    scroll-snap-stop: always;
+  }
+} */

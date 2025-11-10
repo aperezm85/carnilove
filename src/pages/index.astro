@@ -37,6 +37,10 @@ import Layout from "@/layouts/Layout.astro";
 
   gsap.registerPlugin(ScrollTrigger, SplitText);
 
+  ScrollTrigger.config({
+    ignoreMobileResize: true,
+  });
+
   const sections = document.querySelectorAll(".pin-section");
 
   sections.forEach((section, index) => {
