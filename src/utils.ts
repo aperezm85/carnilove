@@ -29,7 +29,7 @@ export const animateTitle = ({
           stagger: 0.02,
           opacity: 0,
           ease: "back.out",
-          duration: 1,
+          // duration: 1,
           scrollTrigger: {
             trigger: trigger || title,
             start: start,
@@ -65,7 +65,7 @@ export const animateLabel = (
     {
       opacity: 1,
       y: 0,
-      duration: 0.5,
+      // duration: 0.5,
       ease: "power2.out",
     }
   );

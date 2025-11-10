@@ -58,7 +58,7 @@ import Accordion from "@/components/shared/Accordion.astro";
 
   gsap.from("#FAQ", {
     backgroundColor: "#fff3e4",
-    duration: 1.5,
+    // duration: 1.5,
     ease: "power2.inOut",
     scrollTrigger: {
       trigger: trigger,
@@ -80,7 +80,7 @@ import Accordion from "@/components/shared/Accordion.astro";
     .from(faqQuestions, {
       xPercent: -100,
       opacity: 0,
-      duration: 1,
+      // duration: 1,
       ease: "power2.out",
     })
     .from(
@@ -88,7 +88,7 @@ import Accordion from "@/components/shared/Accordion.astro";
       {
         yPercent: 50,
         opacity: 0,
-        duration: 1,
+        // duration: 1,
         ease: "power2.out",
       },
       "-=0.5"
