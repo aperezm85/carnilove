@@ -10,65 +10,67 @@ import Arrow3 from "@/assets/find-path/arrow-3.png";
   id="find-your-path"
   class="pin-section relative h-dvh overflow-hidden w-full z-6"
 >
-  <section
-    id="title"
-    class="absolute top-[150px] left-[90px] flex flex-col gap-4 z-2"
-  >
-    <h1
-      id="find-your-path-header"
-      class="font-large-heading text-[120px]/[80%] uppercase text-text-primary max-w-[180px] z-2 overflow-hidden"
+  <section class="content">
+    <section
+      id="title"
+      class="absolute top-[150px] left-[90px] flex flex-col gap-4 z-2"
     >
-      Find your <span class="text-text-minimal">Path</span>
-    </h1>
+      <h1
+        id="find-your-path-header"
+        class="font-large-heading text-[120px]/[80%] uppercase text-text-primary max-w-[180px] z-2 overflow-hidden"
+      >
+        Find your <span class="text-text-minimal">Path</span>
+      </h1>
 
-    <div
-      id="find-your-path-subheader"
-      class="flex flex-col max-w-[220px] overflow-hidden"
-    >
-      <p class="font-copy text-base/[24px] text-text-primary z-2">
-        Every animal’s journey is different, from finding the food they love to
-        knowing how much they need, and never running out again.
-      </p>
-      <p class="font-copy text-base/[24px] text-text-primary z-2">
-        Explore three simple ways to feed instinctively and make every meal
-        effortless, natural, and true to their nature.
-      </p>
-    </div>
+      <div
+        id="find-your-path-subheader"
+        class="flex flex-col max-w-[220px] overflow-hidden"
+      >
+        <p class="font-copy text-base/[24px] text-text-primary z-2">
+          Every animal’s journey is different, from finding the food they love
+          to knowing how much they need, and never running out again.
+        </p>
+        <p class="font-copy text-base/[24px] text-text-primary z-2">
+          Explore three simple ways to feed instinctively and make every meal
+          effortless, natural, and true to their nature.
+        </p>
+      </div>
+    </section>
+
+    <img
+      id="arrow-1"
+      src={Arrow1.src}
+      alt="Arrow pointing right"
+      class="arrow w-[100px] h-[110px] absolute top-[168px] left-64 z-2"
+    />
+    <Card
+      id="card-subscribe"
+      type="subscribe"
+      className="absolute top-[212px] left-[330px]"
+    />
+    <img
+      id="arrow-2"
+      src={Arrow2.src}
+      alt="Arrow pointing right"
+      class="arrow w-[100px] h-[110px] absolute top-[474px] left-[620px] z-2"
+    />
+    <Card
+      id="card-trial"
+      type="trial"
+      className="absolute top-[272px] left-[700px]"
+    />
+    <img
+      id="arrow-3"
+      src={Arrow3.src}
+      alt="Arrow pointing right"
+      class="arrow w-[100px] h-[110px] absolute top-[526px] left-[990px] -rotate-[11px] z-2"
+    />
+    <Card
+      id="card-pet"
+      type="pet"
+      className="absolute top-[332px] left-[1070px]"
+    />
   </section>
-
-  <img
-    id="arrow-1"
-    src={Arrow1.src}
-    alt="Arrow pointing right"
-    class="arrow w-[100px] h-[110px] absolute top-[168px] left-64"
-  />
-  <Card
-    id="card-subscribe"
-    type="subscribe"
-    className="absolute top-[212px] left-[330px]"
-  />
-  <img
-    id="arrow-2"
-    src={Arrow2.src}
-    alt="Arrow pointing right"
-    class="arrow w-[100px] h-[110px] absolute top-[474px] left-[620px]"
-  />
-  <Card
-    id="card-trial"
-    type="trial"
-    className="absolute top-[272px] left-[700px]"
-  />
-  <img
-    id="arrow-3"
-    src={Arrow3.src}
-    alt="Arrow pointing right"
-    class="arrow w-[100px] h-[110px] absolute top-[526px] left-[970px] -rotate-[11px]"
-  />
-  <Card
-    id="card-pet"
-    type="pet"
-    className="absolute top-[332px] left-[1070px]"
-  />
 </section>
 
 <script>

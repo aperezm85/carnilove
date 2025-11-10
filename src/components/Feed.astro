@@ -10,43 +10,46 @@ import Placeholder from "@/assets/feed-nature/video-placeholder.jpg";
   id="feed-their-nature"
   class="pin-section relative flex flex-row items-center justify-center h-dvh overflow-hidden w-full gap-6 z-3"
 >
-  <section class="flex flex-col max-w-[550px]">
-    <DoubleHeading
-      id="feed-their-nature-title"
-      className="max-w-[550px] z-2"
-      first="Feed their"
-      second="true nature."
+  <section
+    class="max-w-[1440px] w-[1440px] h-[1024px] relative mx-auto flex flex-row items-center justify-center"
+  >
+    <section class="flex flex-col max-w-[550px]">
+      <DoubleHeading
+        id="feed-their-nature-title"
+        className="max-w-[550px] z-2"
+        first="Feed their"
+        second="true nature."
+      />
+
+      <h2
+        id="feed-their-nature-subtitle"
+        class="font-heading font-extrabold text-[34px]/[38px] uppercase text-text-primary max-w-[530px] overflow-hidden"
+      >
+        Instinct-driven nutrition for the natural carnivore in every pet
+      </h2>
+
+      <p
+        id="feed-their-nature-description"
+        class="text-sm/[22px] text-text-primary max-w-[530px] overflow-hidden"
+      >
+        High-meat recipes with no grains or fillers. Pure, powerful nutrition
+        that ignites their spirit.
+      </p>
+
+      <ButtonRed
+        id="feed-button"
+        className="mt-[30px] flex flex-row items-center gap-1.5 self-start"
+      >
+        Discover Their Wild Side <EastIcon class="w-6 h-6" />
+      </ButtonRed>
+    </section>
+    <img
+      id="video-feed-placeholder"
+      src={Placeholder.src}
+      class="aspect-433/532 w-[433px] h-[532px]"
     />
-
-    <h2
-      id="feed-their-nature-subtitle"
-      class="font-heading font-extrabold text-[34px]/[38px] uppercase text-text-primary max-w-[530px] overflow-hidden"
-    >
-      Instinct-driven nutrition for the natural carnivore in every pet
-    </h2>
-
-    <p
-      id="feed-their-nature-description"
-      class="text-sm/[22px] text-text-primary max-w-[530px] overflow-hidden"
-    >
-      High-meat recipes with no grains or fillers. Pure, powerful nutrition that
-      ignites their spirit.
-    </p>
-
-    <ButtonRed
-      id="feed-button"
-      className="mt-[30px] flex flex-row items-center gap-1.5 self-start"
-    >
-      Discover Their Wild Side <EastIcon class="w-6 h-6" />
-    </ButtonRed>
   </section>
-  <img
-    id="video-feed-placeholder"
-    src={Placeholder.src}
-    class="aspect-433/532 w-[433px] h-[532px]"
-  />
 </section>
-
 <script>
   import { animateTitle } from "@/utils";
   import { gsap } from "gsap";

@@ -14,42 +14,44 @@ import Title from "@/components/shared/Title.astro";
   id="shop-by-product"
   class="pin-section relative flex flex-col items-center h-dvh overflow-hidden w-full pt-[78px] z-2"
 >
-  <Label id="product-label">honour the bond</Label>
-  <Title id="product-title" className="mt-6"> Shop by Products </Title>
-  <Subtitle id="product-subtitle" className="max-w-[570px] mt-[30px]">
-    Lorem ipsum dolor sit amet, consectetur adipiscing elit etiam sit amet
-    finibus nunc. Aenean ut est egestas.
-  </Subtitle>
+  <section class="content">
+    <Label id="product-label">honour the bond</Label>
+    <Title id="product-title" className="mt-6"> Shop by Products </Title>
+    <Subtitle id="product-subtitle" className="max-w-[570px] mt-[30px]">
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit etiam sit amet
+      finibus nunc. Aenean ut est egestas.
+    </Subtitle>
 
-  <div
-    id="product-filters"
-    class="mt-[35px] flex flex-row gap-2.5 items-center justify-center"
-  >
-    <button
-      type="button"
-      class:list={[
-        "border-b-2  uppercase font-heading font-extrabold text-2xl/[26px] text-center py-1 px-4 cursor-pointer",
-        "border-surface-background-red text-text-brand-red",
-        "hover:border-surface-background-red hover:text-text-brand-red",
-        "transition-colors duration-300 ease-in-out",
-      ]}>DOGS</button
+    <div
+      id="product-filters"
+      class="mt-[35px] flex flex-row gap-2.5 items-center justify-center"
     >
+      <button
+        type="button"
+        class:list={[
+          "border-b-2  uppercase font-heading font-extrabold text-2xl/[26px] text-center py-1 px-4 cursor-pointer",
+          "border-surface-background-red text-text-brand-red",
+          "hover:border-surface-background-red hover:text-text-brand-red",
+          "transition-colors duration-300 ease-in-out",
+        ]}>DOGS</button
+      >
 
-    <button
-      type="button"
-      class:list={[
-        "border-b-2  uppercase font-heading font-extrabold text-2xl/[26px] text-center py-1 px-4 cursor-pointer",
-        "border-[#8E8E8E] text-[#8E8E8E]",
-        "hover:border-surface-background-red hover:text-text-brand-red",
-        "transition-colors duration-300 ease-in-out",
-      ]}>CATS</button
-    >
-  </div>
-  <section id="products" class="flex flex-row gap-5 mt-12">
-    <ProductCard title="Dry food" image={DryFood.src} />
-    <ProductCard title="Wet food" image={WetFood.src} />
-    <ProductCard title="Snacks" image={Snacks.src} />
-    <ProductCard title="All" image={All.src} />
+      <button
+        type="button"
+        class:list={[
+          "border-b-2  uppercase font-heading font-extrabold text-2xl/[26px] text-center py-1 px-4 cursor-pointer",
+          "border-[#8E8E8E] text-[#8E8E8E]",
+          "hover:border-surface-background-red hover:text-text-brand-red",
+          "transition-colors duration-300 ease-in-out",
+        ]}>CATS</button
+      >
+    </div>
+    <section id="products" class="flex flex-row gap-5 mt-12">
+      <ProductCard title="Dry food" image={DryFood.src} />
+      <ProductCard title="Wet food" image={WetFood.src} />
+      <ProductCard title="Snacks" image={Snacks.src} />
+      <ProductCard title="All" image={All.src} />
+    </section>
   </section>
 </section>
 

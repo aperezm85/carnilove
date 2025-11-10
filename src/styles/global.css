@@ -84,6 +84,18 @@ body {
   @apply rounded-full size-12 p-3 bg-red-500 border-[1.5px] border-transparent text-buttons-primary-txt-default cursor-pointer hover:border-buttons-tertiary-txt-default transition-all duration-300;
 }
 
+.content {
+  max-width: 1440px;
+  width: 1440px;
+  max-height: 1024px;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  margin: 0 auto;
+  min-height: 1024px;
+  align-items: center;
+}
+
 /* @layer base {
   html {
     scroll-snap-type: both mandatory;
