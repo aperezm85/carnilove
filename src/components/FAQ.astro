@@ -1,6 +1,9 @@
 ---
 import Footer from "@/components/Footer.astro";
 import Accordion from "@/components/shared/Accordion.astro";
+
+import Cat from "@/assets/faq/footer-cat.gif";
+import Dog from "@/assets/faq/footer-dog.gif";
 ---
 
 <section
@@ -46,11 +49,30 @@ import Accordion from "@/components/shared/Accordion.astro";
       content="All Carnilove recipes are made in the heart of Europe, using responsibly sourced ingredients from trusted farms and fisheries. Each batch is carefully crafted to meet the highest standards of quality and safety."
     />
   </div>
+
+  <img
+    id="footer-dog"
+    data-src={Dog.src}
+    src=""
+    alt="Happy dog"
+    class="absolute top-[220px] left-[806px] w-[634px] h-[428px]"
+  />
+  <img
+    id="footer-cat"
+    data-src={Cat.src}
+    src=""
+    alt="Happy cat"
+    class="absolute top-[370px] left-[848px] w-[591px] h-[327px]"
+  />
   <Footer />
 </section>
 
 <script>
   import { gsap } from "gsap";
+
+  import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+  gsap.registerPlugin(ScrollTrigger);
 
   const trigger = document.getElementById("FAQ");
   const faqQuestions = document.getElementById("faq_questions");
@@ -93,4 +115,54 @@ import Accordion from "@/components/shared/Accordion.astro";
       },
       "-=0.5"
     );
+
+  ScrollTrigger.create({
+    trigger: trigger,
+    start: "top 5%",
+    onEnter: () => {
+      setTimeout(() => {
+        document.getElementById("footer-dog")!.style.display = "block";
+        document.getElementById("footer-cat")!.style.display = "block";
+        (document.getElementById("footer-dog") as HTMLImageElement).src = (
+          document.getElementById("footer-dog") as HTMLImageElement
+        ).getAttribute("data-src") as string;
+        (document.getElementById("footer-cat") as HTMLImageElement).src = (
+          document.getElementById("footer-cat") as HTMLImageElement
+        ).getAttribute("data-src") as string;
+      }, 500);
+    },
+
+    onEnterBack: () => {
+      setTimeout(() => {
+        document.getElementById("footer-dog")!.style.display = "block";
+        document.getElementById("footer-cat")!.style.display = "block";
+        (document.getElementById("footer-dog") as HTMLImageElement).src = (
+          document.getElementById("footer-dog") as HTMLImageElement
+        ).getAttribute("data-src") as string;
+        (document.getElementById("footer-cat") as HTMLImageElement).src = (
+          document.getElementById("footer-cat") as HTMLImageElement
+        ).getAttribute("data-src") as string;
+      }, 500);
+    },
+  });
+
+  ScrollTrigger.create({
+    trigger: trigger,
+    start: "top top",
+    end: "+=50%", // Adjust based on GIF duration
+    // pin: true,
+    scrub: true,
+    onEnter: (self) => {
+      if (self.progress > 0.01) {
+        document.getElementById("footer-dog")!.style.display = "none";
+        document.getElementById("footer-cat")!.style.display = "none";
+      }
+    },
+    onEnterBack: (self) => {
+      if (self.progress > 0.01) {
+        document.getElementById("footer-dog")!.style.display = "none";
+        document.getElementById("footer-cat")!.style.display = "none";
+      }
+    },
+  });
 </script>

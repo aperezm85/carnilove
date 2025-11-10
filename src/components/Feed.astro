@@ -4,6 +4,9 @@ import ButtonRed from "@/components/shared/ButtonRed.astro";
 import DoubleHeading from "@/components/shared/DoubleHeading.astro";
 
 import Placeholder from "@/assets/feed-nature/video-placeholder.jpg";
+import Dog1 from "@/assets/feed-nature/dog-part-1.gif";
+import Dog2 from "@/assets/feed-nature/dog-part-2.gif";
+import Dog3 from "@/assets/feed-nature/dog-part-3.gif";
 ---
 
 <section
@@ -13,24 +16,33 @@ import Placeholder from "@/assets/feed-nature/video-placeholder.jpg";
   <section
     class="max-w-[1440px] w-[1440px] h-[1024px] relative mx-auto flex flex-row items-center justify-center"
   >
+    <img
+      data-dog1={Dog1.src}
+      data-dog2={Dog2.src}
+      data-dog3={Dog3.src}
+      id="dog1"
+      class="aspect-640/354 absolute top-[390px] -left-[100px] z-2 scale-150"
+      src=""
+    />
+
     <section class="flex flex-col max-w-[550px]">
       <DoubleHeading
         id="feed-their-nature-title"
-        className="max-w-[550px] z-2"
+        className="max-w-[550px] z-2 absolute top-[217px] left-[376px]"
         first="Feed their"
         second="true nature."
       />
 
       <h2
         id="feed-their-nature-subtitle"
-        class="font-heading font-extrabold text-[34px]/[38px] uppercase text-text-primary max-w-[530px] overflow-hidden"
+        class="font-heading font-extrabold text-[34px]/[38px] uppercase text-text-primary max-w-[530px] overflow-hidden absolute top-[461px] left-[392px]"
       >
         Instinct-driven nutrition for the natural carnivore in every pet
       </h2>
 
       <p
         id="feed-their-nature-description"
-        class="text-sm/[22px] text-text-primary max-w-[530px] overflow-hidden"
+        class="text-sm/[22px] text-text-primary max-w-[530px] overflow-hidden absolute top-[553px] left-[392px]"
       >
         High-meat recipes with no grains or fillers. Pure, powerful nutrition
         that ignites their spirit.
@@ -38,7 +50,7 @@ import Placeholder from "@/assets/feed-nature/video-placeholder.jpg";
 
       <ButtonRed
         id="feed-button"
-        className="mt-[30px] flex flex-row items-center gap-1.5 self-start"
+        className="mt-[30px] flex flex-row items-center gap-1.5 self-start absolute top-[613px] left-[392px]"
       >
         Discover Their Wild Side <EastIcon class="w-6 h-6" />
       </ButtonRed>
@@ -46,7 +58,7 @@ import Placeholder from "@/assets/feed-nature/video-placeholder.jpg";
     <img
       id="video-feed-placeholder"
       src={Placeholder.src}
-      class="aspect-433/532 w-[433px] h-[532px]"
+      class="aspect-433/532 w-[433px] h-[532px] absolute top-[217px] left-[937px] object-cover object-center shadow-lg"
     />
   </section>
 </section>
@@ -99,4 +111,55 @@ import Placeholder from "@/assets/feed-nature/video-placeholder.jpg";
       "-=0.3"
     );
   }
+
+  ScrollTrigger.create({
+    trigger: trigger,
+    start: "top 5%",
+    onEnter: () => {
+      setTimeout(() => {
+        document.getElementById("dog1")!.style.display = "block";
+        (document.getElementById("dog1") as HTMLImageElement).src = (
+          document.getElementById("dog1") as HTMLImageElement
+        ).getAttribute("data-dog1") as string;
+      }, 500);
+    },
+
+    onEnterBack: () => {
+      setTimeout(() => {
+        document.getElementById("dog1")!.style.display = "block";
+        (document.getElementById("dog1") as HTMLImageElement).src = (
+          document.getElementById("dog1") as HTMLImageElement
+        ).getAttribute("data-dog1") as string;
+      }, 500);
+    },
+  });
+
+  // Pin section and swap GIFs on scroll
+  ScrollTrigger.create({
+    trigger: trigger,
+    start: "top top",
+    end: "+=50%", // Adjust based on GIF duration
+    // pin: true,
+    scrub: true,
+    onEnter: (self) => {
+      if (self.progress > 0.01) {
+        (document.getElementById("dog1") as HTMLImageElement).src = (
+          document.getElementById("dog1") as HTMLImageElement
+        ).getAttribute("data-dog3") as string;
+        setTimeout(() => {
+          document.getElementById("dog1")!.style.display = "none";
+        }, 2000);
+      }
+    },
+    onEnterBack: (self) => {
+      if (self.progress > 0.01) {
+        (document.getElementById("dog1") as HTMLImageElement).src = (
+          document.getElementById("dog1") as HTMLImageElement
+        ).getAttribute("data-dog3") as string;
+        setTimeout(() => {
+          document.getElementById("dog1")!.style.display = "none";
+        }, 2000);
+      }
+    },
+  });
 </script>

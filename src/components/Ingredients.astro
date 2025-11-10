@@ -9,6 +9,10 @@ import ButtonRed from "./shared/ButtonRed.astro";
 
 import BowlImage from "@/assets/ingredients/bowl.png";
 import HalfBowlImage from "@/assets/ingredients/half-bowl.png";
+
+import Puppy1 from "@/assets/ingredients/01-puppy.gif";
+import Puppy2 from "@/assets/ingredients/02-puppy.png";
+import Puppy3 from "@/assets/ingredients/03-puppy.gif";
 ---
 
 <section
@@ -32,47 +36,54 @@ import HalfBowlImage from "@/assets/ingredients/half-bowl.png";
       About our food <EastIcon class="w-6 h-6" />
     </ButtonRed>
 
-    <section class="relative w-full grow">
-      <BenefitCardWithIcon
-        id="benefit-meat"
-        title="Made Only with Fresh Meat"
-        text="Pure protein power — fuelled by wild ingredients like salmon, duck & boar."
-        iconName="meat"
-        className="absolute top-[15%] left-[35%] z-2"
+    <img
+      data-dog1={Puppy1.src}
+      data-dog2={Puppy2.src}
+      data-dog3={Puppy3.src}
+      id="puppy"
+      class="aspect-640/354 absolute top-[542px] left-[630] z-2 scale-100"
+      src=""
+    />
+
+    <BenefitCardWithIcon
+      id="benefit-meat"
+      title="Made Only with Fresh Meat"
+      text="Pure protein power — fuelled by wild ingredients like salmon, duck & boar."
+      iconName="meat"
+      className="absolute top-[305px] left-[621px] z-2"
+    />
+
+    <BenefitCardWithIcon
+      id="benefit-plant"
+      title="True Natural Ingredients"
+      text="Nothing artificial. Just the real taste of nature — herbs, berries & roots."
+      iconName="plant"
+      className="absolute top-[305px] left-[877px] z-2"
+    />
+
+    <BenefitCardWithIcon
+      id="benefit-grain"
+      title="Grain-Free Recipes for Your Pet"
+      text="Nature’s way to feed — balanced, primal nutrition for every dog’s instinctive needs."
+      iconName="grain"
+      className="absolute top-[305px] left-[1133px] z-2"
+    />
+
+    <section
+      id="bowl"
+      class="absolute top-[269px] -left-[75px] w-[744px] min-h-[600px] h-auto"
+    >
+      <img
+        src={BowlImage.src}
+        alt="Carnilove ingredients bowl"
+        class="absolute inset-0 w-full h-auto object-cover z-1 aspect-924/880"
       />
 
-      <BenefitCardWithIcon
-        id="benefit-plant"
-        title="True Natural Ingredients"
-        text="Nothing artificial. Just the real taste of nature — herbs, berries & roots."
-        iconName="plant"
-        className="absolute top-[15%] left-[55%] z-2"
+      <img
+        src={HalfBowlImage.src}
+        alt="Carnilove ingredients bowl"
+        class="absolute inset-0 w-full h-auto object-cover z-2 aspect-924/880"
       />
-
-      <BenefitCardWithIcon
-        id="benefit-grain"
-        title="Grain-Free Recipes for Your Pet"
-        text="Nature’s way to feed — balanced, primal nutrition for every dog’s instinctive needs."
-        iconName="grain"
-        className="absolute top-[15%] left-[75%] z-2"
-      />
-
-      <section
-        id="bowl"
-        class="absolute bottom-[15%] -left-[5%] w-[50%] min-h-[600px] h-auto"
-      >
-        <img
-          src={BowlImage.src}
-          alt="Carnilove ingredients bowl"
-          class="absolute inset-0 w-full h-auto object-cover z-1 aspect-924/880"
-        />
-
-        <img
-          src={HalfBowlImage.src}
-          alt="Carnilove ingredients bowl"
-          class="absolute inset-0 w-full h-auto object-cover z-2 aspect-924/880"
-        />
-      </section>
     </section>
   </section>
 </section>
@@ -164,4 +175,55 @@ import HalfBowlImage from "@/assets/ingredients/half-bowl.png";
     .to("#benefit-meat", { top: 0, xPercent: 35, opacity: 0 }, "<0.2")
     .to("#benefit-plant", { top: 0, xPercent: 55, opacity: 0 }, "<0.2")
     .to("#benefit-grain", { top: 0, xPercent: 75, opacity: 0 }, "<0.2");
+
+  ScrollTrigger.create({
+    trigger: ingredients,
+    start: "top 5%",
+    onEnter: () => {
+      setTimeout(() => {
+        document.getElementById("puppy")!.style.display = "block";
+        (document.getElementById("puppy") as HTMLImageElement).src = (
+          document.getElementById("puppy") as HTMLImageElement
+        ).getAttribute("data-dog1") as string;
+      }, 500);
+    },
+
+    onEnterBack: () => {
+      setTimeout(() => {
+        document.getElementById("puppy")!.style.display = "block";
+        (document.getElementById("puppy") as HTMLImageElement).src = (
+          document.getElementById("puppy") as HTMLImageElement
+        ).getAttribute("data-dog1") as string;
+      }, 500);
+    },
+  });
+
+  // Pin section and swap GIFs on scroll
+  ScrollTrigger.create({
+    trigger: ingredients,
+    start: "top top",
+    end: "+=50%", // Adjust based on GIF duration
+    // pin: true,
+    scrub: true,
+    onEnter: (self) => {
+      if (self.progress > 0.01) {
+        (document.getElementById("puppy") as HTMLImageElement).src = (
+          document.getElementById("puppy") as HTMLImageElement
+        ).getAttribute("data-dog3") as string;
+        setTimeout(() => {
+          document.getElementById("puppy")!.style.display = "none";
+        }, 2000);
+      }
+    },
+    onEnterBack: (self) => {
+      if (self.progress > 0.01) {
+        (document.getElementById("puppy") as HTMLImageElement).src = (
+          document.getElementById("puppy") as HTMLImageElement
+        ).getAttribute("data-dog3") as string;
+        setTimeout(() => {
+          document.getElementById("puppy")!.style.display = "none";
+        }, 2000);
+      }
+    },
+  });
 </script>
