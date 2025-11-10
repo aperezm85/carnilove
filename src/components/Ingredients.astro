@@ -13,9 +13,9 @@ import HalfBowlImage from "@/assets/ingredients/half-bowl.png";
 
 <section
   id="ingredients"
-  class="pin-section relative flex flex-col items-center h-dvh overflow-y-hidden w-full pt-[78px] bg-surface-background-minimal"
+  class="pin-section relative flex flex-col items-center h-dvh overflow-hidden w-full pt-[78px] z-5"
 >
-  <Label>From Wild Origins to Real Nutrition</Label>
+  <Label id="ingredients-label">From Wild Origins to Real Nutrition</Label>
   <Title id="ingredients-title" className="mt-3">
     Ingredients from the Wild
   </Title>
@@ -24,7 +24,10 @@ import HalfBowlImage from "@/assets/ingredients/half-bowl.png";
     and herbs for real performance nutrition.
   </Subtitle>
 
-  <ButtonRed className="mt-[30px] flex flex-row items-center gap-1.5">
+  <ButtonRed
+    id="ingredients-button"
+    className="mt-[30px] flex flex-row items-center gap-1.5"
+  >
     About our food <EastIcon class="w-6 h-6" />
   </ButtonRed>
 
@@ -71,7 +74,7 @@ import HalfBowlImage from "@/assets/ingredients/half-bowl.png";
     </section>
   </section>
   <script>
-    import { animateTitle } from "@/utils";
+    import { animateLabel, animateTitle } from "@/utils";
     import { gsap } from "gsap";
     import { ScrollTrigger } from "gsap/ScrollTrigger";
 
@@ -83,6 +86,28 @@ import HalfBowlImage from "@/assets/ingredients/half-bowl.png";
     const ingredientsTitle = document.getElementById("ingredients-title");
     const ingredientsDescription = document.getElementById(
       "ingredients-description"
+    );
+    const ingredientsLabel = document.getElementById("ingredients-label");
+    const ingredientsButton = document.getElementById("ingredients-button");
+
+    const tlLabel = gsap.timeline({
+      scrollTrigger: {
+        trigger: ingredients,
+        start: "top center",
+        end: "bottom 95%",
+        toggleActions: "play reverse play reverse",
+      },
+    });
+
+    animateLabel(tlLabel, ingredientsLabel).fromTo(
+      ingredientsButton,
+      { opacity: 0, y: -20 },
+      {
+        opacity: 1,
+        y: 0,
+        duration: 0.5,
+        ease: "power2.out",
+      }
     );
 
     animateTitle({

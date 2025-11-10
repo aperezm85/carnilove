@@ -8,7 +8,7 @@ import EastIcon from "@/assets/icons/east.svg";
 
 <section
   id="from-the-wild"
-  class="pin-section relative flex flex-col items-center h-dvh overflow-y-hidden w-full pt-[78px] bg-surface-background-minimal"
+  class="pin-section relative flex flex-col items-center h-dvh overflow-hidden w-full pt-[78px] z-9"
 >
   <h1
     id="from-the-wild-title"
@@ -25,7 +25,7 @@ import EastIcon from "@/assets/icons/east.svg";
     you feed, train, and care for your four-legged explorer the natural way.
   </Subtitle>
 
-  <section class="w-full h-[500px] mt-16 overflow-hidden">
+  <section class="w-full h-[530px] mt-16 overflow-hidden">
     <WildCards />
   </section>
 
@@ -41,7 +41,6 @@ import EastIcon from "@/assets/icons/east.svg";
     gsap.registerPlugin(ScrollTrigger);
 
     const fromTheWild = document.getElementById("from-the-wild");
-    const bowl = document.getElementById("bowl");
 
     const fromTheWildTitle = document.getElementById("from-the-wild-title");
     const fromTheWildDescription = document.getElementById(

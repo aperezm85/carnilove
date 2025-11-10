@@ -8,9 +8,9 @@ import EastIcon from "@/assets/icons/east.svg";
 
 <section
   id="instincts"
-  class="pin-section relative flex flex-col items-center justify-start h-dvh overflow-y-hidden w-full gap-4 bg-surface-background-minimal pt-[65px]"
+  class="pin-section relative flex flex-col items-center justify-start h-dvh overflow-hidden w-full gap-4 z-4 pt-[65px]"
 >
-  <Label>Carnilove Philosophy</Label>
+  <Label id="instincts-label">Carnilove Philosophy</Label>
   <section class="flex flex-col max-w-[700px] items-center gap-4">
     <h1
       id="instincts-title"
@@ -33,7 +33,7 @@ import EastIcon from "@/assets/icons/east.svg";
 
   <section
     id="instincts-carousel"
-    class="absolute top-[35%] left-[50%] flex flex-col"
+    class="absolute top-[41%] left-[50%] flex flex-col"
   >
     <section class="w-[430px] h-[270px] relative">
       <BenefitCard
@@ -78,7 +78,7 @@ import EastIcon from "@/assets/icons/east.svg";
   <img
     id="food-packages"
     src={FoodPackages.src}
-    class="aspect-514/533 w-[514px] h-[533px] z-20 absolute left-[8%] bottom-[25%]"
+    class="aspect-514/533 w-[514px] h-[533px] z-20 absolute left-[8%] bottom-[15%]"
   />
 </section>
 
@@ -86,7 +86,7 @@ import EastIcon from "@/assets/icons/east.svg";
   import { gsap } from "gsap";
   import { ScrollTrigger } from "gsap/ScrollTrigger";
 
-  import { animateTitle } from "@/utils.js";
+  import { animateLabel, animateTitle } from "@/utils.js";
 
   gsap.registerPlugin(ScrollTrigger);
 
@@ -103,17 +103,27 @@ import EastIcon from "@/assets/icons/east.svg";
   const rightButton = document.getElementById("right-button-instincts");
 
   const foodPackages = document.getElementById("food-packages");
+  const instinctsLabel = document.getElementById("instincts-label");
 
   animateTitle({ title, trigger, end: "bottom 95%" });
   animateTitle({ title: description, trigger, end: "bottom 95%" });
+
+  const tlLabel = gsap.timeline({
+    scrollTrigger: {
+      trigger: trigger,
+      start: "top center%",
+      end: "bottom 95%",
+      toggleActions: "play reverse play reverse",
+    },
+  });
+
+  animateLabel(tlLabel, instinctsLabel);
 
   const tlEntry = gsap.timeline({
     scrollTrigger: {
       trigger: "#instincts",
       start: "top 30%",
       end: "bottom bottom",
-      // toggleActions: "play reverse play reverse",
-
       scrub: true,
     },
   });

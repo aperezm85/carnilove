@@ -27,6 +27,7 @@ export const animateTitle = ({
         gsap.from(chars, {
           yPercent: 200,
           stagger: 0.02,
+          opacity: 0,
           ease: "back.out",
           duration: 1,
           scrollTrigger: {
@@ -50,4 +51,22 @@ export const animateTitle = ({
       window.addEventListener("load", initSplitText, { once: true });
     }
   }
+};
+
+export const animateLabel = (
+  tl: gsap.core.Timeline,
+  label: HTMLElement | null
+) => {
+  if (!tl) throw new Error("Timeline is required for animateLabel");
+  if (!label) return tl;
+  return tl.fromTo(
+    label,
+    { opacity: 0, y: -20 },
+    {
+      opacity: 1,
+      y: 0,
+      duration: 0.5,
+      ease: "power2.out",
+    }
+  );
 };

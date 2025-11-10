@@ -8,7 +8,7 @@ import Placeholder from "@/assets/feed-nature/video-placeholder.jpg";
 
 <section
   id="feed-their-nature"
-  class="pin-section relative flex flex-row items-center justify-center h-dvh overflow-y-hidden w-full gap-6 bg-surface-background-minimal"
+  class="pin-section relative flex flex-row items-center justify-center h-dvh overflow-hidden w-full gap-6 z-3"
 >
   <section class="flex flex-col max-w-[550px]">
     <DoubleHeading
@@ -34,6 +34,7 @@ import Placeholder from "@/assets/feed-nature/video-placeholder.jpg";
     </p>
 
     <ButtonRed
+      id="feed-button"
       className="mt-[30px] flex flex-row items-center gap-1.5 self-start"
     >
       Discover Their Wild Side <EastIcon class="w-6 h-6" />
@@ -53,32 +54,46 @@ import Placeholder from "@/assets/feed-nature/video-placeholder.jpg";
 
   gsap.registerPlugin(ScrollTrigger);
 
+  const trigger = document.getElementById("feed-their-nature");
   const feedTitle = document.getElementById("feed-their-nature-title");
   const feedSubtitle = document.getElementById("feed-their-nature-subtitle");
   const feedDescription = document.getElementById(
     "feed-their-nature-description"
   );
+  const feedButton = document.getElementById("feed-button");
 
   const videoFeedPlaceholder = document.getElementById(
     "video-feed-placeholder"
   );
 
-  animateTitle({ title: feedTitle });
-  animateTitle({ title: feedSubtitle });
-  animateTitle({ title: feedDescription });
+  animateTitle({ title: feedTitle, trigger });
+  animateTitle({ title: feedSubtitle, trigger });
+  animateTitle({ title: feedDescription, trigger });
+
+  const tl = gsap.timeline({
+    scrollTrigger: {
+      trigger: trigger,
+      start: "top 50%",
+      end: "bottom 40%",
+      toggleActions: "play reverse restart reset",
+    },
+  });
 
   if (videoFeedPlaceholder) {
-    gsap.from(videoFeedPlaceholder, {
-      yPercent: 200,
-      stagger: 0.02,
+    tl.from(videoFeedPlaceholder, {
+      yPercent: 100,
+      opacity: 0,
       ease: "back.out",
-      duration: 1,
-      scrollTrigger: {
-        trigger: feedTitle,
-        start: "top 50%",
-        end: "bottom 40%",
-        toggleActions: "play reverse restart reset",
+    }).fromTo(
+      feedButton,
+      { opacity: 0, y: -20 },
+      {
+        opacity: 1,
+        y: 0,
+        duration: 0.5,
+        ease: "power2.out",
       },
-    });
+      "-=0.3"
+    );
   }
 </script>

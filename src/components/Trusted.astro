@@ -7,7 +7,7 @@ import BentoGridCarousel from "@/components/BentoGridCarousel/BentoGridCarousel.
 
 <section
   id="trusted"
-  class="pin-section relative flex flex-col items-center h-dvh overflow-y-hidden w-full pt-[78px] bg-surface-background-minimal"
+  class="pin-section relative flex flex-col items-center h-dvh overflow-hidden w-full pt-[78px] z-8"
 >
   <h1
     id="trusted-title"
@@ -24,11 +24,14 @@ import BentoGridCarousel from "@/components/BentoGridCarousel/BentoGridCarousel.
     and see the difference.
   </Subtitle>
 
-  <ButtonRed className="mt-[30px] flex flex-row items-center gap-1.5">
+  <ButtonRed
+    id="trusted-button"
+    className="mt-[30px] flex flex-row items-center gap-1.5"
+  >
     Hear more from the tribe
   </ButtonRed>
 
-  <section class="w-full h-[500px] mt-16 overflow-hidden">
+  <section id="bento-container" class="w-full h-[530px] mt-16 overflow-hidden">
     <BentoGridCarousel />
   </section>
 </section>
@@ -40,10 +43,12 @@ import BentoGridCarousel from "@/components/BentoGridCarousel/BentoGridCarousel.
   gsap.registerPlugin(ScrollTrigger);
 
   const trusted = document.getElementById("trusted");
-  const bowl = document.getElementById("bowl");
 
   const trustedTitle = document.getElementById("trusted-title");
   const trustedDescription = document.getElementById("trusted-description");
+
+  const trustedButton = document.getElementById("trusted-button");
+  const bentoContainer = document.getElementById("bento-container");
 
   animateTitle({
     title: trustedTitle,
@@ -55,4 +60,34 @@ import BentoGridCarousel from "@/components/BentoGridCarousel/BentoGridCarousel.
     trigger: trusted,
     end: "bottom 95%",
   });
+
+  const tl = gsap.timeline({
+    scrollTrigger: {
+      trigger: trusted,
+      start: "top 80%",
+      end: "bottom 95%",
+      toggleActions: "play reverse restart reset",
+    },
+  });
+
+  tl.fromTo(
+    trustedButton,
+    { opacity: 0, y: -20 },
+    {
+      opacity: 1,
+      y: 0,
+      duration: 0.5,
+      ease: "power2.out",
+    }
+  ).fromTo(
+    bentoContainer,
+    { yPercent: 100, opacity: 0 },
+    {
+      yPercent: 0,
+      opacity: 1,
+      duration: 1,
+      ease: "power2.out",
+    },
+    "-=0.3"
+  );
 </script>

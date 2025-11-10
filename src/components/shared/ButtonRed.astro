@@ -1,7 +1,7 @@
 ---
-const { className } = Astro.props;
+const { id, className } = Astro.props;
 ---
 
-<button type="button" class:list={["red-button", className]}>
+<button type="button" class:list={["red-button", className]} id={id}>
   <slot />
 </button>

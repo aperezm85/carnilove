@@ -8,11 +8,11 @@ import Arrow3 from "@/assets/find-path/arrow-3.png";
 
 <section
   id="find-your-path"
-  class="pin-section relative block h-dvh overflow-y-hidden w-full bg-surface-background-minimal"
+  class="pin-section relative h-dvh overflow-hidden w-full z-6"
 >
   <section
     id="title"
-    class="absolute top-[10%] left-[10%] flex flex-col gap-4 z-2"
+    class="absolute top-[150px] left-[90px] flex flex-col gap-4 z-2"
   >
     <h1
       id="find-your-path-header"
@@ -23,7 +23,7 @@ import Arrow3 from "@/assets/find-path/arrow-3.png";
 
     <div
       id="find-your-path-subheader"
-      class="flex flex-col max-w-[170px] overflow-hidden"
+      class="flex flex-col max-w-[220px] overflow-hidden"
     >
       <p class="font-copy text-base/[24px] text-text-primary z-2">
         Every animal’s journey is different, from finding the food they love to
@@ -40,31 +40,35 @@ import Arrow3 from "@/assets/find-path/arrow-3.png";
     id="arrow-1"
     src={Arrow1.src}
     alt="Arrow pointing right"
-    class="arrow w-[100px] h-[110px] absolute top-[12%] left-[21%]"
+    class="arrow w-[100px] h-[110px] absolute top-[168px] left-64"
   />
   <Card
     id="card-subscribe"
     type="subscribe"
-    className="absolute top-[17%] left-[27%]"
+    className="absolute top-[212px] left-[330px]"
   />
   <img
     id="arrow-2"
     src={Arrow2.src}
     alt="Arrow pointing right"
-    class="arrow w-[100px] h-[110px] absolute top-[26%] left-[45%]"
+    class="arrow w-[100px] h-[110px] absolute top-[474px] left-[620px]"
   />
   <Card
     id="card-trial"
     type="trial"
-    className="absolute top-[27%] left-[51%]"
+    className="absolute top-[272px] left-[700px]"
   />
   <img
     id="arrow-3"
     src={Arrow3.src}
     alt="Arrow pointing right"
-    class="arrow w-[100px] h-[110px] absolute top-[32%] left-[70%]"
+    class="arrow w-[100px] h-[110px] absolute top-[526px] left-[970px] -rotate-[11px]"
   />
-  <Card id="card-pet" type="pet" className="absolute top-[37%] left-[77%]" />
+  <Card
+    id="card-pet"
+    type="pet"
+    className="absolute top-[332px] left-[1070px]"
+  />
 </section>
 
 <script>

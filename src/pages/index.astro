@@ -13,6 +13,13 @@ import Layout from "@/layouts/Layout.astro";
 ---
 
 <Layout>
+  <section
+    id="savannah"
+    class="fixed inset-0 pointer-events-none z-2 opacity-0 top-[50%]"
+    style="background-image: url('/savannah-large.png'); background-size: cover; background-position: center bottom;"
+  >
+  </section>
+
   <Hero />
   <ShopProduct />
   <Feed />
@@ -22,12 +29,6 @@ import Layout from "@/layouts/Layout.astro";
   <Trusted />
   <FromTheWild />
   <FAQ />
-
-  <section
-    id="savannah"
-    class="bg-[url(/savannah.png)] bg-cover bg-center bg-no-repeat w-full h-[569px] fixed z-10"
-  >
-  </section>
 </Layout>
 
 <script>
@@ -49,9 +50,9 @@ import Layout from "@/layouts/Layout.astro";
         trigger: section,
         start: "top top",
         end: "bottom top",
-        pin: true,
+        pin: index === 0 || index === sections.length - 1 ? false : true,
         pinSpacing: false,
-        scrub: 0.06,
+        scrub: true,
         // markers: true,
         snap: 1,
       },
@@ -63,53 +64,51 @@ import Layout from "@/layouts/Layout.astro";
   const shopSection = document.getElementById("shop-by-product");
   const feed = document.getElementById("feed-their-nature");
 
-  const FAQ = document.getElementById("FAQ");
-
   if (savannah && shopSection && feed) {
     // Timeline for bottom transitions
-    const tl = gsap.timeline();
 
-    // gsap.set(savannah, { top: "100%" });
+    const bgTimeline = gsap.timeline({
+      scrollTrigger: {
+        trigger: "#shop-by-product",
+        start: "top center",
+        end: "bottom top",
+        endTrigger: "#from-the-wild",
+        scrub: 1,
+      },
+    });
 
-    // // First scroll trigger: move into view at -200px
-    // tl.to(savannah, {
-    //   top: "-=300px",
-    //   duration: 1,
-    //   ease: "power2.out",
-    //   scrollTrigger: {
-    //     trigger: "#shop-by-product",
-    //     start: "top bottom",
-    //     end: "bottom top", // short range to trigger once
-    //     scrub: true,
-    //     pin: true,
-    //   },
-    // });
-
-    // // Second scroll trigger: adjust to -100px without resetting
-    // tl.to(savannah, {
-    //   top: "-=200px",
-    //   duration: 1,
-    //   ease: "power2.out",
-    //   scrollTrigger: {
-    //     trigger: feed,
-    //     start: "top top",
-    //     end: "bottom top",
-    //     scrub: false,
-    //     pin: true,
-    //   },
-    // });
-
-    // tl.to(savannah, {
-    //   top: "-=200px",
-    //   duration: 1,
-    //   ease: "power2.out",
-    //   scrollTrigger: {
-    //     trigger: "#ingredients",
-    //     start: "top top",
-    //     end: "bottom top",
-    //     scrub: false,
-    //     pin: true,
-    //   },
-    // });
+    bgTimeline
+      // Fade in and start from bottom
+      .fromTo(
+        savannah,
+        {
+          opacity: 0,
+          backgroundPositionY: "0%",
+        },
+        {
+          opacity: 1,
+          backgroundPositionY: "85%",
+          duration: 1,
+          ease: "none",
+        }
+      )
+      // Move higher during section 3
+      .to(savannah, {
+        backgroundPositionY: "30%",
+        duration: 1,
+        ease: "none",
+      })
+      // Move down during section 4
+      .to(savannah, {
+        backgroundPositionY: "60%",
+        duration: 1,
+        ease: "none",
+      })
+      // Fade out at section 5
+      .to(savannah, {
+        opacity: 0,
+        duration: 1,
+        ease: "none",
+      });
   }
 </script>

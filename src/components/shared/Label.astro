@@ -1,4 +1,9 @@
+---
+const id = Astro.props.id;
+---
+
 <span
+  id={id}
   class="px-2 py-1.5 border border-surface-background-burgundy rounded-sm font-heading uppercase font-extrabold text-base/[24px] text-text-primary"
 >
   <slot />
