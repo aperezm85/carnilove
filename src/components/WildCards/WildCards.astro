@@ -66,17 +66,25 @@ const cards = [
     const openButton = card.querySelector("#open-button");
 
     tl.to(card, { width: "840px", duration: 0.5, ease: "none" })
-      .to(desc, {
-        opacity: 1,
-        height: "auto",
-        duration: 0.4,
-        ease: "none",
-      })
-      .to(openButton, {
-        rotate: 45,
-        duration: 0.4,
-        ease: "none",
-      })
+      .to(
+        desc,
+        {
+          opacity: 1,
+          height: "auto",
+          duration: 0.4,
+          ease: "none",
+        },
+        0
+      )
+      .to(
+        openButton,
+        {
+          rotate: 45,
+          duration: 0.4,
+          ease: "none",
+        },
+        0
+      )
       .to(
         button,
         {
@@ -86,7 +94,8 @@ const cards = [
           ease: "none",
           padding: "12px 32px",
         },
-        "-=0.2"
+        // "-=0.2"
+        0
       );
   }
 
@@ -97,17 +106,25 @@ const cards = [
     const openButton = card.querySelector("#open-button");
 
     tl.to(card, { width: "400px", duration: 0.5, ease: "none" })
-      .to(desc, {
-        opacity: 0,
-        height: 0,
-        duration: 0.3,
-        ease: "none",
-      })
-      .to(openButton, {
-        rotate: 0,
-        duration: 0.4,
-        ease: "none",
-      })
+      .to(
+        desc,
+        {
+          opacity: 0,
+          height: 0,
+          duration: 0.3,
+          ease: "none",
+        },
+        0
+      )
+      .to(
+        openButton,
+        {
+          rotate: 0,
+          duration: 0.4,
+          ease: "none",
+        },
+        0
+      )
       .to(
         button,
         {
@@ -117,7 +134,7 @@ const cards = [
           ease: "none",
           padding: 0,
         },
-        "-=0.2"
+        0
       );
   }
 </script>
