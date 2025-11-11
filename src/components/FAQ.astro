@@ -8,7 +8,7 @@ import Dog from "@/assets/faq/footer-dog.gif";
 
 <section
   id="FAQ"
-  class="pin-section w-full bg-text-secondary text-text-invert min-h-dvh flex flex-col justify-between z-20"
+  class="pin-section w-full bg-text-secondary text-text-invert min-h-dvh flex flex-col justify-between z-20 relative overflow-auto"
 >
   <div
     id="faq_title"
@@ -26,7 +26,7 @@ import Dog from "@/assets/faq/footer-dog.gif";
 
   <div
     id="faq_questions"
-    class="flex flex-col gap-2 w-[715px] max-w-[90%] ml-40 pb-[100px]"
+    class="flex flex-col gap-2 w-[715px] max-w-[90%] ml-40 pb-[100px] z-10"
   >
     <Accordion
       title="What makes Carnilove different from other pet foods?"
@@ -56,13 +56,16 @@ import Dog from "@/assets/faq/footer-dog.gif";
     src=""
     alt="Happy dog"
     class="absolute top-[220px] left-[806px] w-[634px] h-[428px]"
+    onerror="this.style.display='none';"
   />
+
   <img
     id="footer-cat"
     data-src={Cat.src}
     src=""
     alt="Happy cat"
     class="absolute top-[370px] left-[848px] w-[591px] h-[327px]"
+    onerror="this.style.display='none';"
   />
   <Footer />
 </section>
