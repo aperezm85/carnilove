@@ -4,6 +4,7 @@ import BenefitCard from "@/components/shared/BenefitCard.astro";
 import Label from "@/components/shared/Label.astro";
 
 import EastIcon from "@/assets/icons/east.svg";
+import CatVideo from "@/assets/instincts/cat-video.mp4";
 ---
 
 <section
@@ -35,7 +36,7 @@ import EastIcon from "@/assets/icons/east.svg";
 
     <section
       id="instincts-carousel"
-      class="absolute top-[41%] left-[50%] flex flex-col"
+      class="absolute top-[414px] left-[628px] flex flex-col z-2"
     >
       <section class="w-[430px] h-[270px] relative">
         <BenefitCard
@@ -82,6 +83,16 @@ import EastIcon from "@/assets/icons/east.svg";
       src={FoodPackages.src}
       class="aspect-514/533 w-[514px] h-[533px] z-20 absolute left-[8%] bottom-[15%]"
     />
+
+    <video
+      id="instincts-video"
+      class="absolute -right-[120px] top-[400px] w-[45%] h-auto max-h-[40%] z-1"
+      autoplay={false}
+      muted
+      loop={false}
+    >
+      <source src={CatVideo} type="video/mp4" />
+    </video>
   </section>
 </section>
 
@@ -108,6 +119,8 @@ import EastIcon from "@/assets/icons/east.svg";
   const foodPackages = document.getElementById("food-packages");
   const instinctsLabel = document.getElementById("instincts-label");
 
+  const instinctsVideo = document.getElementById("instincts-video");
+
   animateTitle({ title, trigger, end: "bottom 95%" });
   animateTitle({ title: description, trigger, end: "bottom 95%" });
 
@@ -117,6 +130,56 @@ import EastIcon from "@/assets/icons/east.svg";
       start: "top center%",
       end: "bottom 95%",
       toggleActions: "play reverse play reverse",
+    },
+  });
+
+  const video = gsap.timeline({
+    scrollTrigger: {
+      trigger: trigger,
+      start: "top 5%",
+      end: "bottom 95%",
+      toggleActions: "play reverse play reverse",
+
+      onEnter: () => {
+        const v = instinctsVideo as HTMLVideoElement | null;
+        if (v) {
+          v.currentTime = 0;
+          v.play();
+          setTimeout(() => {
+            v.pause();
+          }, 4300);
+        }
+      },
+      onEnterBack: () => {
+        const v = instinctsVideo as HTMLVideoElement | null;
+        if (v) {
+          v.currentTime = 0;
+          v.play();
+          setTimeout(() => {
+            v.pause();
+          }, 4300);
+        }
+      },
+      onLeave: () => {
+        const v = instinctsVideo as HTMLVideoElement | null;
+        if (v) {
+          v.play();
+          setTimeout(() => {
+            v.pause();
+            v.currentTime = 0;
+          }, 1700);
+        }
+      },
+      onLeaveBack: () => {
+        const v = instinctsVideo as HTMLVideoElement | null;
+        if (v) {
+          v.play();
+          setTimeout(() => {
+            v.pause();
+            v.currentTime = 0;
+          }, 1700);
+        }
+      },
     },
   });
 

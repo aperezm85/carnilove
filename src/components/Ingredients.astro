@@ -29,13 +29,6 @@ import Puppy3 from "@/assets/ingredients/03-puppy.gif";
       roots and herbs for real performance nutrition.
     </Subtitle>
 
-    <ButtonRed
-      id="ingredients-button"
-      className="mt-[30px] flex flex-row items-center gap-1.5"
-    >
-      About our food <EastIcon class="w-6 h-6" />
-    </ButtonRed>
-
     <img
       data-dog1={Puppy1.src}
       data-dog2={Puppy2.src}
@@ -69,9 +62,16 @@ import Puppy3 from "@/assets/ingredients/03-puppy.gif";
       className="absolute top-[305px] left-[1133px] z-2"
     />
 
+    <ButtonRed
+      id="ingredients-button"
+      className="absolute top-[613px] left-[1183px] flex flex-row items-center gap-1.5"
+    >
+      About our food <EastIcon class="w-6 h-6" />
+    </ButtonRed>
+
     <section
       id="bowl"
-      class="absolute top-[269px] -left-[75px] w-[744px] min-h-[600px] h-auto"
+      class="absolute top-[269px] -left-[75px] w-[744px] min-h-[600px] h-auto z-2"
     >
       <img
         src={BowlImage.src}
