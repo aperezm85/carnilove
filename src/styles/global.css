@@ -97,6 +97,11 @@ body {
   padding: 0 20px;
 }
 
+#nourishment .content {
+  max-height: 100%;
+  height: auto;
+}
+
 /* @layer base {
   html {
     scroll-snap-type: both mandatory;

@@ -1,0 +1,24 @@
+---
+const { items = [], id, className } = Astro.props;
+---
+
+<div id={id} class={className}>
+  {
+    items.map((item: string, index: number) => (
+      <button
+        type="button"
+        class:list={[
+          "border-b-2  uppercase font-heading font-extrabold text-2xl/[26px] text-center py-1 px-4 cursor-pointer",
+          index === 0
+            ? "border-surface-background-red text-text-brand-red"
+            : "border-[#8E8E8E] text-[#8E8E8E]",
+
+          "hover:border-surface-background-red hover:text-text-brand-red",
+          "transition-colors duration-300 ease-in-out",
+        ]}
+      >
+        {item}
+      </button>
+    ))
+  }
+</div>

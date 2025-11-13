@@ -1,0 +1,196 @@
+---
+import All from "@/assets/shop_product/all-food.png";
+import DryFood from "@/assets/shop_product/dry-food.png";
+import Snacks from "@/assets/shop_product/snack-food.png";
+import WetFood from "@/assets/shop_product/wet-food.png";
+import FullProductCard from "@/components/shared/FullProductCard.astro";
+import Subtitle from "@/components/shared/Subtitle.astro";
+import Filter from "./shared/Filter.astro";
+---
+
+<section
+  id="nourishment"
+  class="pin-section relative flex flex-col items-center h-auto overflow-auto w-full pt-[78px] z-9"
+>
+  <section class="content">
+    <h1
+      id="nourishment-title"
+      class:list={[
+        "font-large-heading text-[60px]/[80%] text-center text-text-primary overflow-hidden uppercase",
+        "max-w-[516px] mt-6",
+      ]}
+    >
+      Nourishment for Every Stage of Their Wild Life
+    </h1>
+    <Subtitle id="nourishment-description" className="max-w-[516px] mt-5">
+      Discover stories, science, and practical tips inspired by nature — helping
+      you feed, train, and care for your four-legged explorer the natural way.
+    </Subtitle>
+
+    <Filter
+      id="nou-product-filters"
+      className="mt-[35px] flex flex-row gap-2.5 items-center justify-center"
+      items={[
+        "Puppies",
+        "Adult dogs",
+        "Senior dogs",
+        "Kittens",
+        "Adult cats",
+        "Senior cats",
+      ]}
+    />
+
+    <section id="nou-products" class="grid grid-cols-3 gap-3 mt-12">
+      <FullProductCard
+        title="Dry food"
+        image={DryFood.src}
+        weight="(200g - 12kg"
+        price="8.49"
+        discountedPrice="6.37"
+      />
+      <FullProductCard
+        title="Wet food"
+        image={WetFood.src}
+        weight="(200g - 12kg"
+        price="8.49"
+        discountedPrice="6.37"
+      />
+      <FullProductCard
+        title="Snacks"
+        image={Snacks.src}
+        weight="(200g - 12kg"
+        price="8.49"
+        discountedPrice="6.37"
+      />
+      <FullProductCard
+        title="All"
+        image={All.src}
+        weight="(200g - 12kg"
+        price="8.49"
+        discountedPrice="6.37"
+      />
+      <FullProductCard
+        title="Dry food"
+        image={DryFood.src}
+        weight="(200g - 12kg"
+        price="8.49"
+        discountedPrice="6.37"
+      />
+      <FullProductCard
+        title="Wet food"
+        image={WetFood.src}
+        weight="(200g - 12kg"
+        price="8.49"
+        discountedPrice="6.37"
+      />
+      <FullProductCard
+        title="Snacks"
+        image={Snacks.src}
+        weight="(200g - 12kg"
+        price="8.49"
+        discountedPrice="6.37"
+      />
+      <FullProductCard
+        title="All"
+        image={All.src}
+        weight="(200g - 12kg"
+        price="8.49"
+        discountedPrice="6.37"
+      />
+      <FullProductCard
+        title="Dry food"
+        image={DryFood.src}
+        weight="(200g - 12kg"
+        price="8.49"
+        discountedPrice="6.37"
+      />
+      <FullProductCard
+        title="Wet food"
+        image={WetFood.src}
+        weight="(200g - 12kg"
+        price="8.49"
+        discountedPrice="6.37"
+      />
+      <FullProductCard
+        title="Snacks"
+        image={Snacks.src}
+        weight="(200g - 12kg"
+        price="8.49"
+        discountedPrice="6.37"
+      />
+      <FullProductCard
+        title="All"
+        image={All.src}
+        weight="(200g - 12kg"
+        price="8.49"
+        discountedPrice="6.37"
+      />
+      <FullProductCard
+        title="Dry food"
+        image={DryFood.src}
+        weight="(200g - 12kg"
+        price="8.49"
+        discountedPrice="6.37"
+      />
+      <FullProductCard
+        title="Wet food"
+        image={WetFood.src}
+        weight="(200g - 12kg"
+        price="8.49"
+        discountedPrice="6.37"
+      />
+      <FullProductCard
+        title="Snacks"
+        image={Snacks.src}
+        weight="(200g - 12kg"
+        price="8.49"
+        discountedPrice="6.37"
+      />
+      <FullProductCard
+        title="All"
+        image={All.src}
+        weight="(200g - 12kg"
+        price="8.49"
+        discountedPrice="6.37"
+      />
+    </section>
+  </section>
+</section>
+
+<script>
+  import { animateTitle } from "@/utils";
+  import { gsap } from "gsap";
+  import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+  gsap.registerPlugin(ScrollTrigger);
+
+  const nourishment = document.getElementById("nourishment");
+
+  const nourishmentTitle = document.getElementById("nourishment-title");
+  const nourishmentDescription = document.getElementById(
+    "nourishment-description"
+  );
+
+  animateTitle({
+    title: nourishmentTitle,
+    trigger: nourishment,
+    end: "bottom 95%",
+  });
+  animateTitle({
+    title: nourishmentDescription,
+    trigger: nourishment,
+    end: "bottom 95%",
+  });
+
+  // Expose playEntry/playLeave for parent coordination
+  const fromWildRoot = document.getElementById("nourishment");
+  if (fromWildRoot) {
+    (fromWildRoot as any).playEntry = function () {
+      return;
+    };
+
+    (fromWildRoot as any).playLeave = function () {
+      return;
+    };
+  }
+</script>

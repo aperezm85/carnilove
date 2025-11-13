@@ -7,6 +7,7 @@ import FromTheWild from "@/components/FromTheWild.astro";
 import Hero from "@/components/Hero/Hero.astro";
 import Ingredients from "@/components/Ingredients.astro";
 import Instincts from "@/components/Instincts.astro";
+import Nourishment from "@/components/Nourishment.astro";
 import ShopProduct from "@/components/ShopProduct.astro";
 import Trusted from "@/components/Trusted.astro";
 import Layout from "@/layouts/Layout.astro";
@@ -39,6 +40,7 @@ import Layout from "@/layouts/Layout.astro";
   <Ingredients />
   <FindYourPath />
   <Trusted />
+  <Nourishment />
   <FromTheWild />
   <FAQ />
 </Layout>
@@ -134,9 +136,57 @@ import Layout from "@/layouts/Layout.astro";
     }
     const delta = event.deltaY;
     if (Math.abs(delta) < 5) return;
-    event.preventDefault();
+
+    // Helper: find nearest scrollable ancestor (overflow:auto/scroll and scrollHeight>clientHeight)
+    function getScrollableAncestor(el: Element | null): Element | null {
+      while (el && el !== document.body && el !== document.documentElement) {
+        const style = window.getComputedStyle(el);
+        const overflowY = style.overflowY;
+        if (
+          (overflowY === "auto" || overflowY === "scroll") &&
+          (el as HTMLElement).scrollHeight > (el as HTMLElement).clientHeight
+        ) {
+          return el;
+        }
+        el = el.parentElement;
+      }
+      return null;
+    }
 
     const direction = delta > 0 ? 1 : -1;
+    const targetEl = event.target as Element | null;
+
+    // If the wheel event happened inside a scrollable container and that container
+    // can still scroll in the wheel direction, let the native scrolling happen.
+    const scrollable = getScrollableAncestor(targetEl);
+    if (scrollable) {
+      const sc = scrollable as HTMLElement;
+      if (direction > 0) {
+        // scrolling down: if not at bottom, allow native scroll
+        if (sc.scrollTop + sc.clientHeight < sc.scrollHeight - 1) return;
+      } else {
+        // scrolling up: if not at top, allow native scroll
+        if (sc.scrollTop > 1) return;
+      }
+    } else {
+      // No inner scrollable ancestor: check if current section itself is taller than viewport
+      const section = sections[currentIndex] as HTMLElement | undefined;
+      if (section && section.scrollHeight > window.innerHeight) {
+        const rect = section.getBoundingClientRect();
+        const sectionTop = window.scrollY + rect.top;
+        const sectionBottom = sectionTop + section.scrollHeight;
+        if (direction > 0) {
+          // If we're not yet at the bottom of the tall section, allow native scroll
+          if (window.scrollY + window.innerHeight < sectionBottom - 1) return;
+        } else {
+          // If we're not yet at the top of the tall section, allow native scroll
+          if (window.scrollY > sectionTop + 1) return;
+        }
+      }
+    }
+
+    // Prevent default only when we will hijack the wheel for section navigation
+    event.preventDefault();
     const targetIndex = currentIndex + direction;
     if (targetIndex < 0 || targetIndex >= numSections) return;
 
@@ -309,6 +359,12 @@ import Layout from "@/layouts/Layout.astro";
       }
     )
     .to(forest, {
+      opacity: 0.75,
+      backgroundPositionY: "30%",
+      ease: "none",
+    })
+    .to(forest, {
+      opacity: 0.75,
       backgroundPositionY: "30%",
       ease: "none",
     })

@@ -79,21 +79,11 @@ import BentoGridCarousel from "@/components/BentoGridCarousel/BentoGridCarousel.
     const trustedRoot = document.getElementById("trusted");
     if (trustedRoot) {
       (trustedRoot as any).playEntry = function () {
-        return gsap.fromTo(
-          trustedRoot.querySelectorAll(".content > *"),
-          { opacity: 0, y: 20 },
-          { opacity: 1, y: 0, duration: 0.7, stagger: 0.05, ease: "power2.out" }
-        );
+        return;
       };
 
       (trustedRoot as any).playLeave = function () {
-        return gsap.to(trustedRoot.querySelectorAll(".content > *"), {
-          opacity: 0,
-          y: -20,
-          duration: 0.45,
-          stagger: 0.03,
-          ease: "power2.in",
-        });
+        return;
       };
     }
     tl.fromTo(

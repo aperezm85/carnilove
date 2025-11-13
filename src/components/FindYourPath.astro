@@ -92,21 +92,11 @@ import Arrow3 from "@/assets/find-path/arrow-3.png";
   const findRoot = document.getElementById("find-your-path");
   if (findRoot) {
     (findRoot as any).playEntry = function () {
-      return gsap.fromTo(
-        findRoot.querySelectorAll(".content > *"),
-        { opacity: 0, y: 20 },
-        { opacity: 1, y: 0, duration: 0.7, stagger: 0.05, ease: "power2.out" }
-      );
+      return;
     };
 
     (findRoot as any).playLeave = function () {
-      return gsap.to(findRoot.querySelectorAll(".content > *"), {
-        opacity: 0,
-        y: -20,
-        duration: 0.45,
-        stagger: 0.03,
-        ease: "power2.in",
-      });
+      return;
     };
   }
 

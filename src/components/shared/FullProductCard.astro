@@ -1,0 +1,48 @@
+---
+import CardBg from "@/assets/shop_product/card-bg.svg";
+
+const { title, image, weight, price, discountedPrice } = Astro.props;
+---
+
+<div class="flex flex-col gap-5 items-center justify-center full-product-card">
+  <article
+    class:list={[
+      "relative max-w-[315px]  flex flex-col items-start justify-end gap-1.5 px-5 py-3 shadow-[0px_0px_11.31px_0px_#00000014] bg-surface-background-minimal overflow-hidden aspect-square",
+      "group cursor-pointer",
+      "transition-all duration-300 ease-in-out",
+      "opacity-100",
+    ]}
+  >
+    <img
+      src={CardBg.src}
+      class="absolute left-0 h-full w-full -top-20 object-cover group-hover:scale-250 transition-all duration-300 ease-in-out"
+    />
+
+    <div
+      class="z-1 flex flex-col items-start justify-end gap-1.5 w-full h-full"
+    >
+      <img
+        src={image}
+        alt={title}
+        class="relative top-0 grow flex items-center justify-end justify-self-end mx-auto group-hover:-top-2 transition-all duration-300 ease-in-out"
+      />
+    </div>
+  </article>
+  <article class="flex flex-col gap-3 items-center justify-center text-center">
+    <h2
+      class="font-heading text-[#4A002A] font-extrabold text-2xl/[28px] uppercase shrink-0"
+    >
+      {title}
+    </h2>
+    <p class="font-copy text-text-primary text-[15px]/[160%] max-w-full">
+      {weight}
+    </p>
+    <p class="font-copy text-text-primary text-[15px]/[160%] max-w-full">
+      from <span class="text-text-minimal line-through">{price}</span><span
+        class="font-bold text-[18px]/[160%]"
+      >
+        {discountedPrice}</span
+      >
+    </p>
+  </article>
+</div>
