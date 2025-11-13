@@ -86,7 +86,7 @@ body {
 
 .content {
   max-width: 1440px;
-  width: 1440px;
+  width: 100%;
   max-height: 1024px;
   display: flex;
   flex-direction: column;
@@ -94,6 +94,7 @@ body {
   margin: 0 auto;
   min-height: 1024px;
   align-items: center;
+  padding: 0 20px;
 }
 
 /* @layer base {

@@ -145,3 +145,27 @@ import NotInterestedIcon from "@/assets/icons/not-interested.svg";
     </div>
   </div>
 </footer>
+
+<script>
+  // Attach playEntry/playLeave to the footer root (no id present)
+  const footerRoot = document.querySelector("footer.pin-section");
+  if (footerRoot) {
+    (footerRoot as any).playEntry = function () {
+      return gsap.fromTo(
+        footerRoot.querySelectorAll("*"),
+        { opacity: 0, y: 10 },
+        { opacity: 1, y: 0, duration: 0.6, stagger: 0.02, ease: "power2.out" }
+      );
+    };
+
+    (footerRoot as any).playLeave = function () {
+      return gsap.to(footerRoot.querySelectorAll("*"), {
+        opacity: 0,
+        y: -10,
+        duration: 0.45,
+        stagger: 0.01,
+        ease: "power2.in",
+      });
+    };
+  }
+</script>

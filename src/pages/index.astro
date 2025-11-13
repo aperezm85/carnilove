@@ -95,16 +95,95 @@ import Layout from "@/layouts/Layout.astro";
     }
   }
 
-  sections.forEach((section, i) => {
-    ScrollTrigger.create({
-      trigger: section,
-      start: "top bottom-=1",
-      end: "bottom top+=1",
-      onEnter: () => goToSection(section),
-      onEnterBack: () => goToSection(section),
-      snap: 1 / sections.length,
+  // ----- New coordinated scroll handling that calls section.playLeave/playEntry -----
+  // Keep `isAnimating` here in the parent and call child-exposed promises for entry/leave.
+  function findCurrentIndex() {
+    const yCenter = window.scrollY + window.innerHeight / 2;
+    for (let i = 0; i < sections.length; i++) {
+      const rect = sections[i].getBoundingClientRect();
+      const top = window.scrollY + rect.top;
+      const bottom = top + rect.height;
+      if (yCenter >= top && yCenter < bottom) return i;
+    }
+    return 0;
+  }
+
+  let currentIndex = findCurrentIndex();
+  let isAnimating = false;
+  const numSections = sections.length;
+
+  function animateToSectionIndex(targetIndex: number) {
+    if (targetIndex < 0 || targetIndex >= numSections)
+      return Promise.reject("out-of-bounds");
+    const targetSection = sections[targetIndex];
+    return new Promise<void>((resolve) => {
+      gsap.to(window, {
+        scrollTo: { y: targetSection, autoKill: false },
+        duration: 1.2,
+        ease: "power2.inOut",
+        onComplete: () => resolve(),
+        onInterrupt: () => resolve(),
+      });
     });
-  });
+  }
+
+  function handleWheel(event: WheelEvent) {
+    if (isAnimating) {
+      event.preventDefault();
+      return;
+    }
+    const delta = event.deltaY;
+    if (Math.abs(delta) < 5) return;
+    event.preventDefault();
+
+    const direction = delta > 0 ? 1 : -1;
+    const targetIndex = currentIndex + direction;
+    if (targetIndex < 0 || targetIndex >= numSections) return;
+
+    isAnimating = true;
+    const currentSection: any = sections[currentIndex];
+    const newSection: any = sections[targetIndex];
+
+    const leavePromise =
+      typeof currentSection.playLeave === "function"
+        ? currentSection.playLeave()
+        : Promise.resolve();
+
+    Promise.resolve(leavePromise)
+      .then(() => animateToSectionIndex(targetIndex))
+      .then(() => {
+        currentIndex = targetIndex;
+        return typeof newSection.playEntry === "function"
+          ? newSection.playEntry()
+          : Promise.resolve();
+      })
+      .then(() => {
+        isAnimating = false;
+      })
+      .catch((err) => {
+        console.error("Scroll animation error:", err);
+        isAnimating = false;
+      });
+  }
+
+  window.addEventListener("wheel", handleWheel, { passive: false });
+
+  // Initial entry for the first section (if it exposes playEntry)
+  if (sections[0]) {
+    const first: any = sections[0];
+    if (typeof first.playEntry === "function") {
+      isAnimating = true;
+      Promise.resolve(first.playEntry())
+        .then(() => {
+          isAnimating = false;
+        })
+        .catch(() => {
+          isAnimating = false;
+        });
+    }
+  }
+
+  // -------------------------------------------------------------------------------
 
   const savannah = document.getElementById("savannah");
   const rocks = document.getElementById("rocks");
@@ -114,8 +193,12 @@ import Layout from "@/layouts/Layout.astro";
 
   if (savannah && rocks && forest && shopSection && feed) {
     // Timeline for bottom transitions
-
+    // Give each step an explicit duration so the ScrollTrigger maps each tween
+    // evenly across the scroll span. Without explicit durations the timeline
+    // can end up unevenly distributed which makes the first tween only reach
+    // a fraction of its target (e.g. opacity ~0.1588).
     const bgTimeline = gsap.timeline({
+      defaults: { duration: 0.5 },
       scrollTrigger: {
         trigger: "#shop-by-product",
         start: "top center",
@@ -124,23 +207,21 @@ import Layout from "@/layouts/Layout.astro";
         scrub: 1,
       },
     });
-
     bgTimeline
       // Fade in and start from bottom
       .fromTo(
         savannah,
+        { opacity: 0, backgroundPositionY: "0%", ease: "none" },
         {
-          opacity: 0,
-          backgroundPositionY: "0%",
-        },
-        {
-          opacity: 1,
-          backgroundPositionY: "65%",
+          duration: 0.05,
+          opacity: 0.6,
+          backgroundPositionY: "85%",
           ease: "none",
         }
       )
       // Move higher during section 3
       .to(savannah, {
+        opacity: 1,
         backgroundPositionY: "30%",
         ease: "none",
       })
@@ -167,6 +248,7 @@ import Layout from "@/layouts/Layout.astro";
   }
 
   const rocksTimeline = gsap.timeline({
+    defaults: { duration: 0.5 },
     scrollTrigger: {
       trigger: "#instincts",
       start: "top center",
@@ -185,6 +267,7 @@ import Layout from "@/layouts/Layout.astro";
       },
       {
         opacity: 1,
+        duration: 0.05,
         backgroundPositionY: "100%",
         ease: "none",
       }
@@ -213,7 +296,6 @@ import Layout from "@/layouts/Layout.astro";
   });
 
   forestTimeline
-
     .fromTo(
       forest,
       {

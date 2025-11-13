@@ -12,7 +12,7 @@ import Title from "@/components/shared/Title.astro";
 
 <section
   id="shop-by-product"
-  class="pin-section relative flex flex-col items-center h-dvh overflow-hidden w-full pt-[78px] z-2"
+  class="pin-section relative flex flex-col items-center h-[7000px] overflow-hidden w-full pt-[78px] z-2"
 >
   <section class="content">
     <Label id="product-label">honour the bond</Label>
@@ -56,10 +56,11 @@ import Title from "@/components/shared/Title.astro";
 </section>
 
 <script>
-  import { animateLabel, animateTitle } from "@/utils";
+  import { ensureFontsReady } from "@/utils";
   import { gsap } from "gsap";
   import { ScrollTrigger } from "gsap/ScrollTrigger";
-  gsap.registerPlugin(ScrollTrigger);
+  import { SplitText } from "gsap/SplitText";
+  gsap.registerPlugin(ScrollTrigger, SplitText);
 
   const productTitle = document.getElementById("product-title");
   const productSubtitle = document.getElementById("product-subtitle");
@@ -68,40 +69,117 @@ import Title from "@/components/shared/Title.astro";
 
   const trigger = document.getElementById("shop-by-product");
 
-  animateTitle({ title: productTitle, trigger, end: "bottom 95%" });
-
-  animateTitle({ title: productSubtitle, trigger, end: "bottom 95%" });
-
   const tl = gsap.timeline({
     scrollTrigger: {
       trigger: trigger,
       start: "top center",
       end: "bottom 95%",
-      toggleActions: "play reverse play reverse",
     },
   });
 
-  animateLabel(tl, productLabel)
-    .fromTo(
-      ".product-card",
-      { opacity: 0, y: -100 },
-      {
-        opacity: 1,
-        y: 0,
-        duration: 0.5,
-        ease: "power2.out",
-        stagger: 0.1,
+  const shopRoot = document.getElementById("shop-by-product");
+
+  // Defer SplitText creation until fonts are loaded to avoid the SplitText warning
+  ensureFontsReady()
+    .then(() => {
+      const splittedTextLabel = new SplitText(productLabel, {
+        type: "line,words",
+      });
+      const splittedTextTitle = new SplitText(productTitle, {
+        type: "line,words",
+      });
+
+      gsap.set("#product-subtitle", { opacity: 1 });
+
+      let split: gsap.core.Tween;
+      SplitText.create("#product-subtitle", {
+        type: "words,lines",
+        linesClass: "line",
+        autoSplit: true,
+        mask: "lines",
+        onSplit: (self) => {
+          split = gsap.from(self.lines, {
+            duration: 0.6,
+            yPercent: 100,
+            opacity: 0,
+            stagger: 0.1,
+            ease: "expo.out",
+            paused: true,
+          });
+          return split;
+        },
+      });
+
+      const productLabelChars = splittedTextLabel.words;
+      const productTitleChars = splittedTextTitle.words;
+      // const productSubtitleChars = splittedTextSubtitle.words;
+
+      gsap.set(
+        [productLabelChars, productTitleChars, ".product-card", productFilters],
+        { opacity: 0 }
+      );
+
+      if (shopRoot) {
+        (shopRoot as any).playEntry = function () {
+          split.play(0);
+          return tl
+            .fromTo(
+              [productLabelChars, productTitleChars],
+              { yPercent: 100, opacity: 0 },
+              {
+                yPercent: 0,
+                opacity: 1,
+                stagger: 0.1,
+              }
+            )
+            .fromTo(
+              ".product-card",
+              { opacity: 0, y: -100 },
+              {
+                opacity: 1,
+                y: 0,
+                duration: 0.5,
+                ease: "power2.out",
+                stagger: 0.1,
+              },
+              "-=1"
+            )
+            .fromTo(
+              productFilters,
+              { opacity: 0, y: -20 },
+              {
+                opacity: 1,
+                y: 0,
+                duration: 0.5,
+                ease: "power2.out",
+              },
+              "-=1"
+            );
+        };
+
+        (shopRoot as any).playLeave = function () {
+          split.reverse();
+          return tl
+            .to([productLabelChars, productTitleChars], {
+              yPercent: -100,
+              opacity: 0,
+            })
+            .to(
+              ".product-card",
+              {
+                opacity: 0,
+                y: -100,
+                duration: 0.5,
+                ease: "power2.out",
+                stagger: 0.1,
+              },
+              "-=1"
+            )
+            .to(productFilters, { opacity: 0, y: -20 }, "-=1");
+        };
       }
-    )
-    .fromTo(
-      productFilters,
-      { opacity: 0, y: -20 },
-      {
-        opacity: 1,
-        y: 0,
-        duration: 0.5,
-        ease: "power2.out",
-      },
-      "-=0.3"
-    );
+    })
+    .catch((err) => {
+      console.warn("SplitText init failed:", err);
+    });
 </script>

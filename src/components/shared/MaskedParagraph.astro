@@ -1,0 +1,39 @@
+---
+const { className } = Astro.props;
+---
+
+<div class="container">
+  <p
+    class={`split opacity-0 font-copy text-lg/[26px] text-center overflow-hidden text-text-primary will-change-transform *:will-change-transform ${className}`}
+  >
+  </p>
+</div>
+
+<script>
+  import { gsap } from "gsap";
+  import { SplitText } from "gsap/SplitText";
+
+  gsap.registerPlugin(SplitText);
+
+  document.fonts.ready.then(() => {
+    gsap.set(".split", { opacity: 1 });
+
+    let split;
+    SplitText.create(".split", {
+      type: "words,lines",
+      linesClass: "line",
+      autoSplit: true,
+      mask: "lines",
+      onSplit: (self) => {
+        split = gsap.from(self.lines, {
+          duration: 0.6,
+          yPercent: 100,
+          opacity: 0,
+          stagger: 0.1,
+          ease: "expo.out",
+        });
+        return split;
+      },
+    });
+  });
+</script>

@@ -226,4 +226,26 @@ import Puppy3 from "@/assets/ingredients/03-puppy.gif";
       }
     },
   });
+
+  // Expose playEntry/playLeave on ingredients root for parent coordination
+  const ingredientsRoot = document.getElementById("ingredients");
+  if (ingredientsRoot) {
+    (ingredientsRoot as any).playEntry = function () {
+      return gsap.fromTo(
+        ingredientsRoot.querySelectorAll(".content > *"),
+        { opacity: 0, y: 20 },
+        { opacity: 1, y: 0, duration: 0.7, stagger: 0.05, ease: "power2.out" }
+      );
+    };
+
+    (ingredientsRoot as any).playLeave = function () {
+      return gsap.to(ingredientsRoot.querySelectorAll(".content > *"), {
+        opacity: 0,
+        y: -20,
+        duration: 0.5,
+        stagger: 0.03,
+        ease: "power2.in",
+      });
+    };
+  }
 </script>

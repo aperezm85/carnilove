@@ -63,11 +63,11 @@ import Dog3 from "@/assets/feed-nature/dog-part-3.gif";
   </section>
 </section>
 <script>
-  import { animateTitle } from "@/utils";
+  import { animateTitle, ensureFontsReady } from "@/utils";
   import { gsap } from "gsap";
   import { ScrollTrigger } from "gsap/ScrollTrigger";
-
-  gsap.registerPlugin(ScrollTrigger);
+  import { SplitText } from "gsap/SplitText";
+  gsap.registerPlugin(ScrollTrigger, SplitText);
 
   const trigger = document.getElementById("feed-their-nature");
   const feedTitle = document.getElementById("feed-their-nature-title");
@@ -81,85 +81,78 @@ import Dog3 from "@/assets/feed-nature/dog-part-3.gif";
     "video-feed-placeholder"
   );
 
-  animateTitle({ title: feedTitle, trigger });
-  animateTitle({ title: feedSubtitle, trigger });
-  animateTitle({ title: feedDescription, trigger });
+  const dog = document.getElementById("dog1");
 
   const tl = gsap.timeline({
     scrollTrigger: {
       trigger: trigger,
-      start: "top 50%",
-      end: "bottom 40%",
-      toggleActions: "play reverse restart reset",
+      start: "top center",
+      end: "bottom 95%",
     },
   });
+  animateTitle({ title: feedTitle, trigger });
+  animateTitle({ title: feedSubtitle, trigger });
+  animateTitle({ title: feedDescription, trigger });
 
-  if (videoFeedPlaceholder) {
-    tl.from(videoFeedPlaceholder, {
-      yPercent: 100,
-      opacity: 0,
-      ease: "back.out",
-    }).fromTo(
-      feedButton,
-      { opacity: 0, y: -20 },
-      {
-        opacity: 1,
-        y: 0,
-        duration: 0.5,
-        ease: "power2.out",
-      },
-      "-=0.3"
-    );
-  }
+  ensureFontsReady().then(() => {
+    if (trigger) {
+      (trigger as any).playEntry = function () {
+        return tl
+          .to(dog, {
+            duration: 0.1,
+            onComplete: () => {
+              document.getElementById("dog1")!.style.display = "block";
+              (document.getElementById("dog1") as HTMLImageElement).src = (
+                document.getElementById("dog1") as HTMLImageElement
+              ).getAttribute("data-dog1") as string;
+            },
+          })
 
-  ScrollTrigger.create({
-    trigger: trigger,
-    start: "top 5%",
-    onEnter: () => {
-      setTimeout(() => {
-        document.getElementById("dog1")!.style.display = "block";
-        (document.getElementById("dog1") as HTMLImageElement).src = (
-          document.getElementById("dog1") as HTMLImageElement
-        ).getAttribute("data-dog1") as string;
-      }, 500);
-    },
+          .fromTo(
+            videoFeedPlaceholder,
+            {
+              yPercent: 100,
+              opacity: 0,
+              ease: "back.out",
+            },
+            {
+              yPercent: 0,
+              opacity: 1,
+              duration: 1,
+              ease: "back.out",
+            }
+          )
+          .fromTo(
+            feedButton,
+            { opacity: 0, y: -20 },
+            {
+              opacity: 1,
+              y: 0,
+              duration: 0.5,
+              ease: "power2.out",
+            },
+            "-=0.3"
+          );
+      };
 
-    onEnterBack: () => {
-      setTimeout(() => {
-        document.getElementById("dog1")!.style.display = "block";
-        (document.getElementById("dog1") as HTMLImageElement).src = (
-          document.getElementById("dog1") as HTMLImageElement
-        ).getAttribute("data-dog1") as string;
-      }, 500);
-    },
-  });
-
-  // Pin section and swap GIFs on scroll
-  ScrollTrigger.create({
-    trigger: trigger,
-    start: "top top",
-    end: "+=50%", // Adjust based on GIF duration
-    // pin: true,
-    scrub: true,
-    onEnter: (self) => {
-      if (self.progress > 0.01) {
-        (document.getElementById("dog1") as HTMLImageElement).src = (
-          document.getElementById("dog1") as HTMLImageElement
-        ).getAttribute("data-dog3") as string;
-        setTimeout(() => {
-          document.getElementById("dog1")!.style.display = "none";
-        }, 2000);
-      }
-    },
-    onEnterBack: (self) => {
-      if (self.progress > 0.01) {
-        (document.getElementById("dog1") as HTMLImageElement).src = (
-          document.getElementById("dog1") as HTMLImageElement
-        ).getAttribute("data-dog3") as string;
-        setTimeout(() => {
-          document.getElementById("dog1")!.style.display = "none";
-        }, 2000);
-      }
-    },
+      (trigger as any).playLeave = async function () {
+        return tl
+          .to(dog, {
+            duration: 0.1,
+            onComplete: () => {
+              (document.getElementById("dog1") as HTMLImageElement).src = (
+                document.getElementById("dog1") as HTMLImageElement
+              ).getAttribute("data-dog3") as string;
+            },
+          })
+          .to(videoFeedPlaceholder, {
+            yPercent: -100,
+            opacity: 0,
+            ease: "back.in",
+            delay: 2,
+          })
+          .to(feedButton, { opacity: 0, y: 20 }, "-=0.3");
+      };
+    }
   });
 </script>

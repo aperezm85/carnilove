@@ -168,4 +168,33 @@ import Dog from "@/assets/faq/footer-dog.gif";
       }
     },
   });
+
+  // Expose playEntry/playLeave on FAQ root
+  const faqRoot = document.getElementById("FAQ");
+  if (faqRoot) {
+    (faqRoot as any).playEntry = function () {
+      return gsap.fromTo(
+        faqRoot.querySelectorAll(
+          "#faq_title, #faq_questions, #footer-dog, #footer-cat"
+        ),
+        { opacity: 0, y: 20 },
+        { opacity: 1, y: 0, duration: 0.7, stagger: 0.05, ease: "power2.out" }
+      );
+    };
+
+    (faqRoot as any).playLeave = function () {
+      return gsap.to(
+        faqRoot.querySelectorAll(
+          "#faq_title, #faq_questions, #footer-dog, #footer-cat"
+        ),
+        {
+          opacity: 0,
+          y: -20,
+          duration: 0.5,
+          stagger: 0.03,
+          ease: "power2.in",
+        }
+      );
+    };
+  }
 </script>

@@ -85,4 +85,29 @@ import Hero2 from "@/components/Hero/Hero2.astro";
     }
     currentSlide = nextSlide;
   }
+
+  // Expose playEntry/playLeave on the section root so parent can coordinate animations
+  const heroRoot = document.getElementById("hero");
+  if (heroRoot) {
+    (heroRoot as any).playEntry = function () {
+      // return gsap.fromTo(
+      //   heroRoot.querySelectorAll(".header, #hero-1, #hero-2, #buttons"),
+      //   { opacity: 0, y: 20 },
+      //   { opacity: 1, y: 0, duration: 0.6, stagger: 0.05, ease: "power2.out" }
+      // );
+    };
+
+    (heroRoot as any).playLeave = function () {
+      // return gsap.to(
+      //   heroRoot.querySelectorAll(".header, #hero-1, #hero-2, #buttons"),
+      //   {
+      //     opacity: 0,
+      //     y: -20,
+      //     duration: 0.5,
+      //     stagger: 0.03,
+      //     ease: "power2.in",
+      //   }
+      // );
+    };
+  }
 </script>
