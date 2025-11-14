@@ -71,10 +71,10 @@ import Filter from "@/components/shared/Filter.astro";
         type: "line,words",
       });
 
-      gsap.set("#product-subtitle", { opacity: 1 });
+      gsap.set(productSubtitle, { opacity: 1 });
 
       let split: gsap.core.Tween;
-      SplitText.create("#product-subtitle", {
+      SplitText.create(productSubtitle, {
         type: "words,lines",
         linesClass: "line",
         autoSplit: true,

@@ -13,18 +13,19 @@ import Dog3 from "@/assets/feed-nature/dog-part-3.gif";
   id="feed-their-nature"
   class="pin-section relative flex flex-row items-center justify-center h-dvh overflow-hidden w-full gap-6 z-3"
 >
-  <section
-    class="max-w-[1440px] w-[1440px] h-[1024px] relative mx-auto flex flex-row items-center justify-center"
-  >
+  <div class="absolute inset-0 w-full h-full overflow-hidden">
     <img
       data-dog1={Dog1.src}
       data-dog2={Dog2.src}
       data-dog3={Dog3.src}
       id="dog1"
-      class="aspect-640/354 absolute top-[390px] -left-[100px] z-2 scale-150"
+      class="aspect-640/354 z-2 bottom-[16%] -left-[8%] scale-200 absolute"
       src=""
     />
-
+  </div>
+  <section
+    class="max-w-[1440px] w-[1440px] relative mx-auto flex flex-row items-center justify-center h-full"
+  >
     <section class="flex flex-col max-w-[550px]">
       <DoubleHeading
         id="feed-their-nature-title"
@@ -93,6 +94,8 @@ import Dog3 from "@/assets/feed-nature/dog-part-3.gif";
   animateTitle({ title: feedTitle, trigger });
   animateTitle({ title: feedSubtitle, trigger });
   animateTitle({ title: feedDescription, trigger });
+
+  gsap.set(videoFeedPlaceholder, { opacity: 0, yPercent: 0 });
 
   ensureFontsReady().then(() => {
     if (trigger) {

@@ -99,17 +99,17 @@ import CatVideo from "@/assets/instincts/cat-video.mp4";
 <script>
   import { gsap } from "gsap";
   import { ScrollTrigger } from "gsap/ScrollTrigger";
+  import { SplitText } from "gsap/SplitText";
 
-  import { animateLabel, animateTitle } from "@/utils.js";
+  import { animateTitle, ensureFontsReady } from "@/utils.js";
 
-  gsap.registerPlugin(ScrollTrigger);
+  gsap.registerPlugin(ScrollTrigger, SplitText);
 
   const trigger = document.getElementById("instincts");
 
   const title = document.getElementById("instincts-title");
   const description = document.getElementById("instincts-description");
 
-  const buttons = document.getElementById("buttons-instincts");
   const benefit1 = document.getElementById("benefit1");
   const benefit2 = document.getElementById("benefit2");
   const benefit3 = document.getElementById("benefit3");
@@ -121,248 +121,262 @@ import CatVideo from "@/assets/instincts/cat-video.mp4";
 
   const instinctsVideo = document.getElementById("instincts-video");
 
-  animateTitle({ title, trigger, end: "bottom 95%" });
-  animateTitle({ title: description, trigger, end: "bottom 95%" });
+  ensureFontsReady().then(() => {
+    const splittedTextLabel = new SplitText(instinctsLabel, {
+      type: "line,words",
+    });
 
-  const tlLabel = gsap.timeline({
-    scrollTrigger: {
-      trigger: trigger,
-      start: "top center%",
-      end: "bottom 95%",
-      toggleActions: "play reverse play reverse",
-    },
-  });
+    const instinctsLabelChars = splittedTextLabel.words;
 
-  animateLabel(tlLabel, instinctsLabel);
+    gsap.set([instinctsLabelChars], { opacity: 0 });
 
-  const tlEntry = gsap.timeline({
-    scrollTrigger: {
-      trigger: "#instincts",
-      start: "top 30%",
-      end: "bottom bottom",
-      scrub: true,
-    },
-  });
-  tlEntry.from(foodPackages, {
-    xPercent: -100,
-    yPercent: 100,
-    opacity: 0,
-    ease: "back.out",
-  });
+    animateTitle({ title, trigger, end: "bottom 95%" });
+    animateTitle({ title: description, trigger, end: "bottom 95%" });
 
-  const leaveTimeline = gsap.timeline({
-    scrollTrigger: {
-      trigger: "#instincts",
-      start: "bottom 80%",
-      end: "bottom top",
-      scrub: 1,
-    },
-  });
-
-  leaveTimeline
-    .to("#instincts-carousel", {
-      opacity: 0,
-      yPercent: -100,
-      duration: 0.5,
-    })
-    .to(
-      foodPackages,
-      {
-        opacity: 0,
-        yPercent: 100,
-        xPercent: -100,
-        duration: 0.5,
+    const tlEntry = gsap.timeline({
+      scrollTrigger: {
+        trigger: "#instincts",
+        start: "top 30%",
+        end: "bottom bottom",
+        scrub: true,
       },
-      "<"
-    );
+    });
 
-  const tlButtons = gsap.timeline({
-    defaults: {
-      ease: "none",
-      duration: 1,
-    },
-  });
-
-  const tl = gsap.timeline({
-    scrollTrigger: {
-      trigger: "#instincts",
-      start: "top 60%",
-      end: "bottom bottom",
-      scrub: 1,
-    },
-  });
-
-  tl.from(benefit1, {
-    opacity: 0,
-    yPercent: 0,
-    xPercent: 100,
-    duration: 0.5,
-  });
-
-  let currentSlide = 0;
-  const numSlides = 3;
-  leftButton?.addEventListener("click", () => {
-    changeSlideInstincts((currentSlide - 1 + numSlides) % numSlides);
-  });
-
-  rightButton?.addEventListener("click", () => {
-    changeSlideInstincts((currentSlide + 1) % numSlides);
-  });
-
-  function changeSlideInstincts(nextSlide: number) {
-    if (nextSlide === 0) {
-      tlButtons
-        .fromTo(
-          benefit1,
-          {
-            opacity: 0,
-            yPercent: 0,
-            xPercent: -100,
-          },
-          {
-            opacity: 1,
-            yPercent: 0,
-            xPercent: 0,
-          }
-        )
-        .to(
-          benefit2,
-          {
-            opacity: 0,
-            yPercent: 0,
-            xPercent: -100,
-          },
-          "<"
-        )
-        .to(benefit3, {
-          opacity: 0,
+    tlEntry
+      .fromTo(
+        [instinctsLabelChars],
+        { yPercent: 100, opacity: 0 },
+        {
           yPercent: 0,
-          xPercent: -100,
-        });
-    } else if (nextSlide === 1) {
-      tlButtons
-        .to(benefit1, {
+          opacity: 1,
+          stagger: 0.1,
+        }
+      )
+      .from(foodPackages, {
+        xPercent: -100,
+        yPercent: 100,
+        opacity: 0,
+        ease: "back.out",
+      });
+
+    const leaveTimeline = gsap.timeline({
+      scrollTrigger: {
+        trigger: "#instincts",
+        start: "bottom 80%",
+        end: "bottom top",
+        scrub: 1,
+      },
+    });
+
+    leaveTimeline
+      .to("#instincts-carousel", {
+        opacity: 0,
+        yPercent: -100,
+        duration: 0.5,
+      })
+      .to(
+        foodPackages,
+        {
           opacity: 0,
-          yPercent: 0,
+          yPercent: 100,
           xPercent: -100,
-        })
-        .fromTo(
-          benefit2,
-          {
+          duration: 0.5,
+        },
+        "<"
+      );
+
+    const tlButtons = gsap.timeline({
+      defaults: {
+        ease: "none",
+        duration: 1,
+      },
+    });
+
+    const tl = gsap.timeline({
+      scrollTrigger: {
+        trigger: "#instincts",
+        start: "top 60%",
+        end: "bottom bottom",
+        scrub: 1,
+      },
+    });
+
+    tl.from(benefit1, {
+      opacity: 0,
+      yPercent: 0,
+      xPercent: 100,
+      duration: 0.5,
+    });
+
+    let currentSlide = 0;
+    const numSlides = 3;
+    leftButton?.addEventListener("click", () => {
+      changeSlideInstincts((currentSlide - 1 + numSlides) % numSlides);
+    });
+
+    rightButton?.addEventListener("click", () => {
+      changeSlideInstincts((currentSlide + 1) % numSlides);
+    });
+
+    function changeSlideInstincts(nextSlide: number) {
+      if (nextSlide === 0) {
+        tlButtons
+          .fromTo(
+            benefit1,
+            {
+              opacity: 0,
+              yPercent: 100,
+              xPercent: 0,
+            },
+            {
+              opacity: 1,
+              yPercent: 0,
+              xPercent: 0,
+            }
+          )
+          .to(
+            benefit2,
+            {
+              opacity: 0,
+              yPercent: 0,
+              xPercent: -100,
+            },
+            "<"
+          )
+          .to(
+            benefit3,
+            {
+              opacity: 0,
+              yPercent: 0,
+              xPercent: 100,
+            },
+            "<"
+          );
+      } else if (nextSlide === 1) {
+        tlButtons
+          .to(benefit1, {
             opacity: 0,
             yPercent: 0,
-            xPercent: -100,
-          },
-          {
-            opacity: 1,
-            yPercent: 0,
-            xPercent: 0,
-          },
-          "<"
-        )
-        .to(
-          benefit3,
-          {
+            xPercent: 100,
+          })
+          .fromTo(
+            benefit2,
+            {
+              opacity: 0,
+              yPercent: 100,
+              xPercent: 0,
+            },
+            {
+              opacity: 1,
+              yPercent: 0,
+              xPercent: 0,
+            },
+            "<"
+          )
+          .to(
+            benefit3,
+            {
+              opacity: 0,
+              yPercent: 0,
+              xPercent: -100,
+            },
+            "<"
+          );
+      } else if (nextSlide === 2) {
+        tlButtons
+          .to(benefit2, {
             opacity: 0,
             yPercent: 0,
-            xPercent: -100,
-          },
-          "<"
-        );
-    } else if (nextSlide === 2) {
-      tlButtons
-        .to(benefit2, {
-          opacity: 0,
-          yPercent: 0,
-          xPercent: -100,
-        })
-        .fromTo(
-          benefit3,
-          {
-            opacity: 0,
-            yPercent: 0,
-            xPercent: -100,
-          },
-          {
-            opacity: 1,
-            yPercent: 0,
-            xPercent: 0,
-          },
-          "<"
-        )
-        .to(
-          benefit1,
-          {
-            opacity: 0,
-            yPercent: 0,
-            xPercent: -100,
-          },
-          "<"
-        );
+            xPercent: 100,
+          })
+          .fromTo(
+            benefit3,
+            {
+              opacity: 0,
+              yPercent: 100,
+              xPercent: 0,
+            },
+            {
+              opacity: 1,
+              yPercent: 0,
+              xPercent: 0,
+            },
+            "<"
+          )
+          .to(
+            benefit1,
+            {
+              opacity: 0,
+              yPercent: 0,
+              xPercent: -100,
+            },
+            "<"
+          );
+      }
+      currentSlide = nextSlide;
     }
-    currentSlide = nextSlide;
-  }
 
-  // Expose playEntry/playLeave on the instincts root for parent coordination
-  const instinctsRoot = document.getElementById("instincts");
-  if (instinctsRoot) {
-    (instinctsRoot as any).playEntry = function () {
-      const tl2 = gsap.timeline();
-      return tl2
-        .to(
-          {},
-          {
-            duration: 0.1,
-            onStart: () => {
-              (instinctsVideo as HTMLVideoElement).currentTime = 0;
-              (instinctsVideo as HTMLVideoElement).play();
-            },
-          }
-        )
-        .to(
-          {},
-          {
-            duration: 4.3,
-          }
-        )
-        .to(
-          {},
-          {
-            duration: 0.1,
-            onStart: () => {
-              (instinctsVideo as HTMLVideoElement).pause();
-            },
-          }
-        );
-    };
+    // Expose playEntry/playLeave on the instincts root for parent coordination
+    const instinctsRoot = document.getElementById("instincts");
+    if (instinctsRoot) {
+      (instinctsRoot as any).playEntry = function () {
+        const tl2 = gsap.timeline();
+        return tl2
+          .to(
+            {},
+            {
+              duration: 0.1,
+              onStart: () => {
+                (instinctsVideo as HTMLVideoElement).currentTime = 0;
+                (instinctsVideo as HTMLVideoElement).play();
+              },
+            }
+          )
+          .to(
+            {},
+            {
+              duration: 4.3,
+            }
+          )
+          .to(
+            {},
+            {
+              duration: 0.1,
+              onStart: () => {
+                (instinctsVideo as HTMLVideoElement).pause();
+              },
+            }
+          );
+      };
 
-    (instinctsRoot as any).playLeave = function () {
-      const tl2 = gsap.timeline();
-      return tl2
-        .to(
-          {},
-          {
-            duration: 0.1,
-            onStart: () => {
-              (instinctsVideo as HTMLVideoElement).play();
-            },
-          }
-        )
-        .to(
-          {},
-          {
-            duration: 1.7,
-          }
-        )
-        .to(
-          {},
-          {
-            duration: 0.1,
-            onStart: () => {
-              (instinctsVideo as HTMLVideoElement).pause();
-            },
-          }
-        );
-    };
-  }
+      (instinctsRoot as any).playLeave = function () {
+        const tl2 = gsap.timeline();
+        return tl2
+          .to(
+            {},
+            {
+              duration: 0.1,
+              onStart: () => {
+                (instinctsVideo as HTMLVideoElement).play();
+              },
+            }
+          )
+          .to(
+            {},
+            {
+              duration: 1.7,
+            }
+          )
+          .to(
+            {},
+            {
+              duration: 0.1,
+              onStart: () => {
+                (instinctsVideo as HTMLVideoElement).pause();
+              },
+            }
+          );
+      };
+    }
+  });
 </script>
