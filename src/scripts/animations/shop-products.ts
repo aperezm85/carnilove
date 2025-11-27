@@ -11,6 +11,8 @@ let splittedTextLabel: SplitText,
   animation: GSAPTimeline;
 
 export function ShopEntryProductAnimation(element: Element) {
+  animation && animation.revert();
+
   splittedTextLabel && splittedTextLabel.revert();
   splittedTextTitle && splittedTextTitle.revert();
   splittedTextSubtitle && splittedTextSubtitle.revert();

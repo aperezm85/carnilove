@@ -12,6 +12,8 @@ let splittedTextLabel: SplitText,
   animation: GSAPTimeline;
 
 export function InstinctsEntryAnimation(element: Element) {
+  animation && animation.revert();
+
   splittedTextLabel && splittedTextLabel.revert();
   splittedTextTitle && splittedTextTitle.revert();
   splittedTextSubtitle && splittedTextSubtitle.revert();
@@ -204,6 +206,8 @@ function carousel() {
   const leftButton = document.getElementById("left-button-instincts");
   const rightButton = document.getElementById("right-button-instincts");
 
+  if (!benefit1 || !benefit2 || !benefit3) return;
+
   const tlButtons = gsap.timeline({
     defaults: {
       ease: "none",
@@ -211,7 +215,7 @@ function carousel() {
     },
   });
 
-  const tl = gsap.timeline({});
+  const tl = gsap.timeline();
 
   tl.from(benefit1, {
     opacity: 0,

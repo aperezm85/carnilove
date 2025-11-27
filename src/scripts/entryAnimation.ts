@@ -12,9 +12,27 @@ import {
 } from "./animations/shop-products";
 
 import {
+  IngredientsEntryAnimation,
+  IngredientsExitAnimation,
+} from "./animations/ingredients";
+import {
   InstinctsEntryAnimation,
   InstinctsExitAnimation,
 } from "./animations/instincts";
+
+import {
+  FindYourPathEntryAnimation,
+  FindYourPathExitAnimation,
+} from "./animations/find-your-path";
+
+import {
+  NourishmentEntryAnimation,
+  NourishmentExitAnimation,
+} from "./animations/nourishment";
+import {
+  TrustedEntryAnimation,
+  TrustedExitAnimation,
+} from "./animations/trusted";
 
 gsap.registerPlugin(ScrollTrigger, SplitText);
 
@@ -30,6 +48,14 @@ export function getEntryAnimation(element: Element) {
       return FeedTheirNatureEntryAnimation(element);
     case "instincts":
       return InstinctsEntryAnimation(element);
+    case "ingredients":
+      return IngredientsEntryAnimation(element);
+    case "find-your-path":
+      return FindYourPathEntryAnimation(element);
+    case "trusted":
+      return TrustedEntryAnimation(element);
+    case "nourishment":
+      return NourishmentEntryAnimation(element);
   }
   return noAnimation(element);
 }
@@ -42,6 +68,14 @@ export function getExitAnimation(element: Element) {
       return FeedTheirNatureExitAnimation(element);
     case "instincts":
       return InstinctsExitAnimation(element);
+    case "ingredients":
+      return IngredientsExitAnimation(element);
+    case "find-your-path":
+      return FindYourPathExitAnimation(element);
+    case "trusted":
+      return TrustedExitAnimation(element);
+    case "nourishment":
+      return NourishmentExitAnimation(element);
   }
   return noAnimation(element);
 }

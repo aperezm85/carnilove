@@ -6,7 +6,11 @@ import { SplitText } from "gsap/SplitText";
 // Register GSAP plugins
 gsap.registerPlugin(ScrollTrigger, SplitText);
 
+let animation: GSAPTimeline;
+
 export function FeedTheirNatureEntryAnimation(element: Element) {
+  animation && animation.revert();
+
   const feedTitle = element.querySelector("#feed-their-nature-title");
   const feedSubtitle = element.querySelector("#feed-their-nature-subtitle");
   const feedDescription = element.querySelector(
@@ -18,7 +22,6 @@ export function FeedTheirNatureEntryAnimation(element: Element) {
 
   const dog = element.querySelector("#dog1");
 
-  const tl = gsap.timeline();
   animateTextWaveIn({
     title: feedTitle as HTMLElement,
   });
@@ -31,7 +34,8 @@ export function FeedTheirNatureEntryAnimation(element: Element) {
 
   gsap.set(videoFeedPlaceholder, { opacity: 0, yPercent: 0 });
 
-  return tl
+  animation = gsap
+    .timeline()
     .to(dog, {
       duration: 0.1,
       onComplete: () => {
@@ -67,6 +71,8 @@ export function FeedTheirNatureEntryAnimation(element: Element) {
       },
       "-=0.3"
     );
+
+  return animation;
 }
 
 export function FeedTheirNatureExitAnimation(element: Element) {
@@ -76,8 +82,8 @@ export function FeedTheirNatureExitAnimation(element: Element) {
 
   const dog = element.querySelector("#dog1");
 
-  const tl = gsap.timeline();
-  return tl
+  animation = gsap.timeline();
+  return animation
     .to(dog, {
       duration: 0.1,
       onComplete: () => {

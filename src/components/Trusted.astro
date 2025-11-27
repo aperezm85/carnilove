@@ -7,7 +7,7 @@ import ParallaxSection from "./ParallaxSection.astro";
 ---
 
 <ParallaxSection id="trusted" class="items-center pt-[78px]">
-  <section class="content">
+  <section class="content flex flex-col w-full items-center justify-center">
     <h1
       id="trusted-title"
       class:list={[
@@ -37,72 +37,4 @@ import ParallaxSection from "./ParallaxSection.astro";
       <BentoGridCarousel />
     </section>
   </section>
-
-  <!-- <script>
-    import { animateTitle } from "@/utils";
-    import { gsap } from "gsap";
-    import { ScrollTrigger } from "gsap/ScrollTrigger";
-
-    gsap.registerPlugin(ScrollTrigger);
-
-    const trusted = document.getElementById("trusted");
-
-    const trustedTitle = document.getElementById("trusted-title");
-    const trustedDescription = document.getElementById("trusted-description");
-
-    const trustedButton = document.getElementById("trusted-button");
-    const bentoContainer = document.getElementById("bento-container");
-
-    animateTitle({
-      title: trustedTitle,
-      trigger: trusted,
-      end: "bottom 95%",
-    });
-    animateTitle({
-      title: trustedDescription,
-      trigger: trusted,
-      end: "bottom 95%",
-    });
-
-    const tl = gsap.timeline({
-      scrollTrigger: {
-        trigger: trusted,
-        start: "top 80%",
-        end: "bottom 95%",
-        toggleActions: "play reverse restart reset",
-      },
-    });
-
-    // Expose playEntry/playLeave on the trusted section
-    const trustedRoot = document.getElementById("trusted");
-    if (trustedRoot) {
-      (trustedRoot as any).playEntry = function () {
-        return;
-      };
-
-      (trustedRoot as any).playLeave = function () {
-        return;
-      };
-    }
-    tl.fromTo(
-      trustedButton,
-      { opacity: 0, y: -20 },
-      {
-        opacity: 1,
-        y: 0,
-        duration: 0.5,
-        ease: "power2.out",
-      }
-    ).fromTo(
-      bentoContainer,
-      { yPercent: 100, opacity: 0 },
-      {
-        yPercent: 0,
-        opacity: 1,
-        duration: 1,
-        ease: "power2.out",
-      },
-      "-=0.3"
-    );
-  </script> -->
 </ParallaxSection>

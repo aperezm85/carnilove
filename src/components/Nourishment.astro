@@ -11,19 +11,21 @@ import Filter from "./shared/Filter.astro";
 
 <ParallaxSection
   id="nourishment"
-  class="items-center h-auto overflow-auto pt-[78px]"
+  class="items-center h-dvh overflow-y-auto pt-[78px] scroll-smooth parallax-section--tall"
 >
-  <section class="content">
+  <section
+    class="content flex flex-col w-full items-center justify-center min-h-auto pb-[10vh]"
+  >
     <h1
       id="nourishment-title"
       class:list={[
         "font-large-heading text-[60px]/[80%] text-center text-text-primary overflow-hidden uppercase",
-        "max-w-[516px] mt-6",
+        "max-w-[550px] mt-6",
       ]}
     >
       Nourishment for Every Stage of Their Wild Life
     </h1>
-    <Subtitle id="nourishment-description" className="max-w-[516px] mt-5">
+    <Subtitle id="nourishment-description" className="max-w-[600px] mt-5">
       Discover stories, science, and practical tips inspired by nature — helping
       you feed, train, and care for your four-legged explorer the natural way.
     </Subtitle>
@@ -157,41 +159,3 @@ import Filter from "./shared/Filter.astro";
     </section>
   </section>
 </ParallaxSection>
-
-<!-- <script>
-  import { animateTitle } from "@/utils";
-  import { gsap } from "gsap";
-  import { ScrollTrigger } from "gsap/ScrollTrigger";
-
-  gsap.registerPlugin(ScrollTrigger);
-
-  const nourishment = document.getElementById("nourishment");
-
-  const nourishmentTitle = document.getElementById("nourishment-title");
-  const nourishmentDescription = document.getElementById(
-    "nourishment-description"
-  );
-
-  animateTitle({
-    title: nourishmentTitle,
-    trigger: nourishment,
-    end: "bottom 95%",
-  });
-  animateTitle({
-    title: nourishmentDescription,
-    trigger: nourishment,
-    end: "bottom 95%",
-  });
-
-  // Expose playEntry/playLeave for parent coordination
-  const fromWildRoot = document.getElementById("nourishment");
-  if (fromWildRoot) {
-    (fromWildRoot as any).playEntry = function () {
-      return;
-    };
-
-    (fromWildRoot as any).playLeave = function () {
-      return;
-    };
-  }
-</script> -->
