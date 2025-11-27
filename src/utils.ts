@@ -48,13 +48,7 @@ export const animateTitle = ({
           stagger: 0.02,
           opacity: 0,
           ease: "back.out",
-          // duration: 1,
-          scrollTrigger: {
-            trigger: trigger || title,
-            start: start,
-            end: end,
-            toggleActions: "play reverse restart restart",
-          },
+          duration: 0.5,
         });
       } catch (err) {
         // If SplitText fails for any reason, log and bail gracefully

@@ -1,15 +1,13 @@
 ---
-import Subtitle from "@/components/shared/Subtitle.astro";
 import ButtonRed from "@/components/shared/ButtonRed.astro";
+import Subtitle from "@/components/shared/Subtitle.astro";
 import WildCards from "@/components/WildCards/WildCards.astro";
 
 import EastIcon from "@/assets/icons/east.svg";
+import ParallaxSection from "./ParallaxSection.astro";
 ---
 
-<section
-  id="from-the-wild"
-  class="pin-section relative flex flex-col items-center h-dvh overflow-hidden w-full pt-[78px] z-9"
->
+<ParallaxSection id="from-the-wild" class="items-center pt-[78px]">
   <section class="content">
     <h1
       id="from-the-wild-title"
@@ -34,8 +32,8 @@ import EastIcon from "@/assets/icons/east.svg";
       Read more from the wild <EastIcon class="w-6 h-6" />
     </ButtonRed>
   </section>
-</section>
-<script>
+</ParallaxSection>
+<!-- <script>
   import { animateTitle } from "@/utils";
   import { gsap } from "gsap";
   import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -71,4 +69,4 @@ import EastIcon from "@/assets/icons/east.svg";
       return;
     };
   }
-</script>
+</script> -->

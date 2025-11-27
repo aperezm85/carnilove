@@ -13,12 +13,10 @@ import HalfBowlImage from "@/assets/ingredients/half-bowl.png";
 import Puppy1 from "@/assets/ingredients/01-puppy.gif";
 import Puppy2 from "@/assets/ingredients/02-puppy.png";
 import Puppy3 from "@/assets/ingredients/03-puppy.gif";
+import ParallaxSection from "@/components/ParallaxSection.astro";
 ---
 
-<section
-  id="ingredients"
-  class="pin-section relative flex flex-col items-center h-dvh overflow-hidden w-full pt-[78px] z-5"
->
+<ParallaxSection id="ingredients" class="items-center pt-[78px]">
   <section class="content">
     <Label id="ingredients-label">From Wild Origins to Real Nutrition</Label>
     <Title id="ingredients-title" className="mt-3">
@@ -86,9 +84,9 @@ import Puppy3 from "@/assets/ingredients/03-puppy.gif";
       />
     </section>
   </section>
-</section>
+</ParallaxSection>
 
-<script>
+<!-- <script>
   import { animateTitle, ensureFontsReady } from "@/utils";
   import { gsap } from "gsap";
   import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -232,4 +230,4 @@ import Puppy3 from "@/assets/ingredients/03-puppy.gif";
       };
     }
   });
-</script>
+</script> -->

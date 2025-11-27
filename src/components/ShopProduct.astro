@@ -5,163 +5,37 @@ import All from "@/assets/shop_product/all-food.png";
 import DryFood from "@/assets/shop_product/dry-food.png";
 import Snacks from "@/assets/shop_product/snack-food.png";
 import WetFood from "@/assets/shop_product/wet-food.png";
+import ParallaxSection from "@/components/ParallaxSection.astro";
+import Filter from "@/components/shared/Filter.astro";
 import Label from "@/components/shared/Label.astro";
 import Subtitle from "@/components/shared/Subtitle.astro";
 import Title from "@/components/shared/Title.astro";
-import Filter from "@/components/shared/Filter.astro";
 ---
 
-<section
+<ParallaxSection
   id="shop-by-product"
-  class="pin-section relative flex flex-col items-center h-dvh overflow-hidden w-full pt-[78px] z-2"
+  class="relative items-center text-center pt-[78px]"
 >
-  <section class="content">
-    <Label id="product-label">honour the bond</Label>
-    <Title id="product-title" className="mt-6"> Shop by Products </Title>
-    <Subtitle id="product-subtitle" className="max-w-[570px] mt-[30px]">
-      Lorem ipsum dolor sit amet, consectetur adipiscing elit etiam sit amet
-      finibus nunc. Aenean ut est egestas.
-    </Subtitle>
+  <Label id="product-label">honour the bond</Label>
+  <Title id="product-title" className="mt-6"> Shop by Products </Title>
+  <Subtitle id="product-subtitle" className="max-w-[570px] mt-[30px] mx-auto">
+    Lorem ipsum dolor sit amet, consectetur adipiscing elit etiam sit amet
+    finibus nunc. Aenean ut est egestas.
+  </Subtitle>
 
-    <Filter
-      id="product-filters"
-      className="mt-[35px] flex flex-row gap-2.5 items-center justify-center"
-      items={["DOGS", "CATS"]}
-    />
+  <Filter
+    id="product-filters"
+    className="mt-[35px] flex flex-row gap-2.5 items-center justify-center"
+    items={["DOGS", "CATS"]}
+  />
 
-    <section id="products" class="flex flex-row gap-5 mt-12">
-      <ProductCard title="Dry food" image={DryFood.src} />
-      <ProductCard title="Wet food" image={WetFood.src} />
-      <ProductCard title="Snacks" image={Snacks.src} />
-      <ProductCard title="All" image={All.src} />
-    </section>
+  <section
+    id="products"
+    class="flex flex-row gap-5 mt-12 mx-auto items-center w-full justify-center"
+  >
+    <ProductCard title="Dry food" image={DryFood.src} />
+    <ProductCard title="Wet food" image={WetFood.src} />
+    <ProductCard title="Snacks" image={Snacks.src} />
+    <ProductCard title="All" image={All.src} />
   </section>
-</section>
-<script>
-  import { ensureFontsReady } from "@/utils";
-  import { gsap } from "gsap";
-  import { ScrollTrigger } from "gsap/ScrollTrigger";
-  import { SplitText } from "gsap/SplitText";
-  gsap.registerPlugin(ScrollTrigger, SplitText);
-
-  const productTitle = document.getElementById("product-title");
-  const productSubtitle = document.getElementById("product-subtitle");
-  const productLabel = document.getElementById("product-label");
-  const productFilters = document.getElementById("product-filters");
-
-  const trigger = document.getElementById("shop-by-product");
-
-  const tl = gsap.timeline({
-    scrollTrigger: {
-      trigger: trigger,
-      start: "top center",
-      end: "bottom 95%",
-    },
-  });
-
-  const shopRoot = document.getElementById("shop-by-product");
-
-  // Defer SplitText creation until fonts are loaded to avoid the SplitText warning
-  ensureFontsReady()
-    .then(() => {
-      const splittedTextLabel = new SplitText(productLabel, {
-        type: "line,words",
-      });
-      const splittedTextTitle = new SplitText(productTitle, {
-        type: "line,words",
-      });
-
-      gsap.set(productSubtitle, { opacity: 1 });
-
-      let split: gsap.core.Tween;
-      SplitText.create(productSubtitle, {
-        type: "words,lines",
-        linesClass: "line",
-        autoSplit: true,
-        mask: "lines",
-        onSplit: (self) => {
-          split = gsap.from(self.lines, {
-            duration: 0.6,
-            yPercent: 100,
-            opacity: 0,
-            stagger: 0.1,
-            ease: "expo.out",
-            paused: true,
-          });
-          return split;
-        },
-      });
-
-      const productLabelChars = splittedTextLabel.words;
-      const productTitleChars = splittedTextTitle.words;
-      // const productSubtitleChars = splittedTextSubtitle.words;
-
-      gsap.set(
-        [productLabelChars, productTitleChars, ".product-card", productFilters],
-        { opacity: 0 }
-      );
-
-      if (shopRoot) {
-        (shopRoot as any).playEntry = function () {
-          split.play(0);
-          return tl
-            .fromTo(
-              [productLabelChars, productTitleChars],
-              { yPercent: 100, opacity: 0 },
-              {
-                yPercent: 0,
-                opacity: 1,
-                stagger: 0.1,
-              }
-            )
-            .fromTo(
-              ".product-card",
-              { opacity: 0, y: -100 },
-              {
-                opacity: 1,
-                y: 0,
-                duration: 0.5,
-                ease: "power2.out",
-                stagger: 0.1,
-              },
-              "-=1"
-            )
-            .fromTo(
-              productFilters,
-              { opacity: 0, y: -20 },
-              {
-                opacity: 1,
-                y: 0,
-                duration: 0.5,
-                ease: "power2.out",
-              },
-              "-=1"
-            );
-        };
-
-        (shopRoot as any).playLeave = function () {
-          split.reverse();
-          return tl
-            .to([productLabelChars, productTitleChars], {
-              yPercent: -100,
-              opacity: 0,
-            })
-            .to(
-              ".product-card",
-              {
-                opacity: 0,
-                y: -100,
-                duration: 0.5,
-                ease: "power2.out",
-                stagger: 0.1,
-              },
-              "-=1"
-            )
-            .to(productFilters, { opacity: 0, y: -20 }, "-=1");
-        };
-      }
-    })
-    .catch((err) => {
-      console.warn("SplitText init failed:", err);
-    });
-</script>
+</ParallaxSection>

@@ -5,12 +5,13 @@ import Snacks from "@/assets/shop_product/snack-food.png";
 import WetFood from "@/assets/shop_product/wet-food.png";
 import FullProductCard from "@/components/shared/FullProductCard.astro";
 import Subtitle from "@/components/shared/Subtitle.astro";
+import ParallaxSection from "./ParallaxSection.astro";
 import Filter from "./shared/Filter.astro";
 ---
 
-<section
+<ParallaxSection
   id="nourishment"
-  class="pin-section relative flex flex-col items-center h-auto overflow-auto w-full pt-[78px] z-9"
+  class="items-center h-auto overflow-auto pt-[78px]"
 >
   <section class="content">
     <h1
@@ -155,9 +156,9 @@ import Filter from "./shared/Filter.astro";
       />
     </section>
   </section>
-</section>
+</ParallaxSection>
 
-<script>
+<!-- <script>
   import { animateTitle } from "@/utils";
   import { gsap } from "gsap";
   import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -193,4 +194,4 @@ import Filter from "./shared/Filter.astro";
       return;
     };
   }
-</script>
+</script> -->

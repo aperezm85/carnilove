@@ -4,11 +4,12 @@ import Accordion from "@/components/shared/Accordion.astro";
 
 import Cat from "@/assets/faq/footer-cat.gif";
 import Dog from "@/assets/faq/footer-dog.gif";
+import ParallaxSection from "./ParallaxSection.astro";
 ---
 
-<section
+<ParallaxSection
   id="FAQ"
-  class="pin-section w-full bg-text-secondary text-text-invert min-h-dvh flex flex-col justify-between z-20 relative overflow-auto"
+  class="w-full bg-text-secondary text-text-invert min-h-dvh flex flex-col justify-between relative overflow-auto"
 >
   <div class="relative grow">
     <div
@@ -72,9 +73,9 @@ import Dog from "@/assets/faq/footer-dog.gif";
     </div>
   </div>
   <Footer />
-</section>
+</ParallaxSection>
 
-<script>
+<!-- <script>
   import { gsap } from "gsap";
 
   import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -185,4 +186,4 @@ import Dog from "@/assets/faq/footer-dog.gif";
       return;
     };
   }
-</script>
+</script> -->

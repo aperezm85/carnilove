@@ -4,12 +4,10 @@ import Card from "@/components/shared/Card.astro";
 import Arrow1 from "@/assets/find-path/arrow-1.png";
 import Arrow2 from "@/assets/find-path/arrow-2.png";
 import Arrow3 from "@/assets/find-path/arrow-3.png";
+import ParallaxSection from "@/components/ParallaxSection.astro";
 ---
 
-<section
-  id="find-your-path"
-  class="pin-section relative h-dvh overflow-hidden w-full z-6"
->
+<ParallaxSection id="find-your-path" class="">
   <section class="content">
     <section
       id="title"
@@ -75,9 +73,9 @@ import Arrow3 from "@/assets/find-path/arrow-3.png";
       className="absolute top-[332px] left-[1070px]"
     />
   </section>
-</section>
+</ParallaxSection>
 
-<script>
+<!-- <script>
   import { animateTitle } from "@/utils";
   import { gsap } from "gsap";
   import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -144,4 +142,4 @@ import Arrow3 from "@/assets/find-path/arrow-3.png";
       },
       "-=2"
     );
-</script>
+</script> -->

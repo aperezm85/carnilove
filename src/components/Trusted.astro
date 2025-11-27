@@ -1,14 +1,12 @@
 ---
 import Subtitle from "@/components/shared/Subtitle.astro";
 
-import ButtonRed from "@/components/shared/ButtonRed.astro";
 import BentoGridCarousel from "@/components/BentoGridCarousel/BentoGridCarousel.astro";
+import ButtonRed from "@/components/shared/ButtonRed.astro";
+import ParallaxSection from "./ParallaxSection.astro";
 ---
 
-<section
-  id="trusted"
-  class="pin-section relative flex flex-col items-center h-dvh overflow-hidden w-full pt-[78px] z-8"
->
+<ParallaxSection id="trusted" class="items-center pt-[78px]">
   <section class="content">
     <h1
       id="trusted-title"
@@ -40,7 +38,7 @@ import BentoGridCarousel from "@/components/BentoGridCarousel/BentoGridCarousel.
     </section>
   </section>
 
-  <script>
+  <!-- <script>
     import { animateTitle } from "@/utils";
     import { gsap } from "gsap";
     import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -106,5 +104,5 @@ import BentoGridCarousel from "@/components/BentoGridCarousel/BentoGridCarousel.
       },
       "-=0.3"
     );
-  </script>
-</section>
+  </script> -->
+</ParallaxSection>

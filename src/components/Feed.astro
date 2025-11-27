@@ -3,16 +3,14 @@ import EastIcon from "@/assets/icons/east.svg";
 import ButtonRed from "@/components/shared/ButtonRed.astro";
 import DoubleHeading from "@/components/shared/DoubleHeading.astro";
 
-import Placeholder from "@/assets/feed-nature/video-placeholder.png";
 import Dog1 from "@/assets/feed-nature/dog-part-1.gif";
 import Dog2 from "@/assets/feed-nature/dog-part-2.gif";
 import Dog3 from "@/assets/feed-nature/dog-part-3.gif";
+import Placeholder from "@/assets/feed-nature/video-placeholder.png";
+import ParallaxSection from "./ParallaxSection.astro";
 ---
 
-<section
-  id="feed-their-nature"
-  class="pin-section relative flex flex-row items-center justify-center h-dvh overflow-hidden w-full gap-6 z-3"
->
+<ParallaxSection id="feed-their-nature" class="">
   <div class="absolute inset-0 w-full h-full overflow-hidden">
     <img
       data-dog1={Dog1.src}
@@ -62,100 +60,4 @@ import Dog3 from "@/assets/feed-nature/dog-part-3.gif";
       class="aspect-433/532 w-[433px] h-[532px] absolute top-[217px] left-[937px] object-cover object-center"
     />
   </section>
-</section>
-<script>
-  import { animateTitle, ensureFontsReady } from "@/utils";
-  import { gsap } from "gsap";
-  import { ScrollTrigger } from "gsap/ScrollTrigger";
-  import { SplitText } from "gsap/SplitText";
-  gsap.registerPlugin(ScrollTrigger, SplitText);
-
-  const trigger = document.getElementById("feed-their-nature");
-  const feedTitle = document.getElementById("feed-their-nature-title");
-  const feedSubtitle = document.getElementById("feed-their-nature-subtitle");
-  const feedDescription = document.getElementById(
-    "feed-their-nature-description"
-  );
-  const feedButton = document.getElementById("feed-button");
-
-  const videoFeedPlaceholder = document.getElementById(
-    "video-feed-placeholder"
-  );
-
-  const dog = document.getElementById("dog1");
-
-  const tl = gsap.timeline({
-    scrollTrigger: {
-      trigger: trigger,
-      start: "top center",
-      end: "bottom 95%",
-    },
-  });
-  animateTitle({ title: feedTitle, trigger });
-  animateTitle({ title: feedSubtitle, trigger });
-  animateTitle({ title: feedDescription, trigger });
-
-  gsap.set(videoFeedPlaceholder, { opacity: 0, yPercent: 0 });
-
-  ensureFontsReady().then(() => {
-    if (trigger) {
-      (trigger as any).playEntry = function () {
-        return tl
-          .to(dog, {
-            duration: 0.1,
-            onComplete: () => {
-              document.getElementById("dog1")!.style.display = "block";
-              (document.getElementById("dog1") as HTMLImageElement).src = (
-                document.getElementById("dog1") as HTMLImageElement
-              ).getAttribute("data-dog1") as string;
-            },
-          })
-
-          .fromTo(
-            videoFeedPlaceholder,
-            {
-              yPercent: 100,
-              opacity: 0,
-              ease: "back.out",
-            },
-            {
-              yPercent: 0,
-              opacity: 1,
-              duration: 1,
-              ease: "back.out",
-            }
-          )
-          .fromTo(
-            feedButton,
-            { opacity: 0, y: -20 },
-            {
-              opacity: 1,
-              y: 0,
-              duration: 0.5,
-              ease: "power2.out",
-            },
-            "-=0.3"
-          );
-      };
-
-      (trigger as any).playLeave = async function () {
-        return tl
-          .to(dog, {
-            duration: 0.1,
-            onComplete: () => {
-              (document.getElementById("dog1") as HTMLImageElement).src = (
-                document.getElementById("dog1") as HTMLImageElement
-              ).getAttribute("data-dog3") as string;
-            },
-          })
-          .to(videoFeedPlaceholder, {
-            yPercent: -100,
-            opacity: 0,
-            ease: "back.in",
-            delay: 2,
-          })
-          .to(feedButton, { opacity: 0, y: 20 }, "-=0.3");
-      };
-    }
-  });
-</script>
+</ParallaxSection>

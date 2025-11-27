@@ -1,20 +1,17 @@
 ---
 import FAQ from "@/components/FAQ.astro";
-import Feed from "@/components/Feed.astro";
 import FindYourPath from "@/components/FindYourPath.astro";
 import FromTheWild from "@/components/FromTheWild.astro";
-
 import Hero from "@/components/Hero/Hero.astro";
 import Ingredients from "@/components/Ingredients.astro";
 import Instincts from "@/components/Instincts.astro";
 import Nourishment from "@/components/Nourishment.astro";
-import ShopProduct from "@/components/ShopProduct.astro";
 import Trusted from "@/components/Trusted.astro";
 import Layout from "@/layouts/Layout.astro";
 ---
 
-<Layout>
-  <section
+<Layout title="Carnilove | Home">
+  <!-- <section
     id="savannah"
     class="fixed inset-0 pointer-events-none z-2 opacity-0 top-[50%]"
     style="background-image: url('/savannah-large.png'); background-size: cover; background-position: center bottom;"
@@ -31,11 +28,11 @@ import Layout from "@/layouts/Layout.astro";
     class="fixed inset-0 pointer-events-none z-2 opacity-0 top-[0%]"
     style="background-image: url('/forest.png'); background-size: cover; background-position: center bottom;"
   >
-  </section>
+  </section> -->
 
   <Hero />
-  <ShopProduct />
-  <Feed />
+  <!-- <ShopProduct /> -->
+  <!-- <Feed /> -->
   <Instincts />
   <Ingredients />
   <FindYourPath />
@@ -45,7 +42,7 @@ import Layout from "@/layouts/Layout.astro";
   <FAQ />
 </Layout>
 
-<script>
+<!-- <script>
   import { gsap } from "gsap";
   import { ScrollToPlugin } from "gsap/ScrollToPlugin";
   import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -372,4 +369,4 @@ import Layout from "@/layouts/Layout.astro";
       opacity: 0,
       ease: "none",
     });
-</script>
+</script> -->
