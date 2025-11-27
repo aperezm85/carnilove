@@ -13,6 +13,11 @@ import Filter from "./shared/Filter.astro";
   id="nourishment"
   class="items-center h-dvh overflow-y-auto scroll-smooth parallax-section--tall"
   contentClass="pt-[78px]"
+  bgPosition={[
+    { y: 100, opacity: 0 },
+    { y: 100, opacity: 0, scale: 1 },
+    { y: 0, opacity: 0.75, scale: 1 },
+  ]}
 >
   <section
     class="content flex flex-col w-full items-center justify-center min-h-auto pb-[10vh]"

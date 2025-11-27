@@ -1,15 +1,16 @@
 ---
 interface BgPosition {
-  x: number;
-  y: number;
-  scale: number;
+  x?: number;
+  y?: number;
+  scale?: number;
+  opacity?: number;
 }
 
 interface Props {
   id: string;
   class?: string;
   contentClass?: string;
-  bgPosition?: BgPosition;
+  bgPosition?: BgPosition[];
 }
 
 const {
@@ -31,7 +32,10 @@ const {
   id={id}
 >
   <div
-    class:list={["section-content relative z-2 w-full h-full", contentClass]}
+    class:list={[
+      "section-content relative z-2 w-full h-full overflow-x-hidden",
+      contentClass,
+    ]}
   >
     <slot />
   </div>

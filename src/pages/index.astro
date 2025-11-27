@@ -13,24 +13,29 @@ import Layout from "@/layouts/Layout.astro";
 ---
 
 <Layout title="Carnilove | Home">
-  <!-- <section
-    id="savannah"
-    class="fixed inset-0 pointer-events-none z-2 opacity-0 top-[50%]"
-    style="background-image: url('/savannah-large.png'); background-size: cover; background-position: center bottom;"
+  <div
+    id="parallax-bg"
+    class="fixed top-0 left-0 w-full h-full pointer-events-none z-1 overflow-hidden"
   >
-  </section>
-  <section
-    id="rocks"
-    class="fixed inset-0 pointer-events-none z-2 opacity-0 top-[50%]"
-    style="background-image: url('/rock-and-grass.png'); background-size: cover; background-position: center bottom;"
-  >
-  </section>
-  <section
-    id="forest"
-    class="fixed inset-0 pointer-events-none z-2 opacity-0 top-[0%]"
-    style="background-image: url('/forest.png'); background-size: cover; background-position: center bottom;"
-  >
-  </section> -->
+    <section
+      id="savannah"
+      class="fixed inset-0 pointer-events-none z-2 opacity-0 top-0"
+      style="background-image: url('/savannah-large.png'); background-size: cover; background-position: center bottom;"
+    >
+    </section>
+    <section
+      id="rocks"
+      class="fixed inset-0 pointer-events-none z-2 opacity-0 top-[50%]"
+      style="background-image: url('/rock-and-grass.png'); background-size: cover; background-position: center bottom;"
+    >
+    </section>
+    <section
+      id="forest"
+      class="fixed inset-0 pointer-events-none z-2 opacity-0 top-[0%]"
+      style="background-image: url('/forest.png'); background-size: auto; "
+    >
+    </section>
+  </div>
 
   <Hero />
   <ShopProduct />

@@ -10,7 +10,14 @@ import Placeholder from "@/assets/feed-nature/video-placeholder.png";
 import ParallaxSection from "./ParallaxSection.astro";
 ---
 
-<ParallaxSection id="feed-their-nature" class="">
+<ParallaxSection
+  id="feed-their-nature"
+  bgPosition={[
+    { y: 15, opacity: 0.9 },
+    { y: 100, opacity: 0 },
+    { y: 100, opacity: 0 },
+  ]}
+>
   <div class="absolute inset-0 w-full h-full overflow-hidden">
     <img
       data-dog1={Dog1.src}

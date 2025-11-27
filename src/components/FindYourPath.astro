@@ -7,7 +7,15 @@ import Arrow3 from "@/assets/find-path/arrow-3.png";
 import ParallaxSection from "@/components/ParallaxSection.astro";
 ---
 
-<ParallaxSection id="find-your-path" class="">
+<ParallaxSection
+  id="find-your-path"
+  class=""
+  bgPosition={[
+    { y: 15, opacity: 0.75 },
+    { y: 0, opacity: 1, scale: 1.5 },
+    { y: 100, opacity: 0 },
+  ]}
+>
   <section class="content">
     <section
       id="title"

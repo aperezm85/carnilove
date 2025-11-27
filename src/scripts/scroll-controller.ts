@@ -10,6 +10,7 @@
 import gsap from "gsap";
 import { Observer } from "gsap/Observer";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { initBackgroundManager, updateBackground } from "./background-manager";
 import { getEntryAnimation, getExitAnimation } from "./entryAnimation";
 
 // import { initBackgroundManager } from "./background-manager";
@@ -21,7 +22,7 @@ interface SectionConfig {
   element: HTMLElement;
   id: string;
   // hasExitAnimation: boolean;
-  bgPosition: { x: number; y: number; scale: number };
+  bgPosition: { x?: number; y?: number; scale?: number; opacity?: number }[];
   isTall: boolean;
   scrollableContent: HTMLElement | null;
 }
@@ -55,11 +56,21 @@ function parseSectionConfig(element: HTMLElement): SectionConfig {
     element.classList.contains("parallax-section--tall") ||
     (content && content.scrollHeight > window.innerHeight * 0.9);
 
+  const bgPosition = JSON.parse(
+    element.dataset.bgPosition ||
+      '[{"x":0,"y":0,"scale":1, "opacity":1},{"x":0,"y":0,"scale":1, "opacity":1},{"x":0,"y":0,"scale":1, "opacity":1}]'
+  );
+
   return {
     element,
     id: element.dataset.sectionId || "",
-    bgPosition: JSON.parse(
-      element.dataset.bgPosition || '{"x":0,"y":0,"scale":1}'
+    bgPosition: bgPosition.map(
+      (pos: { x?: number; y?: number; scale?: number; opacity?: number }) => ({
+        x: pos.x !== undefined ? pos.x : 0,
+        y: pos.y !== undefined ? pos.y : 0,
+        scale: pos.scale !== undefined ? pos.scale : 1,
+        opacity: pos.opacity !== undefined ? pos.opacity : 1,
+      })
     ),
     isTall,
     scrollableContent: isTall ? content : null,
@@ -117,7 +128,6 @@ function setInitialPositions(): void {
         gsap.set(contentEl as HTMLElement, {
           height: "100vh",
           overflowY: "auto",
-          WebkitOverflowScrolling: "touch",
         });
         // ensure the state knows about the scrollableContent reference
         section.scrollableContent = contentEl as HTMLElement;
@@ -143,7 +153,7 @@ function setInitialPositions(): void {
   // Animate first section entry
   const firstSection = state.sections[0];
   if (firstSection) {
-    // updateBackground(firstSection.id, firstSection.bgPosition);
+    updateBackground(firstSection.id, firstSection.bgPosition);
     const entryTl = getEntryAnimation(firstSection.element);
     entryTl.play();
   }
@@ -192,7 +202,6 @@ async function goToNextSection(): Promise<void> {
     onComplete: () => {
       state.currentIndex++;
       state.isAnimating = false;
-      // updateNavigationDots();
       updateProgressBar();
     },
   });
@@ -222,7 +231,7 @@ async function goToNextSection(): Promise<void> {
   // Update background mid-transition
   tl.call(
     () => {
-      // updateBackground(nextSection.id, nextSection.bgPosition);
+      updateBackground(nextSection.id, nextSection.bgPosition);
     },
     [],
     TRANSITION_DURATION * 0.3
@@ -278,7 +287,6 @@ async function goToPreviousSection(): Promise<void> {
     onComplete: () => {
       state.currentIndex--;
       state.isAnimating = false;
-      // updateNavigationDots();
       updateProgressBar();
     },
   });
@@ -308,7 +316,7 @@ async function goToPreviousSection(): Promise<void> {
   // Update background
   tl.call(
     () => {
-      // updateBackground(prevSection.id, prevSection.bgPosition);
+      updateBackground(prevSection.id, prevSection.bgPosition);
     },
     [],
     TRANSITION_DURATION * 0.3
@@ -418,186 +426,11 @@ function updateProgressBar(): void {
 }
 
 /**
- * Update navigation dots
- */
-// function updateNavigationDots(): void {
-//   const dots = document.querySelectorAll(".section-nav__dot");
-//   dots.forEach((dot, index) => {
-//     dot.classList.toggle("active", index === state.currentIndex);
-//   });
-// }
-
-/**
- * Create navigation dots
- */
-// function createNavigationDots(): void {
-//   const nav = document.createElement("nav");
-//   nav.className = "section-nav";
-//   nav.innerHTML = `
-//     <style>
-//       .section-nav {
-//         position: fixed;
-//         right: 2rem;
-//         top: 50%;
-//         transform: translateY(-50%);
-//         z-index: 9999;
-//         display: flex;
-//         flex-direction: column;
-//         gap: 0.75rem;
-//       }
-//       .section-nav__dot {
-//         width: 12px;
-//         height: 12px;
-//         border-radius: 50%;
-//         background: rgba(255, 255, 255, 0.3);
-//         border: none;
-//         cursor: pointer;
-//         transition: all 0.3s ease;
-//         padding: 0;
-//       }
-//       .section-nav__dot:hover {
-//         background: rgba(255, 255, 255, 0.6);
-//         transform: scale(1.2);
-//       }
-//       .section-nav__dot.active {
-//         background: rgba(99, 102, 241, 1);
-//         transform: scale(1.3);
-//       }
-//       .section-nav__dot.tall::after {
-//         content: '';
-//         position: absolute;
-//         width: 4px;
-//         height: 4px;
-//         background: rgba(255, 255, 255, 0.5);
-//         border-radius: 50%;
-//         top: 50%;
-//         left: 50%;
-//         transform: translate(-50%, -50%);
-//       }
-//       @media (max-width: 768px) {
-//         .section-nav {
-//           right: 1rem;
-//         }
-//         .section-nav__dot {
-//           width: 10px;
-//           height: 10px;
-//         }
-//       }
-//     </style>
-//   `;
-
-//   state.sections.forEach((section, index) => {
-//     const dot = document.createElement("button");
-//     dot.className =
-//       "section-nav__dot" +
-//       (index === 0 ? " active" : "") +
-//       (section.isTall ? " tall" : "");
-//     dot.setAttribute("aria-label", `Go to section ${section.id}`);
-//     dot.addEventListener("click", () => goToSection(index));
-//     nav.appendChild(dot);
-//   });
-
-//   document.body.appendChild(nav);
-// }
-
-/**
- * Go to specific section
- */
-// async function goToSection(targetIndex: number): Promise<void> {
-//   if (state.isAnimating) return;
-//   if (targetIndex === state.currentIndex) return;
-//   if (targetIndex < 0 || targetIndex >= state.sections.length) return;
-
-//   const direction = targetIndex > state.currentIndex ? "down" : "up";
-//   const currentSection = state.sections[state.currentIndex];
-//   const targetSection = state.sections[targetIndex];
-
-//   state.isAnimating = true;
-
-//   // Play exit animation if going forward and section has one
-//   if (direction === "down" && currentSection.hasExitAnimation) {
-//     await playExitAnimationAsync(currentSection);
-//     await new Promise((resolve) => setTimeout(resolve, 100));
-//   }
-
-//   const tl = gsap.timeline({
-//     onComplete: () => {
-//       state.currentIndex = targetIndex;
-//       state.isAnimating = false;
-//       updateNavigationDots();
-//       updateProgressBar();
-//     },
-//   });
-
-//   // Move current section out
-//   tl.to(
-//     currentSection.element,
-//     {
-//       top: direction === "down" ? "-100%" : "100%",
-//       duration: TRANSITION_DURATION,
-//       ease: TRANSITION_EASE,
-//     },
-//     0
-//   );
-
-//   // Reset all sections in between
-//   state.sections.forEach((section, index) => {
-//     if (index !== state.currentIndex && index !== targetIndex) {
-//       gsap.set(section.element, {
-//         top: index < targetIndex ? "-100%" : "100%",
-//       });
-//     }
-//   });
-
-//   // Set target starting position
-//   gsap.set(targetSection.element, {
-//     top: direction === "down" ? "100%" : "-100%",
-//   });
-
-//   // Move target section in
-//   tl.to(
-//     targetSection.element,
-//     {
-//       top: "0%",
-//       duration: TRANSITION_DURATION,
-//       ease: TRANSITION_EASE,
-//     },
-//     0
-//   );
-
-//   // Update background
-//   tl.call(
-//     () => {
-//       // updateBackground(targetSection.id, targetSection.bgPosition);
-//     },
-//     [],
-//     TRANSITION_DURATION * 0.3
-//   );
-
-//   // Play entry animation
-//   tl.call(
-//     () => {
-//       gsap.set(targetSection.element.querySelectorAll(".animate-item"), {
-//         opacity: 0,
-//         y: 40,
-//       });
-//       if (targetSection.isTall) {
-//         targetSection.element.scrollTop = 0;
-//       }
-//       // const entryTl = getEntryAnimation(targetSection.entryAnimation, targetSection.element);
-//       // entryTl.play();
-//     },
-//     [],
-//     TRANSITION_DURATION * 0.4
-//   );
-// }
-
-/**
  * Main initialization function
  */
 export function initScrollController(): void {
   // Initialize background manager
-  // initBackgroundManager();
+  initBackgroundManager();
 
   // Parse all sections
   const sectionElements =
@@ -624,9 +457,6 @@ export function initScrollController(): void {
 
   // Initialize keyboard navigation
   initKeyboardNav();
-
-  // Create navigation dots
-  // createNavigationDots();
 
   // Create progress bar
   createProgressBar();

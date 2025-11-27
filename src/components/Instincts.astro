@@ -11,6 +11,11 @@ import ParallaxSection from "./ParallaxSection.astro";
 <ParallaxSection
   id="instincts"
   class="gap-4 pt-[65px] text-center items-center"
+  bgPosition={[
+    { y: 15, opacity: 0.65, scale: 1.1 },
+    { y: 0, opacity: 1, scale: 1.2 },
+    { y: 100, opacity: 0 },
+  ]}
 >
   <Label id="instincts-label">Carnilove Philosophy</Label>
   <section

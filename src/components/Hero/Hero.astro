@@ -8,7 +8,15 @@ import Hero2 from "@/components/Hero/Hero2.astro";
 import ParallaxSection from "@/components/ParallaxSection.astro";
 ---
 
-<ParallaxSection id="hero" class="relative">
+<ParallaxSection
+  id="hero"
+  class="relative"
+  bgPosition={[
+    { y: 100, opacity: 0 },
+    { y: 100, opacity: 0 },
+    { y: 100, opacity: 0 },
+  ]}
+>
   <Header />
   <Hero1 />
   <Hero2 />
