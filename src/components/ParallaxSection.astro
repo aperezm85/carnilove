@@ -8,13 +8,14 @@ interface BgPosition {
 interface Props {
   id: string;
   class?: string;
-
+  contentClass?: string;
   bgPosition?: BgPosition;
 }
 
 const {
   id,
   class: className = "",
+  contentClass = "",
   bgPosition = { x: 0, y: 0, scale: 1 },
 } = Astro.props;
 ---
@@ -29,7 +30,9 @@ const {
   data-bg-position={JSON.stringify(bgPosition)}
   id={id}
 >
-  <div class="section-content relative z-1 w-full h-full">
+  <div
+    class:list={["section-content relative z-2 w-full h-full", contentClass]}
+  >
     <slot />
   </div>
 </section>

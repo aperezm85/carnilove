@@ -50,6 +50,7 @@ const TRANSITION_EASE = "power2.inOut";
  */
 function parseSectionConfig(element: HTMLElement): SectionConfig {
   const content = element.querySelector(".section-content") as HTMLElement;
+
   const isTall =
     element.classList.contains("parallax-section--tall") ||
     (content && content.scrollHeight > window.innerHeight * 0.9);
@@ -72,12 +73,12 @@ function canTallSectionScroll(
   section: SectionConfig,
   direction: "up" | "down"
 ): boolean {
-  if (!section.isTall || !section.scrollableContent) return false;
+  if (!section.isTall) return false;
 
-  const el = section.element;
-  const scrollTop = el.scrollTop;
-  const scrollHeight = el.scrollHeight;
-  const clientHeight = el.clientHeight;
+  const el = section.scrollableContent || section.element;
+  const scrollTop = (el as HTMLElement).scrollTop;
+  const scrollHeight = (el as HTMLElement).scrollHeight;
+  const clientHeight = (el as HTMLElement).clientHeight;
 
   if (direction === "down") {
     // Can scroll down if not at bottom
@@ -106,8 +107,21 @@ function setInitialPositions(): void {
         ...baseStyles,
         top: index === 0 ? 0 : "100%",
         height: "100vh",
-        overflowY: "auto",
+        overflowY: "hidden",
       });
+      // Make the inner content the scrollable area
+      const contentEl =
+        section.scrollableContent ||
+        section.element.querySelector(".section-content");
+      if (contentEl) {
+        gsap.set(contentEl as HTMLElement, {
+          height: "100vh",
+          overflowY: "auto",
+          WebkitOverflowScrolling: "touch",
+        });
+        // ensure the state knows about the scrollableContent reference
+        section.scrollableContent = contentEl as HTMLElement;
+      }
     } else {
       gsap.set(section.element, {
         ...baseStyles,
@@ -160,8 +174,9 @@ async function goToNextSection(): Promise<void> {
 
   // Check if tall section needs to scroll first
   if (canTallSectionScroll(currentSection, "down")) {
-    // Let the section scroll naturally
-    currentSection.element.scrollBy({ top: 150, behavior: "smooth" });
+    // Let the section scroll naturally (use inner scrollable if present)
+    const el = currentSection.scrollableContent || currentSection.element;
+    (el as HTMLElement).scrollBy({ top: 10, behavior: "smooth" });
     return;
   }
 
@@ -225,7 +240,8 @@ async function goToNextSection(): Promise<void> {
       }
       // Reset scroll position for tall sections
       if (nextSection.isTall) {
-        nextSection.element.scrollTop = 0;
+        const resetEl = nextSection.scrollableContent || nextSection.element;
+        (resetEl as HTMLElement).scrollTop = 0;
       }
       const entryTl = getEntryAnimation(nextSection.element);
       entryTl.play();
@@ -247,8 +263,9 @@ async function goToPreviousSection(): Promise<void> {
 
   // Check if tall section needs to scroll first
   if (canTallSectionScroll(currentSection, "up")) {
-    // Let the section scroll naturally
-    currentSection.element.scrollBy({ top: -150, behavior: "smooth" });
+    // Let the section scroll naturally (use inner scrollable if present)
+    const el = currentSection.scrollableContent || currentSection.element;
+    (el as HTMLElement).scrollBy({ top: -10, behavior: "smooth" });
     return;
   }
 
@@ -337,10 +354,28 @@ function initObserver(): void {
   state.observer = Observer.create({
     type: "wheel,touch,pointer",
     wheelSpeed: -1,
-    onDown: () => handleScrollInput("up"),
-    onUp: () => handleScrollInput("down"),
+    // Do not preventDefault globally; we'll only prevent when we actually hijack navigation
+    preventDefault: false,
     tolerance: 10,
-    preventDefault: true,
+    onDown: (self: any) => {
+      const current = state.sections[state.currentIndex];
+      const shouldNavigate = !canTallSectionScroll(current, "up");
+      if (shouldNavigate) {
+        // prevent native scroll only when we're about to navigate
+        if (self && self.event && self.event.preventDefault)
+          self.event.preventDefault();
+        handleScrollInput("up");
+      }
+    },
+    onUp: (self: any) => {
+      const current = state.sections[state.currentIndex];
+      const shouldNavigate = !canTallSectionScroll(current, "down");
+      if (shouldNavigate) {
+        if (self && self.event && self.event.preventDefault)
+          self.event.preventDefault();
+        handleScrollInput("down");
+      }
+    },
   });
 }
 
@@ -364,7 +399,8 @@ function initKeyboardNav(): void {
  */
 function createProgressBar(): void {
   const progress = document.createElement("div");
-  progress.className = "scroll-progress";
+  progress.className =
+    "fixed top-0 left-0 h-[3px] bg-linear-to-r from-text-primary to-text-minimal z-9999 origin-left transition-transform duration-300 ease";
   progress.id = "scroll-progress";
   document.body.appendChild(progress);
   updateProgressBar();

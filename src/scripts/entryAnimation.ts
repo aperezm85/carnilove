@@ -25,6 +25,11 @@ import {
   FindYourPathExitAnimation,
 } from "./animations/find-your-path";
 
+import { FAQEntryAnimation, FAQExitAnimation } from "./animations/faq";
+import {
+  FromTheWildEntryAnimation,
+  FromTheWildExitAnimation,
+} from "./animations/from-the-wild";
 import {
   NourishmentEntryAnimation,
   NourishmentExitAnimation,
@@ -56,6 +61,10 @@ export function getEntryAnimation(element: Element) {
       return TrustedEntryAnimation(element);
     case "nourishment":
       return NourishmentEntryAnimation(element);
+    case "from-the-wild":
+      return FromTheWildEntryAnimation(element);
+    case "FAQ":
+      return FAQEntryAnimation(element);
   }
   return noAnimation(element);
 }
@@ -76,6 +85,10 @@ export function getExitAnimation(element: Element) {
       return TrustedExitAnimation(element);
     case "nourishment":
       return NourishmentExitAnimation(element);
+    case "from-the-wild":
+      return FromTheWildExitAnimation(element);
+    case "FAQ":
+      return FAQExitAnimation(element);
   }
   return noAnimation(element);
 }

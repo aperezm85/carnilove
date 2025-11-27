@@ -7,8 +7,12 @@ import EastIcon from "@/assets/icons/east.svg";
 import ParallaxSection from "./ParallaxSection.astro";
 ---
 
-<ParallaxSection id="from-the-wild" class="items-center pt-[78px]">
-  <section class="content">
+<ParallaxSection
+  id="from-the-wild"
+  class="items-center"
+  contentClass="pt-[78px]"
+>
+  <section class="content flex flex-col w-full items-center justify-center">
     <h1
       id="from-the-wild-title"
       class:list={[
@@ -33,40 +37,3 @@ import ParallaxSection from "./ParallaxSection.astro";
     </ButtonRed>
   </section>
 </ParallaxSection>
-<!-- <script>
-  import { animateTitle } from "@/utils";
-  import { gsap } from "gsap";
-  import { ScrollTrigger } from "gsap/ScrollTrigger";
-
-  gsap.registerPlugin(ScrollTrigger);
-
-  const fromTheWild = document.getElementById("from-the-wild");
-
-  const fromTheWildTitle = document.getElementById("from-the-wild-title");
-  const fromTheWildDescription = document.getElementById(
-    "from-the-wild-description"
-  );
-
-  animateTitle({
-    title: fromTheWildTitle,
-    trigger: fromTheWild,
-    end: "bottom 95%",
-  });
-  animateTitle({
-    title: fromTheWildDescription,
-    trigger: fromTheWild,
-    end: "bottom 95%",
-  });
-
-  // Expose playEntry/playLeave for parent coordination
-  const fromWildRoot = document.getElementById("from-the-wild");
-  if (fromWildRoot) {
-    (fromWildRoot as any).playEntry = function () {
-      return;
-    };
-
-    (fromWildRoot as any).playLeave = function () {
-      return;
-    };
-  }
-</script> -->
