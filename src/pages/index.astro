@@ -10,6 +10,10 @@ import Nourishment from "@/components/Nourishment.astro";
 import ShopProduct from "@/components/ShopProduct.astro";
 import Trusted from "@/components/Trusted.astro";
 import Layout from "@/layouts/Layout.astro";
+
+import Puppy1 from "@/assets/ingredients/01-puppy.gif";
+import Puppy2 from "@/assets/ingredients/02-puppy.png";
+import Puppy3 from "@/assets/ingredients/03-puppy.gif";
 ---
 
 <Layout title="Carnilove | Home">
@@ -23,6 +27,16 @@ import Layout from "@/layouts/Layout.astro";
       style="background-image: url('/savannah-large.png'); background-size: cover; background-position: center bottom;"
     >
     </section>
+
+    <img
+      data-dog1={Puppy1.src}
+      data-dog2={Puppy2.src}
+      data-dog3={Puppy3.src}
+      id="puppy"
+      class="aspect-640/354 absolute top-[542px] left-[40%] z-2 scale-100"
+      src=""
+    />
+
     <section
       id="rocks"
       class="fixed inset-0 pointer-events-none z-2 opacity-0 top-[50%]"
