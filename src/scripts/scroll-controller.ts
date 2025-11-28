@@ -11,9 +11,7 @@ import gsap from "gsap";
 import { Observer } from "gsap/Observer";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { initBackgroundManager, updateBackground } from "./background-manager";
-import { getEntryAnimation, getExitAnimation } from "./entryAnimation";
-
-// import { initBackgroundManager } from "./background-manager";
+import { getEntryAnimation, getExitAnimation } from "./sections-animation";
 
 // Register GSAP plugins
 gsap.registerPlugin(ScrollTrigger, Observer);
@@ -21,7 +19,6 @@ gsap.registerPlugin(ScrollTrigger, Observer);
 interface SectionConfig {
   element: HTMLElement;
   id: string;
-  // hasExitAnimation: boolean;
   bgPosition: { x?: number; y?: number; scale?: number; opacity?: number }[];
   isTall: boolean;
   scrollableContent: HTMLElement | null;
@@ -43,7 +40,6 @@ const state: ScrollControllerState = {
 
 // Animation settings
 const TRANSITION_DURATION = 0.9;
-const EXIT_ANIMATION_DURATION = 0.5;
 const TRANSITION_EASE = "power2.inOut";
 
 /**
@@ -192,12 +188,12 @@ async function goToNextSection(): Promise<void> {
 
   state.isAnimating = true;
 
-  // Step 1: Play exit animation FIRST and wait for it
+  // Play exit animation FIRST and wait for it
   await playExitAnimationAsync(currentSection);
   // Small pause after exit animation
   await new Promise((resolve) => setTimeout(resolve, 100));
 
-  // Step 2: Now transition sections
+  // Now transition sections
   const tl = gsap.timeline({
     onComplete: () => {
       state.currentIndex++;
@@ -362,7 +358,6 @@ function initObserver(): void {
   state.observer = Observer.create({
     type: "wheel,touch,pointer",
     wheelSpeed: -1,
-    // Do not preventDefault globally; we'll only prevent when we actually hijack navigation
     preventDefault: false,
     tolerance: 10,
     onDown: (self: any) => {
