@@ -1,0 +1,102 @@
+---
+import FoodPackages from "@/assets/instincts/food-packages.png";
+import BenefitCard from "@/components/shared/BenefitCard.astro";
+import Label from "@/components/shared/Label.astro";
+
+import EastIcon from "@/assets/icons/east.svg";
+import CatVideo from "@/assets/instincts/cat-video.mp4";
+import ParallaxSection from "@/components/ParallaxSection.astro";
+---
+
+<ParallaxSection
+  id="instincts"
+  class="gap-4 pt-[65px] text-center items-center"
+  bgPosition={[
+    { y: 15, opacity: 0.65, scale: 1.1 },
+    { y: 0, opacity: 1, scale: 1.2 },
+    { y: 100, opacity: 0 },
+  ]}
+>
+  <Label id="instincts-label">Carnilove Philosophy</Label>
+  <section
+    class="flex flex-col max-w-[700px] items-center gap-4 justify-center w-full mx-auto"
+  >
+    <h1
+      id="instincts-title"
+      class:list={[
+        "font-large-heading text-[120px]/[80%] text-center text-text-primary uppercase",
+        "flex flex-col items-center overflow-hidden pt-6 max-w-full",
+      ]}
+    >
+      <span class="chars max-w-full block">Why their</span>
+      <span class="text-text-minimal chars max-w-full">instincts matters</span>
+    </h1>
+
+    <p
+      id="instincts-description"
+      class="text-sm/[22px] text-text-primary max-w-[530px] overflow-hidden"
+    >
+      The principles behind every recipe
+    </p>
+  </section>
+
+  <section
+    id="instincts-carousel"
+    class="absolute top-[414px] left-[628px] flex flex-col z-2"
+  >
+    <section class="w-[430px] h-[270px] relative">
+      <BenefitCard
+        id="benefit1"
+        title="Born Carnivore"
+        text="Your pet's biology hasn't forgotten what it needs. Carnilove recipes are built around high meat content and animal proteins—mirroring the diet nature intended. No grains, no fillers, no compromise. Just pure, instinct-aligned nutrition that speaks to their wild heritage."
+        className="opacity-100 top-0 left-0 absolute"
+      />
+      <BenefitCard
+        id="benefit2"
+        title="Fuel Their Fire"
+        text="Real energy comes from real nutrition. Our protein-rich formulas deliver sustained vitality, mental clarity, and physical power—keeping your pet sharp, strong, and ready for anything. This is the fuel that powers their best days, every day."
+        className="opacity-0 top-0 left-0 absolute"
+      />
+      <BenefitCard
+        id="benefit3"
+        title="Unleash Their Spirit"
+        text="Every pet deserves to live without compromise—to run, play, and thrive as nature designed. Carnilove supports their journey to peak wellness, helping them express their true character with confidence, strength, and unbridled joy."
+        className="opacity-0 top-0 left-0 absolute"
+      />
+    </section>
+    <section
+      id="buttons-instincts"
+      class="absolute -bottom-10 w-full flex flex-row justify-end gap-4 z-20"
+    >
+      <button
+        id="left-button-instincts"
+        type="button"
+        class="carousel-red-button"
+      >
+        <EastIcon class="w-6 h-6 rotate-180" />
+      </button>
+      <button
+        id="right-button-instincts"
+        type="button"
+        class="carousel-red-button"
+      >
+        <EastIcon class="w-6 h-6" />
+      </button>
+    </section>
+  </section>
+  <img
+    id="food-packages"
+    src={FoodPackages.src}
+    class="aspect-514/533 w-[514px] h-[533px] z-20 absolute left-[8%] bottom-[15%]"
+  />
+
+  <video
+    id="instincts-video"
+    class="absolute -right-[120px] top-[400px] w-[45%] h-auto max-h-[40%] z-1"
+    autoplay={false}
+    muted
+    loop={false}
+  >
+    <source src={CatVideo} type="video/mp4" />
+  </video>
+</ParallaxSection>

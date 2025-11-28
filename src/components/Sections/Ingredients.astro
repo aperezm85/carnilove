@@ -1,0 +1,84 @@
+---
+import EastIcon from "@/assets/icons/east.svg";
+import Label from "@/components/shared/Label.astro";
+import Subtitle from "@/components/shared/Subtitle.astro";
+import Title from "@/components/shared/Title.astro";
+
+import BenefitCardWithIcon from "@/components/shared/BenefitCardWithIcon.astro";
+import ButtonRed from "@/components/shared/ButtonRed.astro";
+
+import BowlImage from "@/assets/ingredients/bowl.png";
+import HalfBowlImage from "@/assets/ingredients/half-bowl.png";
+
+import ParallaxSection from "@/components/ParallaxSection.astro";
+---
+
+<ParallaxSection
+  id="ingredients"
+  class="items-center"
+  contentClass="pt-[78px]"
+  bgPosition={[
+    { y: 25, opacity: 0.9 },
+    { y: 3, opacity: 1, scale: 1.3 },
+    { y: 100, opacity: 0 },
+  ]}
+>
+  <section class="content flex flex-col w-full items-center justify-center">
+    <Label id="ingredients-label">From Wild Origins to Real Nutrition</Label>
+    <Title id="ingredients-title" className="mt-3">
+      Ingredients from the Wild
+    </Title>
+    <Subtitle id="ingredients-description" className="max-w-[650px] mt-5">
+      Every Carnilove recipe begins in nature — balanced with forest fruits,
+      roots and herbs for real performance nutrition.
+    </Subtitle>
+
+    <BenefitCardWithIcon
+      id="benefit-meat"
+      title="Made Only with Fresh Meat"
+      text="Pure protein power — fuelled by wild ingredients like salmon, duck & boar."
+      iconName="meat"
+      className="absolute top-[305px] left-[621px] z-2"
+    />
+
+    <BenefitCardWithIcon
+      id="benefit-plant"
+      title="True Natural Ingredients"
+      text="Nothing artificial. Just the real taste of nature — herbs, berries & roots."
+      iconName="plant"
+      className="absolute top-[305px] left-[877px] z-2"
+    />
+
+    <BenefitCardWithIcon
+      id="benefit-grain"
+      title="Grain-Free Recipes for Your Pet"
+      text="Nature’s way to feed — balanced, primal nutrition for every dog’s instinctive needs."
+      iconName="grain"
+      className="absolute top-[305px] left-[1133px] z-2"
+    />
+
+    <ButtonRed
+      id="ingredients-button"
+      className="absolute top-[613px] left-[1183px] flex flex-row items-center gap-1.5"
+    >
+      About our food <EastIcon class="w-6 h-6" />
+    </ButtonRed>
+
+    <section
+      id="bowl"
+      class="absolute top-[269px] -left-[75px] w-[744px] min-h-[600px] h-auto z-2"
+    >
+      <img
+        src={BowlImage.src}
+        alt="Carnilove ingredients bowl"
+        class="absolute inset-0 w-full h-auto object-cover z-1 aspect-924/880"
+      />
+
+      <img
+        src={HalfBowlImage.src}
+        alt="Carnilove ingredients bowl"
+        class="absolute inset-0 w-full h-auto object-cover z-2 aspect-924/880"
+      />
+    </section>
+  </section>
+</ParallaxSection>

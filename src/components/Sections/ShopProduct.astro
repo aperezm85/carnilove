@@ -1,0 +1,47 @@
+---
+import ProductCard from "@/components/ProductCard.astro";
+
+import All from "@/assets/shop_product/all-food.png";
+import DryFood from "@/assets/shop_product/dry-food.png";
+import Snacks from "@/assets/shop_product/snack-food.png";
+import WetFood from "@/assets/shop_product/wet-food.png";
+import ParallaxSection from "@/components/ParallaxSection.astro";
+import Filter from "@/components/shared/Filter.astro";
+import Label from "@/components/shared/Label.astro";
+import Subtitle from "@/components/shared/Subtitle.astro";
+import Title from "@/components/shared/Title.astro";
+---
+
+<ParallaxSection
+  id="shop-by-product"
+  class="relative items-center text-center"
+  contentClass="pt-[78px]"
+  bgPosition={[
+    { y: 30, opacity: 0.75 },
+    { y: 100, opacity: 0 },
+    { y: 100, opacity: 0 },
+  ]}
+>
+  <Label id="product-label">honour the bond</Label>
+  <Title id="product-title" className="mt-6"> Shop by Products </Title>
+  <Subtitle id="product-subtitle" className="max-w-[570px] mt-[30px] mx-auto">
+    Lorem ipsum dolor sit amet, consectetur adipiscing elit etiam sit amet
+    finibus nunc. Aenean ut est egestas.
+  </Subtitle>
+
+  <Filter
+    id="product-filters"
+    className="mt-[35px] flex flex-row gap-2.5 items-center justify-center"
+    items={["DOGS", "CATS"]}
+  />
+
+  <section
+    id="products"
+    class="flex flex-row gap-5 mt-12 mx-auto items-center w-full justify-center"
+  >
+    <ProductCard title="Dry food" image={DryFood.src} />
+    <ProductCard title="Wet food" image={WetFood.src} />
+    <ProductCard title="Snacks" image={Snacks.src} />
+    <ProductCard title="All" image={All.src} />
+  </section>
+</ParallaxSection>

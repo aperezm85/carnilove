@@ -4,11 +4,17 @@ import Card from "@/components/shared/Card.astro";
 import Arrow1 from "@/assets/find-path/arrow-1.png";
 import Arrow2 from "@/assets/find-path/arrow-2.png";
 import Arrow3 from "@/assets/find-path/arrow-3.png";
+import ParallaxSection from "@/components/ParallaxSection.astro";
 ---
 
-<section
+<ParallaxSection
   id="find-your-path"
-  class="pin-section relative h-dvh overflow-hidden w-full z-6"
+  class=""
+  bgPosition={[
+    { y: 15, opacity: 0.75 },
+    { y: 0, opacity: 1, scale: 1.5 },
+    { y: 100, opacity: 0 },
+  ]}
 >
   <section class="content">
     <section
@@ -75,73 +81,4 @@ import Arrow3 from "@/assets/find-path/arrow-3.png";
       className="absolute top-[332px] left-[1070px]"
     />
   </section>
-</section>
-
-<script>
-  import { animateTitle } from "@/utils";
-  import { gsap } from "gsap";
-  import { ScrollTrigger } from "gsap/ScrollTrigger";
-
-  gsap.registerPlugin(ScrollTrigger);
-  const trigger = document.getElementById("find-your-path");
-  const title = document.getElementById("find-your-path-header");
-  const description = document.getElementById("find-your-path-subheader");
-  const paragraphBg = document.getElementById("paragraph-bg");
-
-  // Expose playEntry/playLeave on the find-your-path root
-  const findRoot = document.getElementById("find-your-path");
-  if (findRoot) {
-    (findRoot as any).playEntry = function () {
-      return;
-    };
-
-    (findRoot as any).playLeave = function () {
-      return;
-    };
-  }
-
-  animateTitle({
-    title: title,
-    trigger: trigger,
-    end: "bottom 95%",
-  });
-  animateTitle({
-    title: description,
-    trigger: trigger,
-    end: "bottom 95%",
-  });
-
-  const timeline = gsap.timeline({
-    scrollTrigger: {
-      trigger: trigger,
-      start: "top 50%",
-      end: "bottom 40%",
-      toggleActions: "play reverse restart restart",
-    },
-  });
-
-  timeline.from(paragraphBg, {
-    xPercent: -150,
-    ease: "power2.out",
-  });
-
-  timeline
-    .from(".card", {
-      yPercent: -200,
-      opacity: 0,
-      stagger: 0.4,
-      // duration: 1,
-      ease: "power2.out",
-    })
-    .from(
-      ".arrow",
-      {
-        yPercent: -200,
-        opacity: 0,
-        stagger: 0.4,
-        // duration: 1,
-        ease: "power2.out",
-      },
-      "-=2"
-    );
-</script>
+</ParallaxSection>

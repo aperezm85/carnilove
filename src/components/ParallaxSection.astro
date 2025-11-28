@@ -1,0 +1,42 @@
+---
+interface BgPosition {
+  x?: number;
+  y?: number;
+  scale?: number;
+  opacity?: number;
+}
+
+interface Props {
+  id: string;
+  class?: string;
+  contentClass?: string;
+  bgPosition?: BgPosition[];
+}
+
+const {
+  id,
+  class: className = "",
+  contentClass = "",
+  bgPosition = { x: 0, y: 0, scale: 1 },
+} = Astro.props;
+---
+
+<section
+  class:list={[
+    "parallax-section",
+    "fixed top-0 left-0 min-h-dvh h-dvh w-full flex flex-col justify-center overflow-hidden will-change-[transform,top]",
+    className,
+  ]}
+  data-section-id={id}
+  data-bg-position={JSON.stringify(bgPosition)}
+  id={id}
+>
+  <div
+    class:list={[
+      "section-content relative z-2 w-full h-full overflow-x-hidden",
+      contentClass,
+    ]}
+  >
+    <slot />
+  </div>
+</section>
